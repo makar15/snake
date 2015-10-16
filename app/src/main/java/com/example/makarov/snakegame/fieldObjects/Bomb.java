@@ -16,12 +16,12 @@ public class Bomb implements FieldObject {
 
     @Override
     public void setX(int x) {
-
+        this.mX = x;
     }
 
     @Override
     public void setY(int y) {
-
+        this.mY = y;
     }
 
     @Override
