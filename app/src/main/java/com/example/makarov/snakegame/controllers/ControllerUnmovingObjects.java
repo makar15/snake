@@ -17,9 +17,9 @@ public class ControllerUnmovingObjects implements  ObjectController{
     }
 
     @Override
-    public boolean nextMove() {
+    public void nextMove() {
 
-        return false;
+
     }
 
     @Override

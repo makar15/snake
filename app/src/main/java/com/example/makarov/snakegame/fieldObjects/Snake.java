@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.fieldObjects;
 
+import com.example.makarov.snakegame.enumeration.Direction;
 import java.util.LinkedList;
 
 public class Snake implements FieldObject{
@@ -8,21 +9,20 @@ public class Snake implements FieldObject{
      * все переменные змейки с нужными сет и гет методами
      */
     public static final int CODE_SNAKE_ON_THE_MAP = -1;
-    private LinkedList<ComponentSnake> mSnake = new LinkedList<ComponentSnake>();
-    private final int DIR_NORTH = 1;
-    private final int DIR_EAST = 2;
-    private final int DIR_SOUTH = 3;
-    private final int DIR_WEST = 4;
+    private LinkedList<ComponentSnake> mSnake ;
     private int mScore=0;
-    private int mDirection = DIR_EAST;
+    private Direction mDirection ;
     private int isGrowing = 0;
     private int mSpeed = 700;
     /**
      * В конструкторе создаем змеку состоящую из компонентов
      * Сет и Гет методы координат и код змейки на карте
      */
-    public Snake(int x, int y){
+    public Snake(int x, int y, Direction direction){
+        mSnake = new LinkedList<>();
+        this.mDirection = direction;
         addComponentSnake(x, y);
+        addComponentSnake(x - mDirection.deltaX(), y - mDirection.deltaY());
     }
 
     @Override
@@ -52,11 +52,11 @@ public class Snake implements FieldObject{
     /**
      * Сет и Гет метод переменной направления змйеки : Юг, Запад ...
      */
-    public void setDirection(int newDirection) {
+    public void setDirection(Direction newDirection) {
         this.mDirection = newDirection;
     }
 
-    public int getDirection() {
+    public Direction getDirection() {
         return this.mDirection;
     }
     /**
@@ -132,13 +132,13 @@ public class Snake implements FieldObject{
      * вернуть колличество компонент в змейке(длину змнйки)
      * вернуть список компонент змейки
      */
-    private void addComponentSnake(int x, int y){
+    public void addComponentSnake(int x, int y){
         mSnake.add(new ComponentSnake(x, y));
         setX(x);
         setY(y);
     }
 
-    private void removeComponentSnake(){
+    public void removeFirstComponentSnake(){
         mSnake.removeFirst();
     }
 
@@ -149,23 +149,13 @@ public class Snake implements FieldObject{
     public LinkedList<ComponentSnake> getListSnake() {
         return this.mSnake;
     }
-    /**
-     * вернуть КОД направления змейки
-     */
-    public int getCodDirSouth() {
-        return this.DIR_SOUTH;
+
+    public ComponentSnake getLastComponentSnake(){
+        return mSnake.getLast();
     }
 
-    public int getCodDirEast() {
-        return this.DIR_EAST;
-    }
-
-    public int getCodDirNorth() {
-        return this.DIR_NORTH;
-    }
-
-    public int getCodDirWest() {
-        return this.DIR_WEST;
+    public ComponentSnake getFirstComponentSnake(){
+        return mSnake.getFirst();
     }
 
 }

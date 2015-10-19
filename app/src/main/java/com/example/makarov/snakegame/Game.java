@@ -13,10 +13,6 @@ public interface Game {
      */
     void pause();
     /**
-     *вернуть размер экрана
-     */
-    int getScreenSize();
-    /**
      *получить объект хранящий пользовательские нажатия на экран
      */
     Input getInput();

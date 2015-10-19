@@ -10,7 +10,6 @@ public class GamePlay extends Canvas implements Game, Runnable {
 
     private Thread gameThread;
     private AtomicBoolean running;
-
     private Input mInput;
     /**
      *Инициализируем переменные:
@@ -56,13 +55,6 @@ public class GamePlay extends Canvas implements Game, Runnable {
                 throw new RuntimeException(exception);
             }
         }
-    }
-    /**
-     *вернуть размер экрана
-     */
-    @Override
-    public int getScreenSize() {
-        return 0;
     }
     /**
      *вернуть объект следящий за нажатиями пользователя

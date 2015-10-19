@@ -25,9 +25,8 @@ public class ControllerField implements ObjectController {
      * поитерационный процесс изенения состояний на поле
      */
     @Override
-    public boolean nextMove() {
+    public void nextMove() {
 
-        return false;
     }
     /**
      *
