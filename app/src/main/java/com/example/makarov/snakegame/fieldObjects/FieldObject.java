@@ -1,10 +1,10 @@
 package com.example.makarov.snakegame.fieldObjects;
 
-
+/**
+ * Интерфейс объектов поля
+ */
 public interface FieldObject {
-    /**
-     * Интерфейс объектов поля
-     */
+
     void setX(int x);
 
     void setY(int y);

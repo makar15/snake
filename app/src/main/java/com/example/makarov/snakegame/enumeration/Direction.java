@@ -1,13 +1,19 @@
 package com.example.makarov.snakegame.enumeration;
 
-
+/**
+ * Перечисление направлений
+ */
 public enum Direction {
-
+    /**
+     * Набор возможных направлений
+     */
     UP,
     RIGHT,
     DOWN,
     LEFT;
-
+    /**
+     * Методы решающие изменение координат при различных направлениях
+     */
     public int deltaX() {
         switch (this) {
             case LEFT:

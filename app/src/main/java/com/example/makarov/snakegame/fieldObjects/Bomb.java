@@ -1,18 +1,13 @@
 package com.example.makarov.snakegame.fieldObjects;
 
-
+/**
+ * Класс бомбы
+ */
 public class Bomb implements FieldObject {
-    /**
-     * Класс бомбы
-     */
+
     public static final int CODE_BOMB_ON_THE_MAP = 4;
     private int mX;
     private int mY;
-
-    public Bomb(int x, int y){
-        this.mX = x;
-        this.mY = y;
-    }
 
     @Override
     public void setX(int x) {

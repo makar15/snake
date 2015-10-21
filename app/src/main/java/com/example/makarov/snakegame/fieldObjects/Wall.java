@@ -1,18 +1,13 @@
 package com.example.makarov.snakegame.fieldObjects;
 
-
+/**
+ * Класс стенки
+ */
 public class Wall implements FieldObject{
-    /**
-     * Класс стенки
-     */
+
     public static final int CODE_WALL_ON_THE_MAP = 1;
     private int mX;
     private int mY;
-
-    public Wall(int x, int y){
-        this.mX = x;
-        this.mY = y;
-    }
 
     @Override
     public void setX(int x) {

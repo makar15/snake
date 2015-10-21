@@ -3,13 +3,13 @@ package com.example.makarov.snakegame.controllers;
 import com.example.makarov.snakegame.playingField.Field;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import com.example.makarov.snakegame.fieldObjects.Snake;
-
+/**
+ * Класс контроллера змейки
+ */
 public class ControlTheSnake implements ObjectController {
-    /**
-     * Класс контроллера змейки
-     */
-    private final Snake mSnake;
-    private final Field mField;
+
+    private Snake mSnake;
+    private Field mField;
 
     public ControlTheSnake(Field field, FieldObject mFieldObject){
         this.mField = field;
@@ -24,25 +24,30 @@ public class ControlTheSnake implements ObjectController {
         nextMoveHead();
     }
     /**
-     * Метод добавления компоненты змейки вперед (с головы состава)
-     */
-    private void nextMoveBody() {
-        mSnake.addComponentSnake(mSnake.getLastComponentSnake().getX() + mSnake.getDirection().deltaX(),
-                mSnake.getLastComponentSnake().getY() + mSnake.getDirection().deltaY());
-    }
-    /**
-     * Метод удаления компоненты змейки, в случае если она не должна рости, с конца(хвоста состава)
-     */
-    private void nextMoveHead() {
-        if(mSnake.getIsGrowing() <= 0) mSnake.removeFirstComponentSnake();
-        else mSnake.reduceIsGrowing(1);
-    }
-    /**
      * Вернуть объект над которым управляет данный контроллер
      */
     @Override
     public FieldObject getObject() {
         return this.mSnake;
+    }
+    /**
+     * Метод добавления компоненты змейки вперед (с головы состава)
+     */
+    private void nextMoveBody() {
+        mSnake.upSnakeLength(mSnake.getHeadSnake().getX() +
+                        mSnake.getDirectionOfMotion().getDirection().deltaX(),
+                mSnake.getHeadSnake().getY() +
+                        mSnake.getDirectionOfMotion().getDirection().deltaY());
+    }
+    /**
+     * Метод удаления компоненты змейки, в случае если она не должна рости, с конца(хвоста состава)
+     */
+    private void nextMoveHead() {
+        if(mSnake.getGrowing() <= 0) {
+            mSnake.removeFirstComponentSnake();
+        } else{
+            mSnake.reduceGrowing(1);
+        }
     }
 
 }

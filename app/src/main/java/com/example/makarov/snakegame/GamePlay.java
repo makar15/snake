@@ -2,7 +2,6 @@ package com.example.makarov.snakegame;
 
 import android.graphics.Canvas;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  *
  */

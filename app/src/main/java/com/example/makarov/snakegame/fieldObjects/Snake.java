@@ -1,28 +1,35 @@
 package com.example.makarov.snakegame.fieldObjects;
 
+import com.example.makarov.snakegame.direction.DirectionOfMotion;
+import com.example.makarov.snakegame.direction.DirectionOfMotionObjectField;
 import com.example.makarov.snakegame.enumeration.Direction;
 import java.util.LinkedList;
+/**
+ * Класс змейки
+ * все переменные змейки с нужными сет и гет методами
+ */
+public class Snake implements FieldObject {
 
-public class Snake implements FieldObject{
-    /**
-     * Класс змейки
-     * все переменные змейки с нужными сет и гет методами
-     */
     public static final int CODE_SNAKE_ON_THE_MAP = -1;
+    private DirectionOfMotion mDirectionOfMotion = new DirectionOfMotionObjectField();
     private LinkedList<ComponentSnake> mSnake ;
     private int mScore=0;
-    private Direction mDirection ;
-    private int isGrowing = 0;
+    private int mGrowing = 0;
     private int mSpeed = 700;
     /**
-     * В конструкторе создаем змеку состоящую из компонентов
+     * В конструкторе создаем змейку состоящую из компонент
      * Сет и Гет методы координат и код змейки на карте
      */
     public Snake(int x, int y, Direction direction){
+        /**
+         *  инициализация в внутри контроллера поля наверное
+         *  ИЗМЕНИТЬ!
+         */
         mSnake = new LinkedList<>();
-        this.mDirection = direction;
-        addComponentSnake(x, y);
-        addComponentSnake(x - mDirection.deltaX(), y - mDirection.deltaY());
+        this.mDirectionOfMotion.setDirection(direction);
+        upSnakeLength(x, y);
+        upSnakeLength(x - mDirectionOfMotion.getDirection().deltaX(),
+                y - mDirectionOfMotion.getDirection().deltaY());
     }
 
     @Override
@@ -50,14 +57,10 @@ public class Snake implements FieldObject{
         return this.CODE_SNAKE_ON_THE_MAP;
     }
     /**
-     * Сет и Гет метод переменной направления змйеки : Юг, Запад ...
+     *  Получить объект управления змейкой
      */
-    public void setDirection(Direction newDirection) {
-        this.mDirection = newDirection;
-    }
-
-    public Direction getDirection() {
-        return this.mDirection;
+    public DirectionOfMotion getDirectionOfMotion() {
+        return mDirectionOfMotion;
     }
     /**
      * добавление, уменьшение и сет методы скорости змейки
@@ -106,34 +109,33 @@ public class Snake implements FieldObject{
     /**
      * добавление, уменьшение, обнуление и сет методы переменной прироста змейки
      */
-    public void addIsGrowing(int addIsGrowing) {
-        int newIsGrowing = this.isGrowing + addIsGrowing;
-        setIsGrowing(newIsGrowing);
+    public void addGrowing(int addGrowing) {
+        int newGrowing = this.mGrowing + addGrowing;
+        setGrowing(newGrowing);
     }
 
-    public void reduceIsGrowing(int reduceIsGrowing) {
-        int newIsGrowing = this.isGrowing - reduceIsGrowing;
-        setIsGrowing(newIsGrowing);
+    public void reduceGrowing(int reduceGrowing) {
+        int newGrowing = this.mGrowing - reduceGrowing;
+        setGrowing(newGrowing);
     }
 
-    public void setIsGrowing(int newIsGrowing) {
-        this.isGrowing = newIsGrowing;
+    public void setGrowing(int newGrowing) {
+        this.mGrowing = newGrowing;
     }
 
-    public void clearIsGrowing(){
-        setIsGrowing(0);
+    public void clearGrowing(){
+        setGrowing(0);
     }
 
-    public int getIsGrowing() {
-        return isGrowing;
+    public int getGrowing() {
+        return mGrowing;
     }
     /**
-     * добавление, удаление компоненты змейки
-     * вернуть колличество компонент в змейке(длину змнйки)
-     * вернуть список компонент змейки
+     * МЕТОДЫ ПОКА НЕ ДОРАБОТАНЫ
+     * ЭТОТ МОМЕНТ НУЖНО ЕЩЕ ПРОДУМАТЬ
      */
-    public void addComponentSnake(int x, int y){
-        mSnake.add(new ComponentSnake(x, y));
+    public void upSnakeLength(int x, int y){
+        mSnake.add(new ComponentSnake());
         setX(x);
         setY(y);
     }
@@ -142,20 +144,12 @@ public class Snake implements FieldObject{
         mSnake.removeFirst();
     }
 
-    public int getSnakeLength() {
-        return  mSnake.size();
-    }
-
     public LinkedList<ComponentSnake> getListSnake() {
         return this.mSnake;
     }
 
-    public ComponentSnake getLastComponentSnake(){
+    public ComponentSnake getHeadSnake(){
         return mSnake.getLast();
-    }
-
-    public ComponentSnake getFirstComponentSnake(){
-        return mSnake.getFirst();
     }
 
 }

@@ -2,15 +2,14 @@ package com.example.makarov.snakegame.handlerСollision;
 
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import com.example.makarov.snakegame.playingField.Field;
+/**
+ * Класс обработки столкновения объекта движущегося об стенку
+ */
+public class CollisionWithTheWallMovingObjectField implements HandlerCollision{
 
-public class CollisionWithTheWallSnakes implements HandlerCollision{
-    /**
-     * Класс обработки столкновения змеи об стенку
-     * змея умрет при столкновении
-     */
     private final Field mField;
 
-    public CollisionWithTheWallSnakes(Field field){
+    public CollisionWithTheWallMovingObjectField(Field field){
         this.mField = field;
     }
     /**

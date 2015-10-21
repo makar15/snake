@@ -1,39 +1,24 @@
-package com.example.makarov.snakegame.controllers;
+package com.example.makarov.snakegame.playingField;
 
 import com.example.makarov.snakegame.exception.DuplicateObjectException;
 import com.example.makarov.snakegame.exception.NotFoundObjectException;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import com.example.makarov.snakegame.fieldObjects.Snake;
-import com.example.makarov.snakegame.handlerСollision.ControllerCollision;
-import com.example.makarov.snakegame.playingField.Field;
+import com.example.makarov.snakegame.ChoiceCollision;
 /**
- * класс упраления полем
+ * Класс упраления полем
  * изменяет состояние ячеек поля
- * Классу ControllerCollision передаёт объекты столкновение
+ * Классу ChoiceCollision передаёт объекты столкновение
  * А так же удаляет, добавляет, меняет позицию объектов или очищает поле
  */
-public class ControllerField implements ObjectController {
+public class ControllerField  {
 
     private final Field mField;
-    private ControllerCollision mControllerCollision;
+    private ChoiceCollision mChoiceCollision;
 
     public ControllerField(Field field){
         this.mField = field;
-        mControllerCollision = new ControllerCollision(mField);
-    }
-    /**
-     * поитерационный процесс изенения состояний на поле
-     */
-    @Override
-    public void nextMove() {
-
-    }
-    /**
-     *
-     */
-    @Override
-    public FieldObject getObject() {
-        return null;
+        mChoiceCollision = new ChoiceCollision(mField);
     }
     /**
      * В методе следующее происходит :
@@ -45,12 +30,12 @@ public class ControllerField implements ObjectController {
         /**
          * проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
          */
-        if (mField.getCodeFieldByPosition(x, y) == mField.getCODE_ON_THE_MAP()){
+        if (mField.isEmptyField(x, y)){
             mField.addObject(object, x, y);
         }
         else if (mField.getCodeFieldByPosition(object.getX(), object.getY())
                 == Snake.CODE_SNAKE_ON_THE_MAP){
-            mControllerCollision.solutionCollision(object, x, y);
+            mChoiceCollision.solutionCollision(object, x, y);
         } else {
             addRandomObject(object);
         }
@@ -84,7 +69,14 @@ public class ControllerField implements ObjectController {
     /**
      * вернуть объект контроллера столкновений
      */
-    public ControllerCollision getControllerCollision() {
-        return this.mControllerCollision;
+    public ChoiceCollision getControllerCollision() {
+        return this.mChoiceCollision;
     }
+    /**
+     * Вернуть поле на котором расставляем объекты
+     */
+    public Field getField() {
+        return this.mField;
+    }
+
 }

@@ -5,10 +5,11 @@ import com.example.makarov.snakegame.exception.NotFoundObjectException;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import java.util.Collection;
 import java.util.LinkedList;
-
+/**
+ * Класс поля(карты игры)
+ */
 public class MyField implements Field{
     /**
-     * Класс поля(карты игры)
      * в конструктор масштаб карты по осям X, Y и очистка карты на нули
      * сет методы добавления объектов на координаты, а так же гет методы
      */
@@ -28,16 +29,19 @@ public class MyField implements Field{
     }
 
     @Override
-    public void addObject(FieldObject object, int x, int y) throws DuplicateObjectException {
-        mField[x][y] = object.getCodeOnTheMap();
+    public void addObject(FieldObject object, int newX, int newY) throws DuplicateObjectException {
+        mField[newX][newY] = object.getCodeOnTheMap();
         addObjectFieldTheList(object);
-        object.setX(x);
-        object.setY(y);
+        object.setX(newX);
+        object.setY(newY);
     }
-
+    /**
+     * Изменить метоположение существующего обьекта на поле
+     */
     @Override
-    public void changeObjectLocation(FieldObject object, int x, int y) throws NotFoundObjectException {
-
+    public void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException {
+        removeObject(object);
+        addObject(object, newX , newY);
     }
     /**
      * очищает поле выстваляя все нули(КОД свободной ячейки в матрице)
@@ -102,12 +106,5 @@ public class MyField implements Field{
     public void clearListObjectField(){
         objectsField.clear();
     }
-    /**
-     * 6 Замутить обычный объект и контроллер к нему для движения по карте
-     * Задание такое.
-     * Написать простой контроллер для объекта.
-     * Хочу чтобы он двигался прямо, если встречал препятствие то поворачивал направо
-     * На нем будем тестировать отрисовку объектов
-     * Объект это fieldObject
-     */
+
 }

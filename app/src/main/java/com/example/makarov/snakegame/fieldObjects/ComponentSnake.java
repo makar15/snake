@@ -1,17 +1,13 @@
 package com.example.makarov.snakegame.fieldObjects;
 
+/**
+ * Класс компанент змейки
+ */
 public class ComponentSnake implements FieldObject{
-    /**
-     * Класс компанент змейки
-     */
+
     public static final int CODE_COMPONENT_SNAKE_ON_THE_MAP = -1;
     private int mX;
     private int mY;
-
-    public ComponentSnake(int x, int y){
-        this.mX = x;
-        this.mY = y;
-    }
 
     @Override
     public void setX(int x) {

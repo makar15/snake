@@ -1,18 +1,13 @@
 package com.example.makarov.snakegame.fieldObjects;
 
-
+/**
+ * Класс фрукта
+ */
 public class Fruite implements  FieldObject{
-    /**
-     * Класс фрукта
-     */
+
     public static final int CODE_FRUITE_ON_THE_MAP = 2;
     private int mX;
     private int mY;
-
-    public Fruite(int x, int y){
-        this.mX = x;
-        this.mY = y;
-    }
 
     @Override
     public void setX(int x) {
