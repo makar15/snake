@@ -53,7 +53,6 @@ public class ControlTheFieldObject implements ObjectController {
         int nextY = (mTestObj.getY() + mTestObj.getDirectionOfMotion().getDirection().deltaY());
 
         if ((nextX >= 0 && nextX < mField.getWidth()) && (nextY >= 0 && nextY < mField.getHeight())) {
-
             if (mField.isEmptyField(nextX, nextY)) {
                 mField.changeObjectLocation(mTestObj, nextX, nextY);
 
@@ -64,7 +63,6 @@ public class ControlTheFieldObject implements ObjectController {
         } else {
             turnObjectField();
         }
-
     }
     /**
      * Вернуть объект над которым управляет данный контроллер

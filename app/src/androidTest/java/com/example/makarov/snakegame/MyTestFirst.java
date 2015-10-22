@@ -13,25 +13,27 @@ import com.example.makarov.snakegame.playingField.MyField;
  * Класс тестирования передвижения объекта по полю по кругу
  * В логи выводим сообщения о движении.
  *
- * Создаем: поле 10 на 10
+ * Создаем: поле 10 на 20
  * контроллер поля
  * тестовыйОбъект
  * тестовый контролле крутящий объект по карте.
  *
- * Запускаем по циклу передвижение объекта
+ * Запускаем по циклу 5 раз передвижение объекта
  */
-public class MyTest extends AndroidTestCase{
+public class MyTestFirst extends AndroidTestCase{
 
     public void test(){
 
-        Field myF = new MyField(10, 10);
+        Field myF = new MyField(10, 20);
         ControllerField myContrFiled = new ControllerField(myF);
         FieldObject myFieldObj = new TestObjectField();
         ObjectController myObjContr = new ControlTheFieldObject(myF, myFieldObj, myContrFiled);
 
-        for(int i =0 ; i < 101 ; i++) {
+        for(int i =0 ; i < 5 ; i++) {
             myObjContr.nextMove();
         }
+
+        assertTrue ("No result", myFieldObj.getX() == 8 && myFieldObj.getY() == 19);
     }
 
 }
