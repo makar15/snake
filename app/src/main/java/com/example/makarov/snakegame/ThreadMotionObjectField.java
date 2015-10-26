@@ -7,13 +7,16 @@ import java.util.Collection;
  */
 public class ThreadMotionObjectField extends Thread{
 
+    private InitializationGameSnake mGameSnake;
     private boolean myThreadRun = false;
     private Collection<ObjectController> mList;
     /**
-     * В конструктор список с контроллерами игры
+     * В конструктор объект уровня игры(в котором инициализированны все объекты игра)
+     * в список записываем все объекты которые будут передвигаться по ходу игры
      */
-    public ThreadMotionObjectField(Collection<ObjectController> list) {
-        mList = list;
+    public ThreadMotionObjectField(InitializationGameSnake gameSnake) {
+        mGameSnake = gameSnake;
+        mList = mGameSnake.getListController();
     }
     /**
      * Метод изменения состояния работы потока передвиения объектов контроллерами

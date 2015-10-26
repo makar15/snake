@@ -2,6 +2,7 @@ package com.example.makarov.snakegame.view;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
+import com.example.makarov.snakegame.InitializationGameSnake;
 import java.util.Collection;
 /**
  * Класс потока отрисовки всех ViewObject игры
@@ -9,15 +10,18 @@ import java.util.Collection;
 public class SurfaceThread extends Thread {
 
     private final SurfaceHolder myThreadSurfaceHolder;
+    private InitializationGameSnake mGameSnake;
     private boolean myThreadRun = false;
     private Collection<View> mList;
     public Canvas canvas;
     /**
-     * В конструктор список с объектами которые будем отрисовывать
+     * В конструктор объект уровня игры(в котором инициализированны все объекты игры)
+     * в список записываем все объекты которые будут перерисовываться по ходу игры
      */
-    public SurfaceThread(SurfaceHolder holder, Collection<View> list) {
+    public SurfaceThread(SurfaceHolder holder, InitializationGameSnake gameSnake) {
         myThreadSurfaceHolder = holder;
-        mList = list;
+        mGameSnake = gameSnake;
+        mList = mGameSnake.getListView();
     }
     /**
      * Вернуть Канвас
@@ -33,15 +37,16 @@ public class SurfaceThread extends Thread {
     }
     /**
      * Метод при запущенном потоке отрисовки объектов игры
+     * Изначально на весь экрна прорисовываем картинку поля игры
      * По холдеру получаем канвас (то на чем производим отрисовку)
      * Для каждого ViewObject который в списке , запускаем метод прорисовки
      */
     @Override
     public void run() {
+        canvas = myThreadSurfaceHolder.lockCanvas(null);
+        mGameSnake.getFieldView().draw(canvas);
         while (myThreadRun) {
-            canvas = null;
             try {
-                canvas = myThreadSurfaceHolder.lockCanvas(null);
                 synchronized (myThreadSurfaceHolder) {
 
                     for(View view : mList){

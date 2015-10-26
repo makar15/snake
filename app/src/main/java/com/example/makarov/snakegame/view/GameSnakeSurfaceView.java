@@ -44,8 +44,8 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        drawThread = new SurfaceThread(holder, mGameSnake.getListView());
-        threadMotionObject = new ThreadMotionObjectField(mGameSnake.getListController());
+        drawThread = new SurfaceThread(holder, mGameSnake);
+        threadMotionObject = new ThreadMotionObjectField(mGameSnake);
         threadMotionObject.setRunning(true);
         drawThread.setRunning(true);
         threadMotionObject.start();

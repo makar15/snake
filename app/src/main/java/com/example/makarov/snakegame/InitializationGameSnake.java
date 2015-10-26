@@ -51,8 +51,13 @@ public class InitializationGameSnake {
      */
     {
         mListController.add(myObjController);
-        mListView.add(myFieldView);
         mListView.add(myObjectView);
+    }
+    /**
+     * Вернуть объекто прорисовывания самого поля игры
+     */
+    public FieldView getFieldView() {
+        return myFieldView;
     }
     /**
      * Гет метод списка контроллеров
