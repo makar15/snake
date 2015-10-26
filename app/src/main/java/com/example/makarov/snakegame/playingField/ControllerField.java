@@ -4,7 +4,7 @@ import com.example.makarov.snakegame.exception.DuplicateObjectException;
 import com.example.makarov.snakegame.exception.NotFoundObjectException;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import com.example.makarov.snakegame.fieldObjects.Snake;
-import com.example.makarov.snakegame.ChoiceCollision;
+import com.example.makarov.snakegame.handlerСollision.ChoiceCollision;
 /**
  * Класс упраления полем
  * изменяет состояние ячеек поля
@@ -22,27 +22,27 @@ public class ControllerField  {
     }
     /**
      * В методе следующее происходит :
-     * 1)если место куда пытаемся добавить пустое, тогда добавляем
-     * 2)если объект змейка или её компонент , тогда обработчик столкновений обрабатывает уже всё
-     * 3)иначе добавляем этот объект на другое свободное место
+     * 1)проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
+     * 2)если место куда пытаемся добавить пустое, тогда добавляем
+     * 3)если объект змейка или её компонент , тогда обработчик столкновений обрабатывает уже всё
+     * 4)иначе добавляем этот объект на другое свободное место
      */
-    public void addObject(FieldObject object, int x, int y) throws DuplicateObjectException {
-        /**
-         * проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
-         */
-        if (mField.isEmptyField(x, y)){
-            mField.addObject(object, x, y);
-        }
-        else if (mField.getCodeFieldByPosition(object.getX(), object.getY())
-                == Snake.CODE_SNAKE_ON_THE_MAP){
-            mChoiceCollision.solutionCollision(object, x, y);
-        } else {
-            addRandomObject(object);
+    public void addObject(FieldObject objectStress, int x, int y) throws DuplicateObjectException {
+        if(mField.getListObject().contains(objectStress)) {
+            if (mField.isEmptyField(x, y)) {
+                mField.addObject(objectStress, x, y);
+            } else if (mField.getCodeFieldByPosition(objectStress.getX(), objectStress.getY())
+                    == Snake.CODE_SNAKE_ON_THE_MAP) {
+                FieldObject objectCollisions = mField.getFieldObject(x, y);
+                mChoiceCollision.solutionCollision(objectStress, objectCollisions);
+            } else {
+                addRandomObject(objectStress);
+            }
         }
     }
     /**
      * В методе следующее происходит :
-     * 1)с помощью MyField.isEmptyField находим свободное место и добавляем addObject
+     * 1)Находим свободное место и добавляем addObject
      */
     public void addRandomObject(FieldObject object) throws DuplicateObjectException {
         /**

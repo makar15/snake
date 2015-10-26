@@ -1,13 +1,14 @@
 package com.example.makarov.snakegame.handlerСollision;
 
-import com.example.makarov.snakegame.fieldObjects.FieldObject;
+import com.example.makarov.snakegame.fieldObjects.Fruite;
+import com.example.makarov.snakegame.fieldObjects.Snake;
 import com.example.makarov.snakegame.playingField.Field;
 /**
  * Класс обработки столкновения змеи об фрукт
  * змейка попадет на фрукт:
  * прибавяться очки игры и увеличиться переменная роста змеи
  */
-public class CollisionWithSnakeFruit implements HandlerCollision{
+public class CollisionWithSnakeFruit implements HandlerCollision<Snake, Fruite>{
 
     private final Field mField;
     private int ADD_SCORE_DUE_TO_FRUITE = 10;
@@ -22,7 +23,7 @@ public class CollisionWithSnakeFruit implements HandlerCollision{
      * объекта(фрукта) стоящего на координатах и продвижение змейки по полю
      */
     @Override
-    public void processingCollision(FieldObject object, int x, int y){
+    public void processingCollision(Snake objectFirst, Fruite objectSecond){
 
     }
 }

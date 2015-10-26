@@ -5,7 +5,7 @@ package com.example.makarov.snakegame.fieldObjects;
  */
 public class ComponentSnake implements FieldObject{
 
-    public static final int CODE_COMPONENT_SNAKE_ON_THE_MAP = -1;
+    public static final int CODE_COMPONENT_SNAKE_ON_THE_MAP = 3;
     private int mX;
     private int mY;
 

@@ -5,7 +5,7 @@ package com.example.makarov.snakegame.fieldObjects;
  */
 public class Wall implements FieldObject{
 
-    public static final int CODE_WALL_ON_THE_MAP = 1;
+    public static final int CODE_WALL_ON_THE_MAP = 5;
     private int mX;
     private int mY;
 

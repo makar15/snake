@@ -6,16 +6,16 @@ import com.example.makarov.snakegame.enumeration.Direction;
 /**
  * Класс тестОбъекта
  */
-public class TestObjectField implements FieldObject {
+public class TestObject implements FieldObject {
 
-    public static final int CODE_TEST_OBJECT_ON_THE_MAP = 5;
+    public static final int CODE_TEST_OBJECT_ON_THE_MAP = 17;
     private DirectionOfMotion mDirectionOfMotion = new DirectionOfMotionObjectField();
     private int mX;
     private int mY;
     /**
      * Задаём начальное направление движения
      */
-    public TestObjectField(){
+    public TestObject(){
         this.mDirectionOfMotion.setDirection(Direction.RIGHT);
     }
 

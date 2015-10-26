@@ -4,10 +4,10 @@ import com.example.makarov.snakegame.fieldObjects.FieldObject;
 /**
  * Интерфейс контроллеров
  */
-public interface ObjectController {
+public interface ObjectController<T extends FieldObject> {
 
     void nextMove();
 
-    FieldObject getObject();
+    T getObject();
 
 }

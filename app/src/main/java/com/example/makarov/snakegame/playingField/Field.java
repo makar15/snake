@@ -19,6 +19,8 @@ public interface Field {
 
     Collection<FieldObject> getListObject();
 
+    FieldObject getFieldObject(int x, int y);
+
     boolean isEmptyField(int x, int y);
 
     int getCodeFieldByPosition(int x, int y);

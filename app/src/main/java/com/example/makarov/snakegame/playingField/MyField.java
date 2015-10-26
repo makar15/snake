@@ -4,6 +4,7 @@ import com.example.makarov.snakegame.exception.DuplicateObjectException;
 import com.example.makarov.snakegame.exception.NotFoundObjectException;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 /**
  * Класс поля(карты игры)
@@ -41,7 +42,7 @@ public class MyField implements Field{
     @Override
     public void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException {
         removeObject(object);
-        addObject(object, newX , newY);
+        addObject(object, newX, newY);
     }
     /**
      * очищает поле выстваляя все нули(КОД свободной ячейки в матрице)
@@ -67,6 +68,18 @@ public class MyField implements Field{
     @Override
     public Collection<FieldObject> getListObject() {
         return objectsField;
+    }
+
+    @Override
+    public FieldObject getFieldObject(int x, int y){
+        Iterator<FieldObject> iter = objectsField.iterator();
+        while (iter.hasNext()) {
+            FieldObject tempObject = iter.next();
+            if(tempObject.getX() == x && tempObject.getY() == y){
+                return tempObject;
+            }
+        }
+        return  null;
     }
 
     @Override

@@ -11,7 +11,7 @@ public class GamePlay extends Canvas implements Game, Runnable {
     private AtomicBoolean running;
     private Input mInput;
     /**
-     *Инициализируем переменные:
+     * Инициализируем переменные:
      * running - управляет паузы и старта игры
      * mInput - объект хранящий нажатия пользователя
      */
@@ -66,13 +66,6 @@ public class GamePlay extends Canvas implements Game, Runnable {
      *Метод запускающий действия (логику игры)
      */
     public void update(){
-
-    }
-    /**
-     *Метод обновления прорисовки всех элементов экрана
-     * На вход должен быть объект класса прорисовки
-     */
-    public void draw(){
 
     }
     /**

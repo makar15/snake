@@ -10,7 +10,7 @@ import java.util.LinkedList;
  */
 public class Snake implements FieldObject {
 
-    public static final int CODE_SNAKE_ON_THE_MAP = -1;
+    public static final int CODE_SNAKE_ON_THE_MAP = 3;
     private DirectionOfMotion mDirectionOfMotion = new DirectionOfMotionObjectField();
     private LinkedList<ComponentSnake> mSnake ;
     private int mScore=0;
