@@ -13,7 +13,6 @@ public class SurfaceThread extends Thread {
     private InitializationGameSnake mGameSnake;
     private boolean myThreadRun = false;
     private Collection<View> mList;
-    public Canvas canvas;
     /**
      * В конструктор объект уровня игры(в котором инициализированны все объекты игры)
      * в список записываем все объекты которые будут перерисовываться по ходу игры
@@ -22,12 +21,6 @@ public class SurfaceThread extends Thread {
         myThreadSurfaceHolder = holder;
         mGameSnake = gameSnake;
         mList = mGameSnake.getListView();
-    }
-    /**
-     * Вернуть Канвас
-     */
-    public Canvas getCanvas(){
-        return canvas;
     }
     /**
      * Метод изменения состояния работы потока отрисовки
@@ -43,6 +36,7 @@ public class SurfaceThread extends Thread {
      */
     @Override
     public void run() {
+        Canvas canvas ;
         canvas = myThreadSurfaceHolder.lockCanvas(null);
         mGameSnake.getFieldView().draw(canvas);
         while (myThreadRun) {

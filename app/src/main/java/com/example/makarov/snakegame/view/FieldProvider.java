@@ -1,14 +1,16 @@
 package com.example.makarov.snakegame.view;
 
 import android.graphics.Canvas;
+import android.view.SurfaceHolder;
 import com.example.makarov.snakegame.playingField.Field;
 /**
  * Класс размеров поля
  */
 public class FieldProvider {
 
-    private final int wightScreen;
-    private final int heightScreen;
+    //private Canvas mCanvas = null;
+    private final int wightScreen = 1080;
+    private final int heightScreen = 1920;
 
     private final int widthOne;
     private final int heightOne;
@@ -16,9 +18,15 @@ public class FieldProvider {
      * Канвасом узнаем высоту и ширину экрана на котором происходит отрисовка всех объектов игры
      * Высчитываем сколько одна клетка поля будет размером в  пикселях на экране
      */
-    public FieldProvider(Canvas canvas, Field field){
-        wightScreen = canvas.getWidth();
-        heightScreen = canvas.getHeight();
+    public FieldProvider(SurfaceHolder surfaceHolders, Field field){
+        /**
+         * Тут тоже ругалось и я пока решил закомментировать, что б другие баги править
+         * Тоже писал вроде что на нулевой объект ссылаюсь
+         */
+        //mCanvas = surfaceHolders.lockCanvas(null);
+        //wightScreen = mCanvas.getWidth();
+        //heightScreen = mCanvas.getHeight();
+        //surfaceHolders.unlockCanvasAndPost(mCanvas);
 
         widthOne = wightScreen / field.getWidth();
         heightOne = heightScreen / field.getHeight();

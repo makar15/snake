@@ -1,6 +1,7 @@
 package com.example.makarov.snakegame;
 
 import android.content.Context;
+import android.view.SurfaceHolder;
 import com.example.makarov.snakegame.controllers.ControlTheFieldObject;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.fieldObjects.TestObject;
@@ -22,10 +23,13 @@ public class InitializationGameSnake {
     private Collection<ObjectController> mListController = new LinkedList<>();
     private Collection<View> mListView = new LinkedList<>();
     private Context mContext;
+    private SurfaceHolder mHolder;
     /**
      * В конструктор контекст
      */
-    public InitializationGameSnake(Context context, GameSnakeSurfaceView gameSnake){
+    public InitializationGameSnake(SurfaceHolder holder,
+                                   Context context, GameSnakeSurfaceView gameSnake){
+        mHolder = holder;
         mContext = context;
         mGameSnake = gameSnake;
     }
@@ -39,13 +43,14 @@ public class InitializationGameSnake {
     ObjectController myObjController = new ControlTheFieldObject(myField, myFieldObj);
     /**
      * Инициализируем: провайдер поля по которому с помощью канваса узнаем размеры в пикселях
-     * Объект отрисовывания в игре
+     *                 объект отрисовывания в игре
      */
     FieldProvider mFieldProvider = new FieldProvider
-            (mGameSnake.getDrawThread().getCanvas(), myField);
+            (mHolder, myField);
+    FieldView myFieldView = new FieldView
+            (myField, mContext, mFieldProvider);
     FieldObjectView myObjectView = new FieldObjectView
             (myFieldObj, mContext, mFieldProvider);
-    FieldView myFieldView = new FieldView(mContext, mFieldProvider);
     /**
      * В списки добавляем
      */

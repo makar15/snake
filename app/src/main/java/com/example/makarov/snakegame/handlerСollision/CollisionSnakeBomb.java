@@ -8,12 +8,12 @@ import com.example.makarov.snakegame.playingField.Field;
  * если змейка попадет на бомбу:
  * все очки игры обнуляться и увеличиться скорость
  */
-public class CollisionSnakeWithBomb implements HandlerCollision<Snake, Bomb>{
+public class CollisionSnakeBomb implements HandlerCollision<Snake, Bomb>{
 
     private final Field mField;
     private int ADD_SPEED_DUE_TO_VEGETABLE = -100;
 
-    public CollisionSnakeWithBomb(Field field){
+    public CollisionSnakeBomb(Field field){
         this.mField = field;
     }
     /**

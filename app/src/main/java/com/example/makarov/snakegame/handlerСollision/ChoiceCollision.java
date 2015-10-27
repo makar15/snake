@@ -25,13 +25,13 @@ public class ChoiceCollision {
         mField = field;
 
         map.put(Snake.CODE_SNAKE_ON_THE_MAP * Fruite.CODE_FRUITE_ON_THE_MAP,
-                new CollisionWithSnakeFruit(mField));
+                new CollisionSnakeFruit(mField));
         map.put(Snake.CODE_SNAKE_ON_THE_MAP * Bomb.CODE_BOMB_ON_THE_MAP,
-                new CollisionSnakeWithBomb(mField));
+                new CollisionSnakeBomb(mField));
         map.put(Snake.CODE_SNAKE_ON_THE_MAP * Vegetable.CODE_VEGETABLE_ON_THE_MAP,
-                new CollisionSnakesWithVegetables(mField));
+                new CollisionSnakesVegetables(mField));
         map.put(Snake.CODE_SNAKE_ON_THE_MAP * Wall.CODE_WALL_ON_THE_MAP,
-                new CollisionWithTheWallMovingObjectField(mField));
+                new CollisionSnakesWall(mField));
     }
     /**
      * метод определяет (по произведению Кодов двух объектов) между какими объектами столкновение

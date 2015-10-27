@@ -33,7 +33,7 @@ public class ControlTheFieldObject extends Controller<TestObject> {
         super(mFieldObject);
         this.mField = field;
 
-        mField.addObject(mFieldObject, 0, 0);
+        mField.addObject(mObject, 0, 0);
     }
     /**
      * Метод передвижения объекта по кругу

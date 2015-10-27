@@ -8,13 +8,13 @@ import com.example.makarov.snakegame.playingField.Field;
  * если змейка попадет на овощь:
  * очки игры увеличаться и увеличиться скорость
  */
-public class CollisionSnakesWithVegetables implements HandlerCollision<Snake, Vegetable>{
+public class CollisionSnakesVegetables implements HandlerCollision<Snake, Vegetable>{
 
     private final Field mField;
     private int ADD_SPEED_DUE_TO_VEGETABLE = -50;
     private int ADD_SCORE_DUE_TO_VEGETABLE = 15;
 
-    public CollisionSnakesWithVegetables(Field field){
+    public CollisionSnakesVegetables(Field field){
         this.mField = field;
     }
     /**

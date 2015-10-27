@@ -31,7 +31,7 @@ public class FieldObjectView implements View {
         mFieldProvider = fieldProvider;
 
         mIcon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.objectfield);
+                R.drawable.object);
     }
     /**
      * В методе с помощью провайдера поля узнаем на какие именно пиксели нужно отрисовать картинку,

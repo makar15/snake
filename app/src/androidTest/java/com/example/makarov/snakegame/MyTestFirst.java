@@ -18,7 +18,7 @@ public class MyTestFirst extends AndroidTestCase{
         Field myF = new MyField(10, 20);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new ControlTheFieldObject(myF, myFieldObj);
-        //myF.addObject(myFieldObj, 7, 19);
+        myF.addObject(myFieldObj, 7, 19);
 
         for(int i =0 ; i < 5 ; i++) {
             myObjController.nextMove();
@@ -34,7 +34,7 @@ public class MyTestFirst extends AndroidTestCase{
         Field myF = new MyField(2, 3);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new ControlTheFieldObject(myF, myFieldObj);
-        //myF.addObject(myFieldObj, 1, 2);
+        myF.addObject(myFieldObj, 1, 2);
 
         for (int i = 0; i < 50; i++) {
             myObjController.nextMove();
@@ -51,7 +51,7 @@ public class MyTestFirst extends AndroidTestCase{
         Field myF = new MyField(5000, 3000);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new ControlTheFieldObject(myF, myFieldObj);
-        //myF.addObject(myFieldObj, 0, 0);
+        myF.addObject(myFieldObj, 0, 0);
 
         for(int i =0 ; i < 50000 ; i++) {
             myObjController.nextMove();

@@ -10,16 +10,15 @@ import java.util.LinkedList;
  * Класс поля(карты игры)
  */
 public class MyField implements Field{
-    /**
-     * в конструктор масштаб карты по осям X, Y и очистка карты на нули
-     * сет методы добавления объектов на координаты, а так же гет методы
-     */
+
     public static final int CODE_EMPTY_CELL_ON_THE_MAP = 0;
     private Collection<FieldObject> objectsField;
     private int mField[][];
     private int mFieldWidth ;
     private int mFieldHeight ;
-
+    /**
+     * В конструктор масштаб карты по осям X, Y и очистка карты на нули
+     */
     public MyField(int fieldX, int fieldY) {
         mFieldWidth = fieldX;
         mFieldHeight = fieldY;
@@ -28,7 +27,9 @@ public class MyField implements Field{
         objectsField = new LinkedList<FieldObject>();
         clearField();
     }
-
+    /**
+     *
+     */
     @Override
     public void addObject(FieldObject object, int newX, int newY) throws DuplicateObjectException {
         mField[newX][newY] = object.getCodeOnTheMap();

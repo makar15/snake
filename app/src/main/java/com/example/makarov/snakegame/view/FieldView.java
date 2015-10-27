@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.view;
 
+import com.example.makarov.snakegame.playingField.Field;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import com.example.makarov.snakegame.R;
  */
 public class FieldView implements View {
 
+    private Field mField;
     private Bitmap mIcon;
     private Paint mPaint;
     private FieldProvider mFieldProvider;
@@ -20,8 +22,9 @@ public class FieldView implements View {
      * создаем кисточку
      * стрэйчим картинку из папки ресурсов
      */
-    public FieldView(Context context, FieldProvider fieldProvider){
+    public FieldView(Field field, Context context, FieldProvider fieldProvider){
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mField = field;
         mFieldProvider = fieldProvider;
 
         mIcon = BitmapFactory.decodeResource(context.getResources(),
