@@ -28,14 +28,15 @@ public class FieldView implements View {
         mFieldProvider = fieldProvider;
 
         mIcon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.field);
+                R.drawable.fieldnew);
     }
     /**
      * отрисовываем картинку на полный экран
      */
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap
-                (mIcon, mFieldProvider.getWightScreen(), mFieldProvider.getHeightScreen(), mPaint);
+        Bitmap icon = Bitmap.createScaledBitmap
+                (mIcon, mFieldProvider.getWightScreen(), mFieldProvider.getHeightScreen(), true);
+        canvas.drawBitmap(icon, 0, 0, mPaint);
     }
 }

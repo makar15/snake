@@ -1,31 +1,38 @@
 package com.example.makarov.snakegame.controllers;
 
+import com.example.makarov.snakegame.playingField.ControllerField;
 import com.example.makarov.snakegame.playingField.Field;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 /**
  * Класс контроллера для недвижущихся объектов
  * В конструктор поле(карта игры) и объект над кем будет управление
  */
-public class ControllerUnmovingObjects implements  ObjectController{
+public class ControllerUnmovingObjects extends Controller<FieldObject>{
+
+    private Field mField;
+    private ControllerField mControllerField;
     /**
      * В конструктор поле(карта игры) и объект над кем будет управление
+     * Ставим начальное месторасположение фрукта на карте
      */
-    private FieldObject mFieldObject;
-    private Field mField;
-
-    public ControllerUnmovingObjects(Field field, FieldObject mFieldObject){
+    public ControllerUnmovingObjects(Field field, FieldObject fieldObject){
+        super(fieldObject);
         this.mField = field;
-        this.mFieldObject = mFieldObject;
+        mControllerField = new ControllerField(mField);
+
+        mField.addObject(mObject, 9, 0);
     }
 
     @Override
     public void nextMove() {
 
     }
-
+    /**
+     * Вернуть объект над которым управляет данный контроллер
+     */
     @Override
     public FieldObject getObject() {
-        return this.mFieldObject;
+        return this.mObject;
     }
 
 }

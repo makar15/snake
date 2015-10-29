@@ -9,13 +9,19 @@ import java.util.Collection;
  */
 public interface Field {
 
-    void addObject(FieldObject object, int x, int y) throws DuplicateObjectException;
+    void addObject(FieldObject object, int newX, int newY) throws DuplicateObjectException;
 
-    void changeObjectLocation(FieldObject object, int x, int y) throws NotFoundObjectException;
+    void addRandomObject(FieldObject object) throws DuplicateObjectException;
+
+    void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException;
+
+    void changeObjectLocationRandom(FieldObject object) throws NotFoundObjectException;
 
     void clearField();
 
     void removeObject(FieldObject object) throws NotFoundObjectException;
+
+    void removeObject(int x, int y) throws NotFoundObjectException;
 
     Collection<FieldObject> getListObject();
 

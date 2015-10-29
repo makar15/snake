@@ -3,13 +3,16 @@ package com.example.makarov.snakegame;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import com.example.makarov.snakegame.controllers.ControlTheFieldObject;
+import com.example.makarov.snakegame.controllers.ControllerUnmovingObjects;
 import com.example.makarov.snakegame.controllers.ObjectController;
+import com.example.makarov.snakegame.fieldObjects.Fruite;
 import com.example.makarov.snakegame.fieldObjects.TestObject;
 import com.example.makarov.snakegame.playingField.Field;
 import com.example.makarov.snakegame.playingField.MyField;
 import com.example.makarov.snakegame.view.FieldObjectView;
 import com.example.makarov.snakegame.view.FieldProvider;
 import com.example.makarov.snakegame.view.FieldView;
+import com.example.makarov.snakegame.view.FruiteView;
 import com.example.makarov.snakegame.view.GameSnakeSurfaceView;
 import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
@@ -19,47 +22,60 @@ import java.util.LinkedList;
  */
 public class InitializationGameSnake {
 
+    private Context mContext;
+    private SurfaceHolder mHolder;
     private GameSnakeSurfaceView mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
     private Collection<View> mListView = new LinkedList<>();
-    private Context mContext;
-    private SurfaceHolder mHolder;
+    private FieldView myFieldView;
     /**
-     * В конструктор контекст
+     * В конструктор Холдер, контекст на котором отрисовываем игру
      */
     public InitializationGameSnake(SurfaceHolder holder,
                                    Context context, GameSnakeSurfaceView gameSnake){
         mHolder = holder;
         mContext = context;
         mGameSnake = gameSnake;
+        /**
+         * Создаем:
+         *  поле с размерами 27 на 48
+         *  объект передвижения по полю
+         *  контроллер который передвигает объект(по часовой стрелке)
+         *  фрукт
+         *  контроллер для фрукта(без передвижения по карте)
+         */
+        Field myField = new MyField(27, 48);
+        TestObject myTestObj = new TestObject();
+        ObjectController myObjController = new ControlTheFieldObject(myField, myTestObj);
+        Fruite myFruite = new Fruite();
+        ObjectController myFruiteController = new ControllerUnmovingObjects(myField, myFruite);
+        /**
+         * Создаем:
+         *  провайдер поля по которому с помощью канваса узнаем размеры в пикселях
+         *  полеView
+         *  объектView
+         *  фруктView
+         */
+        FieldProvider mFieldProvider = new FieldProvider
+                (mHolder, myField);
+        myFieldView = new FieldView
+                (myField, mContext, mFieldProvider);
+        FieldObjectView myObjectView = new FieldObjectView
+                (myTestObj, mContext, mFieldProvider);
+        FruiteView myFruiteView = new FruiteView
+                (myFruite, mContext, mFieldProvider);
+        /**
+         * В списки добавляем
+         */
+        {
+            mListController.add(myObjController);
+            mListView.add(myObjectView);
+            mListController.add(myFruiteController);
+            mListView.add(myFruiteView);
+        }
     }
     /**
-     * Создаем поле с размерами 54 на 96
-     * Создаем объект передвижения по полю
-     * Создаем контроллер который передвигает объект(по часовой стрелке)
-     */
-    Field myField = new MyField(54, 96);
-    TestObject myFieldObj = new TestObject();
-    ObjectController myObjController = new ControlTheFieldObject(myField, myFieldObj);
-    /**
-     * Инициализируем: провайдер поля по которому с помощью канваса узнаем размеры в пикселях
-     *                 объект отрисовывания в игре
-     */
-    FieldProvider mFieldProvider = new FieldProvider
-            (mHolder, myField);
-    FieldView myFieldView = new FieldView
-            (myField, mContext, mFieldProvider);
-    FieldObjectView myObjectView = new FieldObjectView
-            (myFieldObj, mContext, mFieldProvider);
-    /**
-     * В списки добавляем
-     */
-    {
-        mListController.add(myObjController);
-        mListView.add(myObjectView);
-    }
-    /**
-     * Вернуть объекто прорисовывания самого поля игры
+     * Вернуть объект прорисовывания самого поля игры
      */
     public FieldView getFieldView() {
         return myFieldView;
@@ -71,7 +87,7 @@ public class InitializationGameSnake {
         return mListController;
     }
     /**
-     * Гет метод списка объект отрисовывания
+     * Гет метод списка объектовView
      */
     public Collection<View> getListView(){
         return mListView;

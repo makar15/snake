@@ -4,6 +4,7 @@ import com.example.makarov.snakegame.fieldObjects.Bomb;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 import com.example.makarov.snakegame.fieldObjects.Fruite;
 import com.example.makarov.snakegame.fieldObjects.Snake;
+import com.example.makarov.snakegame.fieldObjects.TestObject;
 import com.example.makarov.snakegame.fieldObjects.Vegetable;
 import com.example.makarov.snakegame.fieldObjects.Wall;
 import com.example.makarov.snakegame.playingField.Field;
@@ -17,9 +18,9 @@ public class ChoiceCollision {
     private Map<Integer, HandlerCollision> map = new HashMap<>();
     private final Field mField;
     /**
-     * В конструктор поле на котором играем и добавление в мапу ключа
-     * (произведение Кодов двух столкнувшихся объектов),
-     * объекта класса решающего коллизию между этими обэектами
+     * В конструктор поле на котором играем и добавление в мапу:
+     * ключам(произведение Кодов двух столкнувшихся объектов) и
+     * хэндлера решающего коллизию между этими объектами
      */
     public ChoiceCollision(Field field){
         mField = field;
@@ -32,6 +33,8 @@ public class ChoiceCollision {
                 new CollisionSnakesVegetables(mField));
         map.put(Snake.CODE_SNAKE_ON_THE_MAP * Wall.CODE_WALL_ON_THE_MAP,
                 new CollisionSnakesWall(mField));
+        map.put(TestObject.CODE_TEST_OBJECT_ON_THE_MAP * Fruite.CODE_FRUITE_ON_THE_MAP,
+                new CollisionTestObjectFruit(mField));
     }
     /**
      * метод определяет (по произведению Кодов двух объектов) между какими объектами столкновение

@@ -1,11 +1,12 @@
 package com.example.makarov.snakegame.controllers;
 
-import android.util.Log;
 import com.example.makarov.snakegame.enumeration.Direction;
 import com.example.makarov.snakegame.fieldObjects.TestObject;
+import com.example.makarov.snakegame.playingField.ControllerField;
 import com.example.makarov.snakegame.playingField.Field;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 /**
  * Класс контроллера тестОбъекта
  */
@@ -14,6 +15,7 @@ public class ControlTheFieldObject extends Controller<TestObject> {
     private static final String TAG = "myLogs";
 
     private Field mField;
+    private ControllerField  mControllerField;
     private List<Direction> mListDirection = new ArrayList<>();
     /**
      * В лист направлений добавляем для движения по кругу(по часовой)
@@ -25,13 +27,13 @@ public class ControlTheFieldObject extends Controller<TestObject> {
         mListDirection.add(Direction.LEFT);
     }
     /**
-     * В конструктор объекты: поле, тестОбъект управления, контроллер поля
+     * В конструктор объекты: поле, тестОбъект управления
      * Ставим начальное месторасположение на карте тестОбъекта
      */
-    public ControlTheFieldObject(Field field,
-                                 TestObject mFieldObject){
+    public ControlTheFieldObject(Field field, TestObject mFieldObject){
         super(mFieldObject);
         this.mField = field;
+        mControllerField = new ControllerField(mField);
 
         mField.addObject(mObject, 0, 0);
     }
@@ -41,23 +43,17 @@ public class ControlTheFieldObject extends Controller<TestObject> {
      */
     @Override
     public void nextMove() {
-        Log.d(TAG, "Объект на X :" + mObject.getX() + " на Y :" + mObject.getY());
-
+        //Log.d(TAG, "Объект на X :" + mObject.getX() + " на Y :" + mObject.getY());
         int nextX = (mObject.getX() + mObject.getDirectionOfMotion().getDirection().deltaX());
         int nextY = (mObject.getY() + mObject.getDirectionOfMotion().getDirection().deltaY());
 
         if ((nextX >= 0 && nextX < mField.getWidth()) && (nextY >= 0 && nextY < mField.getHeight())) {
-            if (mField.isEmptyField(nextX, nextY)) {
-                mField.changeObjectLocation(mObject, nextX, nextY);
 
-                Log.d(TAG, "Объект на X :" + mObject.getX() + " на Y :" + mObject.getY());
-            } else {
-                turnObjectField();
-            }
+            mControllerField.changeObjectLocation(mObject, nextX, nextY);
+            //Log.d(TAG, "Объект на X :" + mObject.getX() + " на Y :" + mObject.getY());
         } else {
             turnObjectField();
         }
-        nextMove();
     }
     /**
      * Вернуть объект над которым управляет данный контроллер
@@ -68,7 +64,7 @@ public class ControlTheFieldObject extends Controller<TestObject> {
     }
     /**
      * метод поворота объекта на 90 градусов относительно текущего направления
-     * Работа с листом в котором лежат уже направления внужном порядке
+     * Работа с листом в котором лежат уже направления в нужном порядке
      */
     private void turnObjectField(){
         int tempIndexDirection =
@@ -77,7 +73,7 @@ public class ControlTheFieldObject extends Controller<TestObject> {
         tempIndexDirection = tempIndexDirection % mListDirection.size();
         mObject.getDirectionOfMotion().setDirection(mListDirection.get(tempIndexDirection));
 
-        Log.d(TAG, "Поворот на X :" + mObject.getX() + " на Y :" + mObject.getY());
+        //Log.d(TAG, "Поворот на X :" + mObject.getX() + " на Y :" + mObject.getY());
     }
 
 }

@@ -29,22 +29,32 @@ public class SurfaceThread extends Thread {
         this.myThreadRun = b;
     }
     /**
-     * Метод при запущенном потоке отрисовки объектов игры
+     * Метод вызван при запущенном потоке отрисовки ViewObject игры
      * Изначально на весь экрна прорисовываем картинку поля игры
      * По холдеру получаем канвас (то на чем производим отрисовку)
      * Для каждого ViewObject который в списке , запускаем метод прорисовки
      */
     @Override
     public void run() {
-        Canvas canvas ;
-        canvas = myThreadSurfaceHolder.lockCanvas(null);
-        mGameSnake.getFieldView().draw(canvas);
+        Canvas canvas;
+        //canvas = myThreadSurfaceHolder.lockCanvas(null);
+        //mGameSnake.getFieldView().draw(canvas);
+        //myThreadSurfaceHolder.unlockCanvasAndPost(canvas);
         while (myThreadRun) {
+            canvas = null ;
             try {
+                canvas = myThreadSurfaceHolder.lockCanvas(null);
                 synchronized (myThreadSurfaceHolder) {
-
+                    if (canvas == null)
+                        continue;
+                    mGameSnake.getFieldView().draw(canvas);
                     for(View view : mList){
                         view.draw(canvas);
+                        try {
+                            sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             } finally {

@@ -11,7 +11,6 @@ public class FieldProvider {
     //private Canvas mCanvas = null;
     private final int wightScreen = 1080;
     private final int heightScreen = 1920;
-
     private final int widthOne;
     private final int heightOne;
     /**
@@ -36,6 +35,15 @@ public class FieldProvider {
      * Методы возврата высоты и щирины всего экрана,
      * и возврат высоты и ширины одной клетки игрового  поля
      */
+
+    public int getHeightOne() {
+        return heightOne;
+    }
+
+    public int getWidthOne() {
+        return widthOne;
+    }
+
     public int getWightScreen() {
         return wightScreen;
     }

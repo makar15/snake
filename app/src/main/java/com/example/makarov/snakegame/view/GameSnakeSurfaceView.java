@@ -14,7 +14,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     private ThreadMotionObjectField threadMotionObject;
     private InitializationGameSnake mGameSnake ;
     /**
-     * В конструктор Холдер, контекст на котором отрисовываем игру
+     * В конструктор контекст
      * Инициализируем класс со всеми объектами участвующими в потоках:
      * передвижения и прорисовки на поле
      */
@@ -34,12 +34,12 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     }
     /**
      * Метод вызывается, когда SurfaceView создан и готов к отображению информации
-     * Запуск потоков: передвижения объектов и прорисовки ViewObject игры
+     * Инициализация и запуск потоков: передвижения объектов и прорисовки ViewObject игры
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        drawThread = new SurfaceThread(getHolder(), mGameSnake);
         threadMotionObject = new ThreadMotionObjectField(mGameSnake);
+        drawThread = new SurfaceThread(getHolder(), mGameSnake);
         threadMotionObject.setRunning(true);
         drawThread.setRunning(true);
         threadMotionObject.start();

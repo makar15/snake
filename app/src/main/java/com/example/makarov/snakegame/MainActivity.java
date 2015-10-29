@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
 import com.example.makarov.snakegame.view.GameSnakeSurfaceView;
 /**
  * Главное окно приложения

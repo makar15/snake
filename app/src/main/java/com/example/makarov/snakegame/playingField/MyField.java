@@ -28,7 +28,7 @@ public class MyField implements Field{
         clearField();
     }
     /**
-     *
+     * Добавить объект на указанные координаты на поле
      */
     @Override
     public void addObject(FieldObject object, int newX, int newY) throws DuplicateObjectException {
@@ -36,6 +36,26 @@ public class MyField implements Field{
         addObjectFieldTheList(object);
         object.setX(newX);
         object.setY(newY);
+    }
+    /**
+     * Добавить объект на свободное место на карте рандомом
+     * В методе следующее происходит :
+     * 1)Проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
+     * 2)Находим свободное место и добавляем
+     */
+    @Override
+    public void addRandomObject(FieldObject object) throws DuplicateObjectException {
+        if(!getListObject().contains(object)) {
+            boolean par = false;
+            while (!par) {
+                int x = (int) (Math.random() * getWidth());
+                int y = (int) (Math.random() * getHeight());
+                if (isEmptyField(x, y)) {
+                    addObject(object, x, y);
+                    par = true;
+                }
+            }
+        }
     }
     /**
      * Изменить метоположение существующего обьекта на поле
@@ -46,7 +66,16 @@ public class MyField implements Field{
         addObject(object, newX, newY);
     }
     /**
-     * очищает поле выстваляя все нули(КОД свободной ячейки в матрице)
+     * Изменить метоположение существующего обьекта на поле с рассмотрением коллизии
+     */
+    @Override
+    public void changeObjectLocationRandom(FieldObject object) throws NotFoundObjectException {
+        removeObject(object);
+        addRandomObject(object);
+    }
+    /**
+     * очистить поле
+     * выставить все нули(КОД свободной ячейки в матрице)
      */
     @Override
     public void clearField() {
@@ -56,21 +85,38 @@ public class MyField implements Field{
             }
         clearListObjectField();
     }
-
+    /**
+     *
+     */
     @Override
     public void removeObject(FieldObject object) throws NotFoundObjectException {
-    /**
-     * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
-     */
+        /**
+         * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
+         */
         mField[object.getX()][object.getY()] = CODE_EMPTY_CELL_ON_THE_MAP;
         removeObjectFieldTheList(object);
     }
-
+    /**
+     *
+     */
+    @Override
+    public void removeObject(int x, int y) throws NotFoundObjectException {
+        /**
+         * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
+         */
+        mField[x][y] = CODE_EMPTY_CELL_ON_THE_MAP;
+        removeObjectFieldTheList(getFieldObject(x, y));
+    }
+    /**
+     * Вернуть список объектов находящихся на карте
+     */
     @Override
     public Collection<FieldObject> getListObject() {
         return objectsField;
     }
-
+    /**
+     * Вернуть объект поля
+     */
     @Override
     public FieldObject getFieldObject(int x, int y){
         Iterator<FieldObject> iter = objectsField.iterator();
@@ -82,41 +128,57 @@ public class MyField implements Field{
         }
         return  null;
     }
-
+    /**
+     * Проверить, свободная ли клетка поля
+     */
     @Override
     public boolean isEmptyField(int x, int y) {
         if(mField[x][y] == CODE_EMPTY_CELL_ON_THE_MAP) return true;
         return false;
     }
-
+    /**
+     * Вернуть Код поля по позиции
+     */
     @Override
     public int getCodeFieldByPosition(int x, int y){
         return mField[x][y];
     }
-
+    /**
+     * Вернуть ширину поля
+     */
     @Override
     public int getWidth() {
         return mFieldWidth;
     }
-
+    /**
+     * Вернуть высоту поля
+     */
     @Override
     public int getHeight() {
         return mFieldHeight;
     }
-
+    /**
+     * Вернуть Код свободной ячейки поля
+     */
     @Override
     public int getCODE_ON_THE_MAP() {
         return CODE_EMPTY_CELL_ON_THE_MAP;
     }
-
+    /**
+     * Добавить объект в список объектов поля
+     */
     public void addObjectFieldTheList(FieldObject object){
         objectsField.add(object);
     }
-
+    /**
+     * Удалить объект из списка объектов поля
+     */
     public void removeObjectFieldTheList(FieldObject object){
         objectsField.remove(object);
     }
-
+    /**
+     * Очистить список объектов поля
+     */
     public void clearListObjectField(){
         objectsField.clear();
     }

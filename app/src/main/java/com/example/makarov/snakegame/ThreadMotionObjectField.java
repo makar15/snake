@@ -3,7 +3,7 @@ package com.example.makarov.snakegame;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import java.util.Collection;
 /**
- * Класс потока передвижения объектов игры контроллерами
+ * Класс потока передвижения объектов игры, контроллерами
  */
 public class ThreadMotionObjectField extends Thread{
 
@@ -26,13 +26,18 @@ public class ThreadMotionObjectField extends Thread{
     }
     /**
      * Метод при запущенном потоке передвижения объектов
-     * Пролистывая список запускаем метод передвижение объектов контроллерами
+     * Пролистывая список, запускаем метод передвижение объектов контроллерами
      */
     @Override
     public void run() {
         while (myThreadRun) {
             for(ObjectController objectController : mList){
                 objectController.nextMove();
+                try {
+                    sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

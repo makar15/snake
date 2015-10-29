@@ -3,12 +3,11 @@ package com.example.makarov.snakegame.playingField;
 import com.example.makarov.snakegame.exception.DuplicateObjectException;
 import com.example.makarov.snakegame.exception.NotFoundObjectException;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
-import com.example.makarov.snakegame.fieldObjects.Snake;
+import com.example.makarov.snakegame.fieldObjects.TestObject;
 import com.example.makarov.snakegame.handlerСollision.ChoiceCollision;
 /**
  * Класс упраления полем
- * изменяет состояние ячеек поля
- * Классу ChoiceCollision передаёт объекты столкновение
+ * Классу ChoiceCollision передаёт объекты столкновений
  * А так же удаляет, добавляет, меняет позицию объектов или очищает поле
  */
 public class ControllerField  {
@@ -21,19 +20,20 @@ public class ControllerField  {
         mChoiceCollision = new ChoiceCollision(mField);
     }
     /**
+     * Добавить объект на указанные координаты на поле с рассмотрением коллизии
      * В методе следующее происходит :
      * 1)проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
      * 2)если место куда пытаемся добавить пустое, тогда добавляем
-     * 3)если объект змейка или её компонент , тогда обработчик столкновений обрабатывает уже всё
+     * 3)если объект тестОбъект, тогда обработчик столкновений обрабатывает уже всё
      * 4)иначе добавляем этот объект на другое свободное место
      */
-    public void addObject(FieldObject objectStress, int x, int y) throws DuplicateObjectException {
-        if(mField.getListObject().contains(objectStress)) {
-            if (mField.isEmptyField(x, y)) {
-                mField.addObject(objectStress, x, y);
+    public void addObject(FieldObject objectStress, int newX, int newY) throws DuplicateObjectException {
+        if(!mField.getListObject().contains(objectStress)) {
+            if (mField.isEmptyField(newX, newY)) {
+                mField.addObject(objectStress, newX, newY);
             } else if (mField.getCodeFieldByPosition(objectStress.getX(), objectStress.getY())
-                    == Snake.CODE_SNAKE_ON_THE_MAP) {
-                FieldObject objectCollisions = mField.getFieldObject(x, y);
+                    == TestObject.CODE_TEST_OBJECT_ON_THE_MAP) {
+                FieldObject objectCollisions = mField.getFieldObject(newX, newY);
                 mChoiceCollision.solutionCollision(objectStress, objectCollisions);
             } else {
                 addRandomObject(objectStress);
@@ -41,39 +41,39 @@ public class ControllerField  {
         }
     }
     /**
+     * Добавить объект на свободное место на карте рандомом
      * В методе следующее происходит :
-     * 1)Находим свободное место и добавляем addObject
+     * 1)Проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
+     * 2)Находим свободное место и добавляем
      */
     public void addRandomObject(FieldObject object) throws DuplicateObjectException {
-        /**
-         * проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
-         */
-        boolean par = false;
-        while (!par) {
-            int x = (int) (Math.random() * mField.getWidth());
-            int y = (int) (Math.random() * mField.getHeight());
-            if (mField.isEmptyField(x, y)) {
-                addObject(object, x, y);
-                par = true;
+        if(!mField.getListObject().contains(object)) {
+            boolean par = false;
+            while (!par) {
+                int x = (int) (Math.random() * mField.getWidth());
+                int y = (int) (Math.random() * mField.getHeight());
+                if (mField.isEmptyField(x, y)) {
+                    addObject(object, x, y);
+                    par = true;
+                }
             }
         }
     }
     /**
-     * надо написать
+     * Изменить местоположение существующего обьекта на поле с рассмотрением коллизии
      */
-    public void changeObjectLocation(FieldObject object, int x, int y) throws NotFoundObjectException {
-        /**
-         * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
-         */
+    public void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException {
+        mField.removeObject(object);
+        addObject(object, newX, newY);
     }
     /**
-     * вернуть объект контроллера столкновений
+     * Вернуть объект контроллера столкновений
      */
-    public ChoiceCollision getControllerCollision() {
+    public ChoiceCollision getChoiceCollision() {
         return this.mChoiceCollision;
     }
     /**
-     * Вернуть поле на котором расставляем объекты
+     * Вернуть поле
      */
     public Field getField() {
         return this.mField;

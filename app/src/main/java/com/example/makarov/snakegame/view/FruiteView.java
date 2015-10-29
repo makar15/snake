@@ -8,11 +8,9 @@ import android.graphics.Paint;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
 /**
- * Класс объекта поля который будем отрисовывать
- * (пока это просто тестовый объект который будет двигаться)
- * Далее для каждого объекта поля будет свой класс и своя картинка
+ *
  */
-public class FieldObjectView implements View {
+public class FruiteView implements View {
 
     private FieldObject mObject;
     private Bitmap mIcon;
@@ -20,19 +18,19 @@ public class FieldObjectView implements View {
     private Paint mPaint;
     private FieldProvider mFieldProvider;
     /**
-     * В констркторе сам объект поля
+     * В конструкторе сам объект поля
      * Контекст (часть экрана на которой отрисоваем)
      * провайдер поля
      * создаем кисточку
      * стрэйчим картинку из папки ресурсов
      */
-    public FieldObjectView(FieldObject object, Context context, FieldProvider fieldProvider){
+    public FruiteView(FieldObject object, Context context, FieldProvider fieldProvider){
         mObject = object;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mFieldProvider = fieldProvider;
 
         mIcon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.object);
+                R.drawable.fruite);
         icon = Bitmap.createScaledBitmap
                 (mIcon, mFieldProvider.getWidthOne(), mFieldProvider.getHeightOne(), true);
     }
