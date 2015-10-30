@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.view;
 
+import com.example.makarov.snakegame.initialized.FieldProvider;
 import com.example.makarov.snakegame.playingField.Field;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,7 +11,7 @@ import com.example.makarov.snakegame.R;
 /**
  * Класс отрисовываемого поля для игры
  */
-public class FieldView implements View {
+public class FieldView {
 
     private Field mField;
     private Bitmap mIcon;
@@ -33,10 +34,16 @@ public class FieldView implements View {
     /**
      * отрисовываем картинку на полный экран
      */
-    @Override
     public void draw(Canvas canvas) {
         Bitmap icon = Bitmap.createScaledBitmap
                 (mIcon, mFieldProvider.getWightScreen(), mFieldProvider.getHeightScreen(), true);
         canvas.drawBitmap(icon, 0, 0, mPaint);
     }
+    /**
+     * Вернуть объек поля(карту) на которой происходят передвижения объектов
+     */
+    public Field getField() {
+        return mField;
+    }
+
 }

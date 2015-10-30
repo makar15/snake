@@ -1,10 +1,8 @@
-package com.example.makarov.snakegame.view;
+package com.example.makarov.snakegame.initialized;
 
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import com.example.makarov.snakegame.InitializationGameSnake;
-import com.example.makarov.snakegame.ThreadMotionObjectField;
 /**
  * Класс Игры змейки
  */
@@ -24,6 +22,14 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         mGameSnake = new InitializationGameSnake(getHolder(), context, this);
         getHolder().addCallback(this);
     }
+    /**
+     *
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        scaleGestureDetector.onTouchEvent(event);
+        return true;
+    }
+     */
     /**
      * Метод вызывается, если был изменен формат или размер SurfaceView
      */

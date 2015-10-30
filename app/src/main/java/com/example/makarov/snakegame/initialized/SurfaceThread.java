@@ -1,8 +1,8 @@
-package com.example.makarov.snakegame.view;
+package com.example.makarov.snakegame.initialized;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-import com.example.makarov.snakegame.InitializationGameSnake;
+import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
 /**
  * Класс потока отрисовки всех ViewObject игры
@@ -29,7 +29,7 @@ public class SurfaceThread extends Thread {
         this.myThreadRun = b;
     }
     /**
-     * Метод вызван при запущенном потоке отрисовки ViewObject игры
+     * Метод вызван при запущенном потоке отрисовки ViewObject-ов игры
      * Изначально на весь экрна прорисовываем картинку поля игры
      * По холдеру получаем канвас (то на чем производим отрисовку)
      * Для каждого ViewObject который в списке , запускаем метод прорисовки
@@ -49,9 +49,17 @@ public class SurfaceThread extends Thread {
                         continue;
                     mGameSnake.getFieldView().draw(canvas);
                     for(View view : mList){
-                        view.draw(canvas);
+                        if(objectInTheGame(view)) {
+                            view.draw(canvas);
+                        } else {
+                            /**
+                             * Вроде как просто так удалить нельзя!???
+                             * Не нужно ли смещение в списка назад на одну позицию?
+                             */
+                            mList.remove(view);
+                        }
                         try {
-                            sleep(50);
+                            sleep(70);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -62,6 +70,17 @@ public class SurfaceThread extends Thread {
                     myThreadSurfaceHolder.unlockCanvasAndPost(canvas);
                 }
             }
+        }
+    }
+    /**
+     * Проверка, в игре ли еще объект
+     */
+    public boolean objectInTheGame(View view){
+        if(mGameSnake.getFieldView().getField().getFieldObject
+                (view.getObject().getX(), view.getObject().getY()) != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

@@ -1,8 +1,8 @@
-package com.example.makarov.snakegame.view;
+package com.example.makarov.snakegame.initialized;
 
-import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import com.example.makarov.snakegame.playingField.Field;
+import android.graphics.Canvas;
 /**
  * Класс размеров поля
  */
@@ -15,7 +15,7 @@ public class FieldProvider {
     private final int heightOne;
     /**
      * Канвасом узнаем высоту и ширину экрана на котором происходит отрисовка всех объектов игры
-     * Высчитываем сколько одна клетка поля будет размером в  пикселях на экране
+     * Высчитываем сколько одна клетка поля будет размером в пикселях на экране
      */
     public FieldProvider(SurfaceHolder surfaceHolders, Field field){
         /**
@@ -32,10 +32,11 @@ public class FieldProvider {
 
     }
     /**
-     * Методы возврата высоты и щирины всего экрана,
-     * и возврат высоты и ширины одной клетки игрового  поля
+     *Вернуть:
+     * ширину и высоту одной клетки поля
+     * ширину и высоту всего поля
+     * ширину и высоту до координат
      */
-
     public int getHeightOne() {
         return heightOne;
     }

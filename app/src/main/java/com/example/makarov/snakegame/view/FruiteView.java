@@ -7,8 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.fieldObjects.FieldObject;
+import com.example.makarov.snakegame.initialized.FieldProvider;
 /**
- *
+ * Класс объекта поля который будем отрисовывать
+ * (объект используем Банан который не будет двигаться)
+ * Далее для каждого объекта поля будет свой класс и своя картинка
  */
 public class FruiteView implements View {
 
@@ -44,4 +47,11 @@ public class FruiteView implements View {
         int y = mFieldProvider.getScreenY(mObject.getY());
         canvas.drawBitmap(icon, x, y, mPaint);
     }
+    /**
+     * Вернуть объект передвижения
+     */
+    public FieldObject getObject() {
+        return mObject;
+    }
+
 }

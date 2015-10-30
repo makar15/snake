@@ -22,6 +22,13 @@ public class ControlTheSnake extends Controller<Snake> {
         nextMoveHead();
     }
     /**
+     *
+     */
+    @Override
+    public Field getField() {
+        return mField;
+    }
+    /**
      * Метод добавления компоненты змейки вперед (с головы состава)
      */
     private void nextMoveBody() {

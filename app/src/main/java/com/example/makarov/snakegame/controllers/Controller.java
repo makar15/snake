@@ -20,4 +20,5 @@ public abstract class Controller<T extends FieldObject> implements ObjectControl
     public T getObject() {
         return mObject;
     }
+
 }

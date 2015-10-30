@@ -3,7 +3,9 @@ package com.example.makarov.snakegame;
 import android.graphics.Canvas;
 import java.util.concurrent.atomic.AtomicBoolean;
 /**
- *
+ * Класс не используется
+ * Возможно и не нужен будет
+ * Потом удалю
  */
 public class GamePlay extends Canvas implements Game, Runnable {
 

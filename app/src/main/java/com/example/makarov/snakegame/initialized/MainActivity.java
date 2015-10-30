@@ -1,18 +1,17 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.initialized;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import com.example.makarov.snakegame.view.GameSnakeSurfaceView;
 /**
  * Главное окно приложения
  */
 public class MainActivity extends Activity {
     /**
-     * приложение постоянно имело портретную ориентацию
-     * приложение было полноэкранным и без заголовка
+     * приложение постоянно имеет портретную ориентацию
+     * приложение будет полноэкранным и без заголовка
      * Запускаем класс сцены игры
      */
     @Override
@@ -25,5 +24,4 @@ public class MainActivity extends Activity {
 
         setContentView(new GameSnakeSurfaceView(this));
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.initialized;
 
 import android.content.Context;
 import android.view.SurfaceHolder;
@@ -9,16 +9,14 @@ import com.example.makarov.snakegame.fieldObjects.Fruite;
 import com.example.makarov.snakegame.fieldObjects.TestObject;
 import com.example.makarov.snakegame.playingField.Field;
 import com.example.makarov.snakegame.playingField.MyField;
-import com.example.makarov.snakegame.view.FieldObjectView;
-import com.example.makarov.snakegame.view.FieldProvider;
+import com.example.makarov.snakegame.view.TestObjectView;
 import com.example.makarov.snakegame.view.FieldView;
 import com.example.makarov.snakegame.view.FruiteView;
-import com.example.makarov.snakegame.view.GameSnakeSurfaceView;
 import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
 import java.util.LinkedList;
 /**
- * Класс инициализации всех объектов игры , и всех объектов отрисовки в игре
+ * Класс инициализации всех объектов игры, и всех объектов отрисовки в игре
  */
 public class InitializationGameSnake {
 
@@ -51,16 +49,16 @@ public class InitializationGameSnake {
         ObjectController myFruiteController = new ControllerUnmovingObjects(myField, myFruite);
         /**
          * Создаем:
-         *  провайдер поля по которому с помощью канваса узнаем размеры в пикселях
+         *  провайдер поля
          *  полеView
-         *  объектView
+         *  тестОбъектView
          *  фруктView
          */
         FieldProvider mFieldProvider = new FieldProvider
                 (mHolder, myField);
         myFieldView = new FieldView
                 (myField, mContext, mFieldProvider);
-        FieldObjectView myObjectView = new FieldObjectView
+        TestObjectView myObjectView = new TestObjectView
                 (myTestObj, mContext, mFieldProvider);
         FruiteView myFruiteView = new FruiteView
                 (myFruite, mContext, mFieldProvider);

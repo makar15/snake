@@ -17,7 +17,9 @@ public class MyField implements Field{
     private int mFieldWidth ;
     private int mFieldHeight ;
     /**
-     * В конструктор масштаб карты по осям X, Y и очистка карты на нули
+     * В конструктор масштаб карты по осям X, Y
+     * Инициализируем матрицу игры и список объектов на карте,
+     * и очищаем карту на нули
      */
     public MyField(int fieldX, int fieldY) {
         mFieldWidth = fieldX;
@@ -40,7 +42,7 @@ public class MyField implements Field{
     /**
      * Добавить объект на свободное место на карте рандомом
      * В методе следующее происходит :
-     * 1)Проверка, нету ли этого объекта в Collection<FieldObject> objectsField данной карты
+     * 1)Проверка, нету ли этого объекта в списке объектов карты
      * 2)Находим свободное место и добавляем
      */
     @Override
@@ -58,7 +60,7 @@ public class MyField implements Field{
         }
     }
     /**
-     * Изменить метоположение существующего обьекта на поле
+     * Изменить местоположение существующего обьекта на поле
      */
     @Override
     public void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException {
@@ -66,7 +68,7 @@ public class MyField implements Field{
         addObject(object, newX, newY);
     }
     /**
-     * Изменить метоположение существующего обьекта на поле с рассмотрением коллизии
+     * Изменить местоположение существующего обьекта на поле, в рандомную свободную ячейку
      */
     @Override
     public void changeObjectLocationRandom(FieldObject object) throws NotFoundObjectException {
@@ -86,23 +88,25 @@ public class MyField implements Field{
         clearListObjectField();
     }
     /**
-     *
+     * Удаление объекта с поля
      */
     @Override
     public void removeObject(FieldObject object) throws NotFoundObjectException {
         /**
-         * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
+         * проверка, существует ли объекта в списке объектов данной карты
          */
         mField[object.getX()][object.getY()] = CODE_EMPTY_CELL_ON_THE_MAP;
+        object.setX(0);
+        object.setY(0);
         removeObjectFieldTheList(object);
     }
     /**
-     *
+     * Удаление объекта с поля по координатам
      */
     @Override
     public void removeObject(int x, int y) throws NotFoundObjectException {
         /**
-         * проверка, существует ли этот объект в Collection<FieldObject> objectsField данной карты
+         * проверка, существует ли объекта в списке объектов данной карты
          */
         mField[x][y] = CODE_EMPTY_CELL_ON_THE_MAP;
         removeObjectFieldTheList(getFieldObject(x, y));
@@ -174,6 +178,8 @@ public class MyField implements Field{
      * Удалить объект из списка объектов поля
      */
     public void removeObjectFieldTheList(FieldObject object){
+        object.setX(0);
+        object.setY(0);
         objectsField.remove(object);
     }
     /**

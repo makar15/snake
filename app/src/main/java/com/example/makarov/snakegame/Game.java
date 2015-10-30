@@ -1,7 +1,10 @@
 package com.example.makarov.snakegame;
 
 /**
- *интерфейс игры
+ * Класс не используется
+ * Возможно и не нужен будет
+ * Потом удалю
+ * интерфейс игры
  */
 public interface Game {
     /**

@@ -20,9 +20,11 @@ public class ControllerUnmovingObjects extends Controller<FieldObject>{
         this.mField = field;
         mControllerField = new ControllerField(mField);
 
-        mField.addObject(mObject, 9, 0);
+        mField.addObject(mObject, 26, 29);
     }
-
+    /**
+     * Объект не передвигаем!
+     */
     @Override
     public void nextMove() {
 
@@ -33,6 +35,13 @@ public class ControllerUnmovingObjects extends Controller<FieldObject>{
     @Override
     public FieldObject getObject() {
         return this.mObject;
+    }
+    /**
+     * Вернуть поле на котором происходит передвижение объекта
+     */
+    @Override
+    public Field getField() {
+        return mField;
     }
 
 }

@@ -43,6 +43,7 @@ public class ControlTheFieldObject extends Controller<TestObject> {
      */
     @Override
     public void nextMove() {
+
         //Log.d(TAG, "Объект на X :" + mObject.getX() + " на Y :" + mObject.getY());
         int nextX = (mObject.getX() + mObject.getDirectionOfMotion().getDirection().deltaX());
         int nextY = (mObject.getY() + mObject.getDirectionOfMotion().getDirection().deltaY());
@@ -61,6 +62,13 @@ public class ControlTheFieldObject extends Controller<TestObject> {
     @Override
     public TestObject getObject() {
         return this.mObject;
+    }
+    /**
+     * Вернуть поле на котором происходит передвижение объекта
+     */
+    @Override
+    public Field getField() {
+        return mField;
     }
     /**
      * метод поворота объекта на 90 градусов относительно текущего направления

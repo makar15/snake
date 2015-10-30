@@ -20,6 +20,6 @@ public class CollisionTestObjectFruit implements HandlerCollision<TestObject, Fr
     @Override
     public void processingCollision(TestObject objectFirst, Fruite objectSecond) {
         mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
-        mField.changeObjectLocationRandom(objectSecond);
+        mField.removeObject(objectSecond);
     }
 }
