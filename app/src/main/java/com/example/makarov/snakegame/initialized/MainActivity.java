@@ -5,10 +5,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
 /**
  * Главное окно приложения
  */
 public class MainActivity extends Activity {
+
     /**
      * приложение постоянно имеет портретную ориентацию
      * приложение будет полноэкранным и без заголовка

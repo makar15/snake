@@ -1,7 +1,7 @@
 package com.example.makarov.snakegame.controllers;
 
-import com.example.makarov.snakegame.fieldObjects.FieldObject;
-import com.example.makarov.snakegame.playingField.Field;
+import com.example.makarov.snakegame.objects.FieldObject;
+import com.example.makarov.snakegame.field.MyField;
 
 /**
  * Интерфейс контроллеров
@@ -12,6 +12,6 @@ public interface ObjectController<T extends FieldObject> {
 
     T getObject();
 
-    Field getField();
+    MyField getField();
 
 }

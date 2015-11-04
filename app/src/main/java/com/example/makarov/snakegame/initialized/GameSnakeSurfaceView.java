@@ -3,6 +3,10 @@ package com.example.makarov.snakegame.initialized;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.example.makarov.snakegame.initialized.levels.LevelGameSnake;
+import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
+import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
+
 /**
  * Класс Игры змейки
  */
@@ -10,26 +14,17 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
-    private InitializationGameSnake mGameSnake ;
+    private LevelGameSnake mGameSnake ;
+    private IconLoader myIconLoader;
+
     /**
      * В конструктор контекст
-     * Инициализируем класс со всеми объектами участвующими в потоках:
-     * передвижения и прорисовки на поле
      */
     public GameSnakeSurfaceView(Context context) {
         super(context);
-
-        mGameSnake = new InitializationGameSnake(getHolder(), context, this);
         getHolder().addCallback(this);
     }
-    /**
-     *
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        scaleGestureDetector.onTouchEvent(event);
-        return true;
-    }
-     */
+
     /**
      * Метод вызывается, если был изменен формат или размер SurfaceView
      */
@@ -38,12 +33,17 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
                                int height) {
 
     }
+
     /**
      * Метод вызывается, когда SurfaceView создан и готов к отображению информации
+     * Инициализируем класс уровня игры
      * Инициализация и запуск потоков: передвижения объектов и прорисовки ViewObject игры
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        myIconLoader = new IconLoader(this.getContext());
+        mGameSnake = new LevelGameSnake(this, myIconLoader);
+
         threadMotionObject = new ThreadMotionObjectField(mGameSnake);
         drawThread = new SurfaceThread(getHolder(), mGameSnake);
         threadMotionObject.setRunning(true);
@@ -51,6 +51,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         threadMotionObject.start();
         drawThread.start();
     }
+
     /**
      * Метод вызывается перед тем, как SurfaceView будет уничтожен
      */

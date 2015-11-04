@@ -3,14 +3,14 @@ package com.example.makarov.snakegame.view;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import com.example.makarov.snakegame.initialized.FieldProvider;
 import com.example.makarov.snakegame.initialized.IconLoader;
 import com.example.makarov.snakegame.objects.FieldObject;
-import com.example.makarov.snakegame.initialized.FieldProvider;
 
 /**
- * Класс fruite который будем отрисовывать в игре
+ *
  */
-public class FruiteView implements View {
+public class WallView implements View {
 
     private FieldObject mObject;
     private Bitmap icon;
@@ -24,13 +24,13 @@ public class FruiteView implements View {
      * создаем кисточку
      * получаем картинку из класса со всеми bitmap-ами
      */
-    public FruiteView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
+    public WallView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;
         mFieldProvider = fieldProvider;
         mIconLoader = iconLoader;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        icon = mIconLoader.getIcon(IconLoader.TYPE_FRUITE,
+        icon = mIconLoader.getIcon(IconLoader.TYPE_WALL,
                 mFieldProvider.getWidthOneScreen(), mFieldProvider.getHeightOneScreen());
     }
 

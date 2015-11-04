@@ -1,48 +1,50 @@
 package com.example.makarov.snakegame.view;
 
+import com.example.makarov.snakegame.initialized.IconLoader;
 import com.example.makarov.snakegame.initialized.FieldProvider;
-import com.example.makarov.snakegame.playingField.Field;
-import android.content.Context;
+import com.example.makarov.snakegame.field.MyField;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import com.example.makarov.snakegame.R;
+
 /**
  * Класс отрисовываемого поля для игры
  */
 public class FieldView {
 
-    private Field mField;
-    private Bitmap mIcon;
+    private MyField mField;
+    private Bitmap icon;
     private Paint mPaint;
     private FieldProvider mFieldProvider;
+    private IconLoader mIconLoader;
+
     /**
      * В конструктор контекст на котором будем отрисовывать
      * провайдер поля
      * создаем кисточку
-     * стрэйчим картинку из папки ресурсов
+     * получаем картинку из класса со всеми bitmap-ами
      */
-    public FieldView(Field field, Context context, FieldProvider fieldProvider){
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    public FieldView(MyField field, FieldProvider fieldProvider, IconLoader iconLoader){
         mField = field;
         mFieldProvider = fieldProvider;
+        mIconLoader = iconLoader;
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        mIcon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.fieldnew);
+        icon = mIconLoader.getIcon(IconLoader.TYPE_FIELD,
+                mFieldProvider.getWidthScreen(), mFieldProvider.getHeightScreen());
     }
+
     /**
      * отрисовываем картинку на полный экран
      */
     public void draw(Canvas canvas) {
-        Bitmap icon = Bitmap.createScaledBitmap
-                (mIcon, mFieldProvider.getWightScreen(), mFieldProvider.getHeightScreen(), true);
         canvas.drawBitmap(icon, 0, 0, mPaint);
     }
+
     /**
      * Вернуть объек поля(карту) на которой происходят передвижения объектов
      */
-    public Field getField() {
+    public MyField getField() {
         return mField;
     }
 

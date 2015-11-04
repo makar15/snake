@@ -1,52 +1,62 @@
 package com.example.makarov.snakegame.initialized;
 
-import android.view.SurfaceHolder;
-import com.example.makarov.snakegame.playingField.Field;
-import android.graphics.Canvas;
+import android.view.View;
+
 /**
  * Класс размеров поля
  */
 public class FieldProvider {
 
-    //private Canvas mCanvas = null;
-    private final int wightScreen = 1080;
-    private final int heightScreen = 1920;
-    private final int widthOne;
-    private final int heightOne;
-    /**
-     * Канвасом узнаем высоту и ширину экрана на котором происходит отрисовка всех объектов игры
-     * Высчитываем сколько одна клетка поля будет размером в пикселях на экране
-     */
-    public FieldProvider(SurfaceHolder surfaceHolders, Field field){
-        /**
-         * Тут тоже ругалось и я пока решил закомментировать, что б другие баги править
-         * Тоже писал вроде что на нулевой объект ссылаюсь
-         */
-        //mCanvas = surfaceHolders.lockCanvas(null);
-        //wightScreen = mCanvas.getWidth();
-        //heightScreen = mCanvas.getHeight();
-        //surfaceHolders.unlockCanvasAndPost(mCanvas);
+    private int mWidth;
+    private int mHeight;
+    private int widthScreen;
+    private int heightScreen;
+    private int widthOneScreen;
+    private int heightOneScreen;
 
-        widthOne = wightScreen / field.getWidth();
-        heightOne = heightScreen / field.getHeight();
+    /**
+     * View узнаем высоту и ширину экрана на котором происходит отрисовка
+     * Узнаём общий размер экрна и размер одной клетки игры в пикселях
+     */
+    public FieldProvider(View surfaceView, int width, int height){
+
+        mWidth = width;
+        mHeight = height;
+
+        widthScreen = surfaceView.getWidth();
+        heightScreen = surfaceView.getHeight();
+
+        widthOneScreen = widthScreen / width;
+        heightOneScreen = heightScreen / height;
 
     }
+
     /**
      *Вернуть:
+     * ширину и высоту поля в клетках матрицы
+     *Вернуть (в пикселяях):
      * ширину и высоту одной клетки поля
      * ширину и высоту всего поля
      * ширину и высоту до координат
      */
-    public int getHeightOne() {
-        return heightOne;
+    public int getWidth() {
+        return mWidth;
     }
 
-    public int getWidthOne() {
-        return widthOne;
+    public int getHeight() {
+        return mHeight;
     }
 
-    public int getWightScreen() {
-        return wightScreen;
+    public int getHeightOneScreen() {
+        return heightOneScreen;
+    }
+
+    public int getWidthOneScreen() {
+        return widthOneScreen;
+    }
+
+    public int getWidthScreen() {
+        return widthScreen;
     }
 
     public int getHeightScreen() {
@@ -54,11 +64,11 @@ public class FieldProvider {
     }
 
     public int getScreenX(int fieldX){
-        return fieldX * widthOne;
+        return fieldX * widthOneScreen;
     }
 
     public int getScreenY(int fieldY){
-        return fieldY * heightOne;
+        return fieldY * heightOneScreen;
     }
 
 }

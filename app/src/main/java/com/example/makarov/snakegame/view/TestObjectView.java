@@ -1,44 +1,41 @@
 package com.example.makarov.snakegame.view;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.fieldObjects.FieldObject;
+import com.example.makarov.snakegame.initialized.IconLoader;
+import com.example.makarov.snakegame.objects.FieldObject;
 import com.example.makarov.snakegame.initialized.FieldProvider;
+
 /**
- * Класс объекта поля который будем отрисовывать
- * (пока это просто тестОбъект который будет двигаться)
- * Далее для каждого объекта поля будет свой класс и своя картинка
+ * Класс тестОбъекта который будем отрисовывать в игре
  */
 public class TestObjectView implements View {
 
     private FieldObject mObject;
-    private Bitmap mIcon;
     private Bitmap icon;
     private Paint mPaint;
     private FieldProvider mFieldProvider;
+    private IconLoader mIconLoader;
+
     /**
      * В констркторе сам объект поля
-     * Контекст (часть экрана на которой отрисоваем)
      * провайдер поля
      * создаем кисточку
-     * стрэйчим картинку из папки ресурсов
+     * получаем картинку из класса со всеми bitmap-ами
      */
-    public TestObjectView(FieldObject object, Context context, FieldProvider fieldProvider){
+    public TestObjectView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mFieldProvider = fieldProvider;
+        mIconLoader = iconLoader;
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        mIcon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.object);
-        icon = Bitmap.createScaledBitmap
-                (mIcon, mFieldProvider.getWidthOne(), mFieldProvider.getHeightOne(), true);
+        icon = mIconLoader.getIcon(IconLoader.TYPE_TEST_OBJECT,
+                mFieldProvider.getWidthOneScreen(), mFieldProvider.getHeightOneScreen());
     }
+
     /**
-     * В методе с помощью провайдера поля узнаем на какие именно пиксели нужно отрисовать картинку,
+     * В методе, с помощью провайдера поля, узнаем на какие именно пиксели нужно отрисовать картинку,
      * и отрисовываем картинку
      */
     @Override
@@ -47,6 +44,7 @@ public class TestObjectView implements View {
         int y = mFieldProvider.getScreenY(mObject.getY());
         canvas.drawBitmap(icon, x, y, mPaint);
     }
+
     /**
      * Вернуть объект передвижения
      */

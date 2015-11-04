@@ -3,16 +3,19 @@ package com.example.makarov.snakegame.view;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import com.example.makarov.snakegame.initialized.IconLoader;
+import com.example.makarov.snakegame.objects.ComponentSnake;
 import com.example.makarov.snakegame.objects.FieldObject;
+import com.example.makarov.snakegame.objects.Snake;
 import com.example.makarov.snakegame.initialized.FieldProvider;
+import com.example.makarov.snakegame.initialized.IconLoader;
+import java.util.List;
 
 /**
- * Класс fruite который будем отрисовывать в игре
+ * Класс snake который будем отрисовывать в игре
  */
-public class FruiteView implements View {
+public class SnakeView implements View {
 
-    private FieldObject mObject;
+    private Snake mObject;
     private Bitmap icon;
     private Paint mPaint;
     private FieldProvider mFieldProvider;
@@ -24,25 +27,29 @@ public class FruiteView implements View {
      * создаем кисточку
      * получаем картинку из класса со всеми bitmap-ами
      */
-    public FruiteView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
+    public SnakeView(Snake object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;
         mFieldProvider = fieldProvider;
         mIconLoader = iconLoader;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        icon = mIconLoader.getIcon(IconLoader.TYPE_FRUITE,
+        icon = mIconLoader.getIcon(IconLoader.TYPE_SNAKE,
                 mFieldProvider.getWidthOneScreen(), mFieldProvider.getHeightOneScreen());
     }
 
     /**
-     * В методе, с помощью провайдера поля, узнаем на какие именно пиксели нужно отрисовать картинку
+     * В методе, пролистывая список компонентов змейки, с помощью провайдера поля узнаем
+     * ,на какие именно пиксели нужно отрисовать каждую компаненту змейки
      * и отрисовываем картинку
      */
     @Override
     public void draw(Canvas canvas) {
-        int x = mFieldProvider.getScreenX(mObject.getX());
-        int y = mFieldProvider.getScreenY(mObject.getY());
-        canvas.drawBitmap(icon, x, y, mPaint);
+        List<ComponentSnake> list = mObject.getComponents();
+        for(int i = list.size() - 1; i >= 0; i--){
+            int x = mFieldProvider.getScreenX(list.get(i).getX());
+            int y = mFieldProvider.getScreenY(list.get(i).getY());
+            canvas.drawBitmap(icon, x, y, mPaint);
+        }
     }
 
     /**
@@ -51,5 +58,4 @@ public class FruiteView implements View {
     public FieldObject getObject() {
         return mObject;
     }
-
 }
