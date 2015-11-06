@@ -95,7 +95,7 @@ public class ControllerTouchResponse extends Controller<TestObject> {
                 }
                 break;
             case RIGHT:
-                if(event.getY() > mFieldProvider.getScreenX
+                if(event.getY() > mFieldProvider.getScreenY
                         (mObject.getY()) + (mFieldProvider.getWidthOneScreen()/2)){
                     mObject.getMoving().setDirection(Direction.DOWN);
                 } else{
@@ -103,7 +103,7 @@ public class ControllerTouchResponse extends Controller<TestObject> {
                 }
                 break;
             case LEFT:
-                if(event.getY() > mFieldProvider.getScreenX
+                if(event.getY() > mFieldProvider.getScreenY
                         (mObject.getY()) + (mFieldProvider.getWidthOneScreen()/2)){
                     mObject.getMoving().setDirection(Direction.DOWN);
                 } else{
@@ -112,15 +112,64 @@ public class ControllerTouchResponse extends Controller<TestObject> {
                 break;
             case UNMOVING:
                 /*
-                Переписать
-                Что бы когда объект просто стоял, можно было его не только в два направления послать
-                Сделать что бы сравнивал разницу по иксу и игрику и сравнивал
+                Когда объект движения изначально стоит,
+                 решаем в какую из четырех сторон ему следует направиться при тапе по экрану
+                 */
+                /*
+                заранее вычисляем разницу(в пикселях) для двух осей, между точкой
+                ( на которой находится объек) и точкой куда тапнули по экрану
+                 */
+                float diffX = Math.abs(event.getX() - mFieldProvider.getScreenX(mObject.getX()) +
+                        (mFieldProvider.getWidthOneScreen()/2));
+                float diffY = Math.abs(event.getY() - mFieldProvider.getScreenY(mObject.getY()) +
+                        (mFieldProvider.getWidthOneScreen()/2));
+                /*
+                Если тап по экрану правее чем находится объект, тогда:
                  */
                 if(event.getX() > mFieldProvider.getScreenX
                         (mObject.getX()) + (mFieldProvider.getWidthOneScreen()/2)){
-                    mObject.getMoving().setDirection(Direction.RIGHT);
-                } else{
-                    mObject.getMoving().setDirection(Direction.LEFT);
+                    /*
+                    Если тап по экрану ниже, чем находится объект, тогда:
+                     */
+                    if(event.getY() > mFieldProvider.getScreenY
+                            (mObject.getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                        /*
+                        Сравниваем разницу ранее вычесленную , и решаем куда направить
+                         */
+                        if(diffX > diffY){
+                            mObject.getMoving().setDirection(Direction.RIGHT);
+                        } else {
+                            mObject.getMoving().setDirection(Direction.DOWN);
+                        }
+                    } else {
+                        /*
+                        В случае если тап выше, так же сравниваем разницу ранее вычесленную,
+                         и решаем куда направить
+                         */
+                        if(diffX > diffY){
+                            mObject.getMoving().setDirection(Direction.RIGHT);
+                        } else {
+                            mObject.getMoving().setDirection(Direction.UP);
+                        }
+                    }
+                    /*
+                    Так же и в случаях если тап левее и выше, или же левее и ниже чем находиться объект
+                     */
+                } else {
+                    if(event.getY() > mFieldProvider.getScreenY
+                            (mObject.getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                        if(diffX > diffY){
+                            mObject.getMoving().setDirection(Direction.LEFT);
+                        } else {
+                            mObject.getMoving().setDirection(Direction.DOWN);
+                        }
+                    } else {
+                        if(diffX > diffY){
+                            mObject.getMoving().setDirection(Direction.LEFT);
+                        } else {
+                            mObject.getMoving().setDirection(Direction.UP);
+                        }
+                    }
                 }
                 break;
         }

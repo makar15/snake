@@ -61,25 +61,25 @@ public class CreateLevel implements Level{
         InputStream inputStream = null;
         inputStream = assetManager.open("levels/level1.txt");
         String text = loadTextFile(inputStream);
-        //String[] masstext = text.split("\\s+");  Заменит следующие операции,
+        //String[] massLines = text.split("\\s+");  Заменит следующие операции,
         // но не позволяет узнать ширину поля заранее(
 
         /*
          * строку символов файла разбивая на подстроки записываем водномерный массив,
          * далее в двумерный массив разбивая уже по пробелам между символами
          */
-        String[] masstext = text.split("\\n");
-        String[][] massOne = new String[masstext.length][];
+        String[] massLines = text.split("\\n");
+        String[][] massCodes = new String[massLines.length][];
 
-        for(int k = 0; k < masstext.length; k++){
-            massOne[k] = masstext[k].split(" ");
+        for(int k = 0; k < massLines.length; k++){
+            massCodes[k] = massLines[k].split(" ");
         }
 
         /*
          * узнаем размеры карты игры
          */
-        int x = massOne[0].length;
-        int y = massOne.length ;
+        int x = massCodes[0].length;
+        int y = massCodes.length ;
 
         /*
          * Создаем:
@@ -91,7 +91,7 @@ public class CreateLevel implements Level{
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
         myFieldView = new FieldView(myField, mFieldProvider, mIconLoader);
 
-        initMapGame(massOne);
+        initMapGame(massCodes);
     }
 
     /**
