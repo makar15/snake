@@ -21,5 +21,6 @@ public class CollisionSnakesWall implements HandlerCollision<Snake, Wall>{
     @Override
     public void processingCollision(Snake objectFirst, Wall objectSecond) {
         mField.removeObject(objectFirst);
+        mField.removeObject(objectSecond);
     }
 }

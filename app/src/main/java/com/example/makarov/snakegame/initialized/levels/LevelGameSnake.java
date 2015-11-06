@@ -24,7 +24,7 @@ import java.util.LinkedList;
  * Класс уровня тестирования игры
  * инициализация всех объектов игры, и всех объектов отрисовки в игре
  */
-public class LevelGameSnake {
+public class LevelGameSnake implements Level{
 
     private android.view.View mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
@@ -39,15 +39,22 @@ public class LevelGameSnake {
     public LevelGameSnake(android.view.View gameSnake, IconLoader iconLoader){
 
         /*
-         * Создаем:
-         *
+         * Инициализируем:
+         * view экран, на котором все отрисовываем
+         * объект со всеми содержащими bitmap-ами
          */
         mGameSnake = gameSnake;
         mIconLoader = iconLoader;
 
         /*
          * Создаем:
-         *
+         * поле с размером 18 на 32
+         * провайдер поля
+         * view поля
+         */
+
+        /*
+
          */
         MyField myField = new MyField(18, 32);
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
@@ -55,24 +62,29 @@ public class LevelGameSnake {
 
         /*
          * Создаем:
-         *
+         * змейку с длинной 3
+         * контроллер для змейки
+         * ставим на карту
+         * view змейки
          */
-        Snake mySnake = new Snake(4);
+        Snake mySnake = new Snake(5);
         ObjectController myObjContr =
                 new TouchResponseSnakeController(myField, mySnake, mGameSnake, mFieldProvider);
-        myField.addObject(mySnake, 0, 0);
+        myField.addObject(mySnake, 5, 5);
         View mySnakeView =
                 new SnakeView(mySnake, mFieldProvider, mIconLoader);
 
         /*
-         * В списки добавляем
+         * Добавляем в списки
          */
         mListController.add(myObjContr);
         mListView.add(mySnakeView);
 
         /*
          * Создаем:
-         *
+         * 5 фруктов
+         * для каждой: view отрисовки фрукта
+         * ставим на рандомное место на карте и добавляем в список view-ху
          */
         for(int i = 0; i < 5; i++){
             Fruite myFruite = new Fruite();
@@ -83,8 +95,8 @@ public class LevelGameSnake {
         }
 
         /*
-         * Создаем:
-         *
+         * Создаем (по принципу фрукта):
+         * 2 бомбы
          */
         for(int i = 0; i < 2; i++){
             Bomb myBomb = new Bomb();
@@ -95,10 +107,10 @@ public class LevelGameSnake {
         }
 
         /*
-         * Создаем:
-         *
+         * Создаем (по принципу фрукта):
+         * 7 стенок
          */
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; i < 8; i++){
             Wall myWall = new Wall();
             myField.addRandomObject(myWall);
             View myWallView =
@@ -107,8 +119,8 @@ public class LevelGameSnake {
         }
 
         /*
-         * Создаем:
-         *
+         * Создаем (по принципу фрукта):
+         * 2 овощя
          */
         for(int i = 0; i < 2; i++){
             Vegetable myVegetable = new Vegetable();
@@ -117,25 +129,21 @@ public class LevelGameSnake {
                     new VegetableView(myVegetable, mFieldProvider, mIconLoader);
             mListView.add(myVegetableView);
         }
+
+
     }
 
-    /**
-     * Вернуть объект прорисовывания самого поля игры
-     */
+    @Override
     public FieldView getFieldView() {
         return myFieldView;
     }
 
-    /**
-     * Гет метод списка контроллеров
-     */
+    @Override
     public Collection<ObjectController> getControllers(){
         return mListController;
     }
 
-    /**
-     * Гет метод списка объектовView
-     */
+    @Override
     public Collection<View> getViews(){
         return mListView;
     }

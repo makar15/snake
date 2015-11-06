@@ -25,7 +25,7 @@ public class Snake implements FieldObject {
      * Инициализируем список содержащий компонентыЗмейки
      */
     public Snake(int lengthSnake){
-        mMoving.setDirection(Direction.LEFT);
+        mMoving.setDirection(Direction.UNMOVING);
         mSnake = new LinkedList<>();
         initSnakeLength(lengthSnake);
     }

@@ -81,11 +81,6 @@ public class ControllerField  {
                 mField.changeObjectLocation(object, newX, newY);
             } else if (object.getCode() == Snake.CODE_SNAKE_ON_THE_MAP) {
                 FieldObject objectCollisions = mField.getFieldObject(newX, newY);
-                /**
-                 * В случае,  если змейка изначально не движущийся объект
-                 * то выходит коллизия змейки об змейку и она умирает
-                 * Переделать этот момент !!
-                 */
                 mChoiceCollision.solutionCollision(object, objectCollisions);
             } else {
                 mField.changeObjectLocationRandom(object);

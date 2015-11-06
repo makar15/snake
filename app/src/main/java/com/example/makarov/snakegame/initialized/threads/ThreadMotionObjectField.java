@@ -1,7 +1,7 @@
 package com.example.makarov.snakegame.initialized.threads;
 
 import com.example.makarov.snakegame.controllers.ObjectController;
-import com.example.makarov.snakegame.initialized.levels.LevelGameSnake;
+import com.example.makarov.snakegame.initialized.levels.Level;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -18,7 +18,7 @@ public class ThreadMotionObjectField extends GameThreads {
      * В конструктор объект уровня игры(в котором инициализированы все объекты игры)
      * В список записываем все контроллеры которые будут передвигать объекты, по ходу игры
      */
-    public ThreadMotionObjectField(LevelGameSnake gameSnake) {
+    public ThreadMotionObjectField(Level gameSnake) {
         super(gameSnake);
         mList = mGameSnake.getControllers();
     }

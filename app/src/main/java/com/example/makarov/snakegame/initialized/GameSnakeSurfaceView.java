@@ -3,9 +3,12 @@ package com.example.makarov.snakegame.initialized;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import com.example.makarov.snakegame.initialized.levels.LevelGameSnake;
+
+import com.example.makarov.snakegame.initialized.levels.CreateLevel;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
+
+import java.io.IOException;
 
 /**
  * Класс Игры змейки
@@ -14,7 +17,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
-    private LevelGameSnake mGameSnake ;
+    private CreateLevel mGameSnake ;
     private IconLoader myIconLoader;
 
     /**
@@ -42,7 +45,11 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         myIconLoader = new IconLoader(this.getContext());
-        mGameSnake = new LevelGameSnake(this, myIconLoader);
+        try {
+            mGameSnake = new CreateLevel(this, myIconLoader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         threadMotionObject = new ThreadMotionObjectField(mGameSnake);
         drawThread = new SurfaceThread(getHolder(), mGameSnake);

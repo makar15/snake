@@ -18,7 +18,7 @@ import java.util.LinkedList;
  * Класс уровня тестирования игры
  * инициализация всех объектов игры, и всех объектов отрисовки в игре
  */
-public class LevelTestGame {
+public class LevelTestGame implements Level{
 
     private android.view.View mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
@@ -78,23 +78,17 @@ public class LevelTestGame {
         }
     }
 
-    /**
-     * Вернуть объект прорисовывания самого поля игры
-     */
+    @Override
     public FieldView getFieldView() {
         return myFieldView;
     }
 
-    /**
-     * Гет метод списка контроллеров
-     */
+    @Override
     public Collection<ObjectController> getControllers(){
         return mListController;
     }
 
-    /**
-     * Гет метод списка объектовView
-     */
+    @Override
     public Collection<View> getViews(){
         return mListView;
     }

@@ -2,7 +2,7 @@ package com.example.makarov.snakegame.initialized.threads;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-import com.example.makarov.snakegame.initialized.levels.LevelGameSnake;
+import com.example.makarov.snakegame.initialized.levels.Level;
 import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import java.util.Iterator;
  */
 public class SurfaceThread extends GameThreads {
 
-    private final int COUNT_FRAME_IN_SECOND = 16;
+    private final int COUNT_FRAME_IN_SECOND = 12;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private final SurfaceHolder myThreadSurfaceHolder;
     private Collection<View> mList;
@@ -21,7 +21,7 @@ public class SurfaceThread extends GameThreads {
      * В конструктор объект уровня игры(в котором инициализированны все объекты игры)
      * В список записываем все viewObject, которые будут перерисовываться по ходу игры
      */
-    public SurfaceThread(SurfaceHolder holder, LevelGameSnake gameSnake) {
+    public SurfaceThread(SurfaceHolder holder, Level gameSnake) {
         super(gameSnake);
         myThreadSurfaceHolder = holder;
         mList = mGameSnake.getViews();

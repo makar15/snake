@@ -13,7 +13,7 @@ public class CollisionSnakeFruit implements HandlerCollision<Snake, Fruite>{
 
     private final MyField mField;
     private int ADD_SCORE_DUE_TO_FRUITE = 10;
-    private int ADD_IS_GROWING_DUE_TO_FRUITE = 2;
+    private int ADD_IS_GROWING_DUE_TO_FRUITE = 1;
 
     public CollisionSnakeFruit(MyField field){
         this.mField = field;
