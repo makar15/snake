@@ -61,21 +61,25 @@ public class CreateLevel implements Level{
         InputStream inputStream = null;
         inputStream = assetManager.open("levels/level1.txt");
         String text = loadTextFile(inputStream);
-        String[] masstext = text.split("\\s+");
+        //String[] masstext = text.split("\\s+");  Заменит следующие операции,
+        // но не позволяет узнать ширину поля заранее(
 
-        /**
-         * Это то как я пытался сделать)) Но не удачно
-         * Устал думать ((
+        /*
+         * строку символов файла разбивая на подстроки записываем водномерный массив,
+         * далее в двумерный массив разбивая уже по пробелам между символами
+         */
         String[] masstext = text.split("\\n");
+        String[][] massOne = new String[masstext.length][];
+
         for(int k = 0; k < masstext.length; k++){
-            masstext[k].split(" ");
+            massOne[k] = masstext[k].split(" ");
         }
 
-        int x = (masstext[0].length() + 1) / 2;
-        int y = masstext.length ;
-
-        myField = new MyField(x, y);
-        */
+        /*
+         * узнаем размеры карты игры
+         */
+        int x = massOne[0].length;
+        int y = massOne.length ;
 
         /*
          * Создаем:
@@ -83,11 +87,11 @@ public class CreateLevel implements Level{
          * провайдер поля
          * view поля
          */
-        myField = new MyField(18, 32);
+        myField = new MyField(x, y);
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
         myFieldView = new FieldView(myField, mFieldProvider, mIconLoader);
 
-        initMapGame(masstext);
+        initMapGame(massOne);
     }
 
     /**
@@ -103,24 +107,16 @@ public class CreateLevel implements Level{
     }
 
     /**
-     * В методе перебираем строку и запускаем метод создания объектов игры
-     * Метод заапгрейдить получиться , если сделать split по разделению строк,
-     * и по пробелам между символами!
-     * Пока что костыли)
+     * В методе перебираем двумерный массив типа стринг
+     * и запускаем метод создания объектов игры в случае когда это следует делать
      */
-    public void initMapGame(String[] mass){
-        int i = 0, j = 0;
-        for (int k = 0; k < mass.length; k ++){
-            if(k != 0){
-                if (k % 18 == 0) {
-                    j += 1;
-                    i = 0;
+    public void initMapGame(String[][] mass){
+        for (int j = 0; j < mass.length; j ++){
+            for(int i = 0; i < mass[0].length; i++) {
+                if (mass[j][i] != "0"){
+                    createObjectGame(mass[j][i], i, j);
                 }
             }
-            if(mass[k] != "0") {
-                createObjectGame(mass[k], i, j);
-            }
-            i += 1;
         }
     }
 
