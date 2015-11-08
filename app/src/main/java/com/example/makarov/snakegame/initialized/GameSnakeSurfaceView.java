@@ -3,11 +3,9 @@ package com.example.makarov.snakegame.initialized;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
 import com.example.makarov.snakegame.initialized.levels.CreateLevel;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
-
 import java.io.IOException;
 
 /**

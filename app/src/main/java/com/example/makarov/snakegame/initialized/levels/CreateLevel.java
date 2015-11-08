@@ -1,7 +1,6 @@
 package com.example.makarov.snakegame.initialized.levels;
 
 import android.content.res.AssetManager;
-
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
 import com.example.makarov.snakegame.field.MyField;
@@ -12,13 +11,9 @@ import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;
 import com.example.makarov.snakegame.objects.Vegetable;
 import com.example.makarov.snakegame.objects.Wall;
-import com.example.makarov.snakegame.view.BombView;
 import com.example.makarov.snakegame.view.FieldView;
-import com.example.makarov.snakegame.view.FruiteView;
-import com.example.makarov.snakegame.view.SnakeView;
-import com.example.makarov.snakegame.view.VegetableView;
 import com.example.makarov.snakegame.view.View;
-import com.example.makarov.snakegame.view.WallView;
+import com.example.makarov.snakegame.view.ViewFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +33,7 @@ public class CreateLevel implements Level{
     private IconLoader mIconLoader;
     private FieldProvider mFieldProvider;
     private MyField myField;
+    private ViewFactory myViewFactory;
 
     /**
      * В конструктор View на котором отрисовываем игру, объукт со всеми Bitmap-ами для игры
@@ -51,7 +47,6 @@ public class CreateLevel implements Level{
          */
         mGameSnake = gameSnake;
         mIconLoader = iconLoader;
-
         /*
          * АссетсМенеджером получаем доступ к файлам папка Assets
          * в строку переносим все данные в файле уровня
@@ -86,10 +81,12 @@ public class CreateLevel implements Level{
          * поле
          * провайдер поля
          * view поля
+         * фабрику View(которая и будет создавать View элементы для игры)
          */
         myField = new MyField(x, y);
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
         myFieldView = new FieldView(myField, mFieldProvider, mIconLoader);
+        myViewFactory = new ViewFactory(mIconLoader, mFieldProvider);
 
         initMapGame(massCodes);
     }
@@ -122,6 +119,8 @@ public class CreateLevel implements Level{
 
     /**
      * В методе по символу в текстовом файле уровня и расположению символа , создаем объекты игры
+     * А далее объекту класса фабрики View отдаем задачу создания View элементы игры,
+     * для каждого созданного объекта
      */
     public void createObjectGame(String count, int x, int y) {
         switch (count){
@@ -130,38 +129,28 @@ public class CreateLevel implements Level{
                 ObjectController myObjContr =
                         new TouchResponseSnakeController(myField, mySnake, mGameSnake, mFieldProvider);
                 myField.addObject(mySnake, x, y);
-                View mySnakeView =
-                        new SnakeView(mySnake, mFieldProvider, mIconLoader);
                 mListController.add(myObjContr);
-                mListView.add(mySnakeView);
+                mListView.add(myViewFactory.createView(mySnake));
                 break;
             case "5":
                 Wall myWall = new Wall();
                 myField.addObject(myWall, x, y);
-                View myWallView =
-                        new WallView(myWall, mFieldProvider, mIconLoader);
-                mListView.add(myWallView);
+                mListView.add(myViewFactory.createView(myWall));
                 break;
             case "7":
                 Fruite myFruite = new Fruite();
                 myField.addObject(myFruite, x, y);
-                View myFruiteView =
-                        new FruiteView(myFruite, mFieldProvider, mIconLoader);
-                mListView.add(myFruiteView);
+                mListView.add(myViewFactory.createView(myFruite));
                 break;
             case "11":
                 Bomb myBomb = new Bomb();
                 myField.addObject(myBomb, x, y);
-                View myBombView =
-                        new BombView(myBomb, mFieldProvider, mIconLoader);
-                mListView.add(myBombView);
+                mListView.add(myViewFactory.createView(myBomb));
                 break;
             case "13":
                 Vegetable myVegetable = new Vegetable();
                 myField.addObject(myVegetable, x, y);
-                View myVegetableView =
-                        new VegetableView(myVegetable, mFieldProvider, mIconLoader);
-                mListView.add(myVegetableView);
+                mListView.add(myViewFactory.createView(myVegetable));
                 break;
             default:
 

@@ -11,22 +11,27 @@ import android.view.WindowManager;
 import com.example.makarov.snakegame.R;
 
 /**
- * Главное окно приложения
+ * Главное активити приложения
  */
 public class MainActivity extends FragmentActivity {
 
+    /*
+    Для открытия и сохранения последовательности открытых фрагментов
+     */
     private FragmentTransaction ft;
     private FragmentManager fm;
 
     /**
-     * приложение постоянно имеет портретную ориентацию
-     * приложение будет полноэкранным и без заголовка
      * Запускаем класс сцены игры
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
+        приложение постоянно имеет портретную ориентацию
+        приложение будет полноэкранным и без заголовка
+         */
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -36,8 +41,14 @@ public class MainActivity extends FragmentActivity {
             return;
         }
 
+        /*
+        Инициализируем фрагмент с менюшкой игры
+         */
         Fragment fragMenuGame = new GameMenuFragment();
 
+        /*
+        Запускаем фрагмент меню игры и записываем в стек опереций с фрагментами
+         */
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft = ft.add(R.id.LayoutMenu, fragMenuGame).addToBackStack(null);

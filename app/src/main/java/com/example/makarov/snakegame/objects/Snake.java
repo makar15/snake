@@ -112,6 +112,7 @@ public class Snake implements FieldObject {
 
     /**
      * добавление, уменьшение, обнуление и сет методы очков набранных змейкой в игре
+     * Еще сделать сохранение скор
      */
     public void addScore(int addScore) {
         int newScore = this.mScore + addScore;
