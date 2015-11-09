@@ -12,7 +12,7 @@ import com.example.makarov.snakegame.field.MyField;
 public class CollisionSnakeFruit implements HandlerCollision<Snake, Fruite>{
 
     private final MyField mField;
-    private int ADD_SCORE_DUE_TO_FRUITE = 10;
+    private int ADD_SCORE_DUE_TO_FRUITE = 35;
     private int ADD_IS_GROWING_DUE_TO_FRUITE = 1;
 
     public CollisionSnakeFruit(MyField field){
@@ -26,9 +26,9 @@ public class CollisionSnakeFruit implements HandlerCollision<Snake, Fruite>{
      */
     @Override
     public void processingCollision(Snake objectFirst, Fruite objectSecond){
-        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
-        mField.removeObject(objectSecond);
-        objectFirst.addScore(ADD_SCORE_DUE_TO_FRUITE);
+        objectFirst.getScore().addScore(ADD_SCORE_DUE_TO_FRUITE);
         objectFirst.addGrowing(ADD_IS_GROWING_DUE_TO_FRUITE);
+        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
+        mField.changeObjectLocationRandom(objectSecond);
     }
 }

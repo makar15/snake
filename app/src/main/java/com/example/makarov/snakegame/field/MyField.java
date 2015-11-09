@@ -36,9 +36,13 @@ public class MyField {
      * Добавить объект на указанные координаты на поле
      */
     public void addObject(FieldObject object, int newX, int newY) throws DuplicateObjectException {
-        mField[newX][newY] = object.getCode();
-        addObjectFieldTheList(object);
-        object.setXY(newX, newY);
+        if (existenceCellField(newX, newY)) {
+            mField[newX][newY] = object.getCode();
+            addObjectFieldTheList(object);
+            object.setXY(newX, newY);
+        } else {
+            addRandomObject(object);
+        }
     }
 
     /**
@@ -67,16 +71,20 @@ public class MyField {
      */
     public void changeObjectLocation(FieldObject object, int newX, int newY)
             throws NotFoundObjectException {
-        clearCellField(object.getX(),object.getY());
-        mField[newX][newY] = object.getCode();
-        object.setXY(newX, newY);
+        if(existenceCellField(newX, newY)) {
+            clearCellField(object.getX(), object.getY());
+            mField[newX][newY] = object.getCode();
+            object.setXY(newX, newY);
+        }else{
+            changeObjectLocationRandom(object);
+        }
     }
 
     /**
      * Изменить местоположение существующего обьекта на поле, в рандомную свободную ячейку
      */
     public void changeObjectLocationRandom(FieldObject object) throws NotFoundObjectException {
-        if(!getListObject().contains(object)) {
+        if(getListObject().contains(object)) {
             boolean par = false;
             while (!par) {
                 int x = (int) (Math.random() * getWidth());
@@ -105,16 +113,15 @@ public class MyField {
      * очистить ячейку поля
      */
     public void clearCellField(int x, int y) {
-        mField[x][y] = CODE_EMPTY_CELL_ON_THE_MAP;
+        if(existenceCellField(x, y)) {
+            mField[x][y] = CODE_EMPTY_CELL_ON_THE_MAP;
+        }
     }
 
     /**
      * Удаление объекта с поля
      */
     public void removeObject(FieldObject object) throws NotFoundObjectException {
-        /**
-         * проверка, существует ли объекта в списке объектов данной карты
-         */
         mField[object.getX()][object.getY()] = CODE_EMPTY_CELL_ON_THE_MAP;
         removeObjectFieldTheList(object);
     }
@@ -123,10 +130,15 @@ public class MyField {
      * Проверить, свободная ли клетка поля
      */
     public boolean isEmptyField(int x, int y) {
-        if(mField[x][y] == CODE_EMPTY_CELL_ON_THE_MAP) {
-            return true;
+        if(existenceCellField(x, y)) {
+            if (mField[x][y] == CODE_EMPTY_CELL_ON_THE_MAP) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -164,14 +176,18 @@ public class MyField {
      * Вернуть объект поля
      */
     public FieldObject getFieldObject(int x, int y){
-        Iterator<FieldObject> iter = objectsField.iterator();
-        while (iter.hasNext()) {
-            FieldObject tempObject = iter.next();
-            if(tempObject.getX() == x && tempObject.getY() == y){
-                return tempObject;
+        if(existenceCellField(x, y)) {
+            Iterator<FieldObject> iter = objectsField.iterator();
+            while (iter.hasNext()) {
+                FieldObject tempObject = iter.next();
+                if (tempObject.getX() == x && tempObject.getY() == y) {
+                    return tempObject;
+                }
             }
+            return null;
+        } else {
+            return null;
         }
-        return  null;
     }
 
     /**

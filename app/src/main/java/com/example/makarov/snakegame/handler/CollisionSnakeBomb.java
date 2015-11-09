@@ -13,7 +13,7 @@ public class CollisionSnakeBomb implements HandlerCollision<Snake, Bomb>{
 
     private final MyField mField;
     private int REDUCE_SPEED_DUE_TO_BOMB = 100;
-    private int REDUCE_SCORE_DUE_TO_BOMB = 20;
+    private int REDUCE_SCORE_DUE_TO_BOMB = 15;
 
     public CollisionSnakeBomb(MyField field){
         this.mField = field;
@@ -24,9 +24,9 @@ public class CollisionSnakeBomb implements HandlerCollision<Snake, Bomb>{
      */
     @Override
     public void processingCollision(Snake objectFirst, Bomb objectSecond){
-        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
-        mField.removeObject(objectSecond);
         objectFirst.reduceSpeed(REDUCE_SPEED_DUE_TO_BOMB);
-        objectFirst.reduceScore(REDUCE_SCORE_DUE_TO_BOMB);
+        objectFirst.getScore().reduceScore(REDUCE_SCORE_DUE_TO_BOMB);
+        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
+        mField.changeObjectLocationRandom(objectSecond);
     }
 }

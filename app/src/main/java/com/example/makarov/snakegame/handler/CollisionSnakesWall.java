@@ -10,6 +10,7 @@ import com.example.makarov.snakegame.field.MyField;
 public class CollisionSnakesWall implements HandlerCollision<Snake, Wall>{
 
     private final MyField mField;
+    private int REDUCE_SCORE_DUE_TO_WALL = 15;
 
     public CollisionSnakesWall(MyField field){
         this.mField = field;
@@ -20,7 +21,7 @@ public class CollisionSnakesWall implements HandlerCollision<Snake, Wall>{
      */
     @Override
     public void processingCollision(Snake objectFirst, Wall objectSecond) {
+        objectFirst.getScore().reduceScore(REDUCE_SCORE_DUE_TO_WALL);
         mField.removeObject(objectFirst);
-        mField.removeObject(objectSecond);
     }
 }

@@ -10,6 +10,7 @@ import com.example.makarov.snakegame.objects.Snake;
 public class CollisionSnakesSnakes implements HandlerCollision<Snake, Snake>{
 
     private final MyField mField;
+    private int REDUCE_SCORE_DUE_TO_SNAKES = 15;
 
     public CollisionSnakesSnakes(MyField field){
         this.mField = field;
@@ -21,6 +22,7 @@ public class CollisionSnakesSnakes implements HandlerCollision<Snake, Snake>{
     @Override
     public void processingCollision(Snake objectFirst, Snake objectSecond) {
         if(objectFirst.getMoving().getDirection() != Direction.UNMOVING) {
+            objectFirst.getScore().reduceScore(REDUCE_SCORE_DUE_TO_SNAKES);
             mField.removeObject(objectFirst);
         }
     }

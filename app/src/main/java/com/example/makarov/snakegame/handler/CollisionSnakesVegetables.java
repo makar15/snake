@@ -13,7 +13,7 @@ public class CollisionSnakesVegetables implements HandlerCollision<Snake, Vegeta
 
     private final MyField mField;
     private int REDUCE_SPEED_DUE_TO_VEGETABLE = 100;
-    private int ADD_SCORE_DUE_TO_VEGETABLE = 15;
+    private int ADD_SCORE_DUE_TO_VEGETABLE = 20;
 
     public CollisionSnakesVegetables(MyField field){
         this.mField = field;
@@ -24,9 +24,9 @@ public class CollisionSnakesVegetables implements HandlerCollision<Snake, Vegeta
      */
     @Override
     public void processingCollision(Snake objectFirst, Vegetable objectSecond){
-        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
-        mField.removeObject(objectSecond);
         objectFirst.reduceSpeed(REDUCE_SPEED_DUE_TO_VEGETABLE);
-        objectFirst.addScore(ADD_SCORE_DUE_TO_VEGETABLE);
+        objectFirst.getScore().addScore(ADD_SCORE_DUE_TO_VEGETABLE);
+        mField.changeObjectLocation(objectFirst, objectSecond.getX(), objectSecond.getY());
+        mField.changeObjectLocationRandom(objectSecond);
     }
 }

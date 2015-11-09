@@ -18,8 +18,8 @@ public class MainActivity extends FragmentActivity {
     /*
     Для открытия и сохранения последовательности открытых фрагментов
      */
-    private FragmentTransaction ft;
-    private FragmentManager fm;
+    private FragmentTransaction ftActivity;
+    private FragmentManager fmActivity;
 
     /**
      * Запускаем класс сцены игры
@@ -49,10 +49,10 @@ public class MainActivity extends FragmentActivity {
         /*
         Запускаем фрагмент меню игры и записываем в стек опереций с фрагментами
          */
-        fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
-        ft = ft.add(R.id.LayoutMenu, fragMenuGame).addToBackStack(null);
-        ft.commit();
+        fmActivity = getSupportFragmentManager();
+        ftActivity = fmActivity.beginTransaction();
+        ftActivity = ftActivity.add(R.id.LayoutMenu, fragMenuGame);
+        ftActivity.commit();
 
     }
 }

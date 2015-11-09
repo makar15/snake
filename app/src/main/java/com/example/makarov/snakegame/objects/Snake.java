@@ -3,6 +3,8 @@ package com.example.makarov.snakegame.objects;
 import com.example.makarov.snakegame.direction.Moving;
 import com.example.makarov.snakegame.direction.MovingObjectField;
 import com.example.makarov.snakegame.direction.enumeration.Direction;
+import com.example.makarov.snakegame.initialized.score.ScoreManager;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,9 +16,9 @@ public class Snake implements FieldObject {
     public static final int CODE_SNAKE_ON_THE_MAP = 3;
     private Moving mMoving = new MovingObjectField();
     private LinkedList<ComponentSnake> mSnake ;
+    private ScoreManager myScore = new ScoreManager();
     private int mX = -1;
     private int mY = -1;
-    private int mScore = 0;
     private int mGrowing = 0;
     private int mSpeed = 0;
 
@@ -102,7 +104,7 @@ public class Snake implements FieldObject {
         setSpeed(newSpeed);
     }
 
-    public void setSpeed(int newSpeed){
+    private void setSpeed(int newSpeed){
         this.mSpeed = newSpeed;
     }
 
@@ -111,29 +113,10 @@ public class Snake implements FieldObject {
     }
 
     /**
-     * добавление, уменьшение, обнуление и сет методы очков набранных змейкой в игре
-     * Еще сделать сохранение скор
+     * Получить объект, хранящий набранные очки
      */
-    public void addScore(int addScore) {
-        int newScore = this.mScore + addScore;
-        setScore(newScore);
-    }
-
-    public void reduceScore(int reduceScore){
-        int newScore = this.mScore - reduceScore;
-        setScore(newScore);
-    }
-
-    public void clearScore(){
-        setScore(0);
-    }
-
-    public void setScore(int newScore){
-        this.mScore = newScore;
-    }
-
-    public int getScore() {
-        return this.mScore;
+    public ScoreManager getScore() {
+        return myScore;
     }
 
     /**
@@ -149,7 +132,7 @@ public class Snake implements FieldObject {
         setGrowing(newGrowing);
     }
 
-    public void setGrowing(int newGrowing) {
+    private void setGrowing(int newGrowing) {
         this.mGrowing = newGrowing;
     }
 

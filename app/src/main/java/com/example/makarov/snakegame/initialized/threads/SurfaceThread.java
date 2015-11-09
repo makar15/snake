@@ -12,7 +12,7 @@ import java.util.Iterator;
  */
 public class SurfaceThread extends GameThreads {
 
-    private final int COUNT_FRAME_IN_SECOND = 12;
+    private final int COUNT_FRAME_IN_SECOND = 18;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private final SurfaceHolder myThreadSurfaceHolder;
     private Collection<View> mList;

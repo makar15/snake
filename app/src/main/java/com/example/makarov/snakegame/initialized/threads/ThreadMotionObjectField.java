@@ -1,7 +1,10 @@
 package com.example.makarov.snakegame.initialized.threads;
 
+import android.app.DialogFragment;
 import com.example.makarov.snakegame.controllers.ObjectController;
+import com.example.makarov.snakegame.initialized.GameSnakeSurfaceView;
 import com.example.makarov.snakegame.initialized.levels.Level;
+import com.example.makarov.snakegame.window.DialogSaveRecord;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -10,17 +13,27 @@ import java.util.Iterator;
  */
 public class ThreadMotionObjectField extends GameThreads {
 
-    private final int COUNT_FRAME_IN_SECOND = 8;
+    private final int COUNT_FRAME_IN_SECOND = 10;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private Collection<ObjectController> mList;
+    /**
+     * ПОТЫТКА НЕ ПЫТКА!
+     */
+    private GameSnakeSurfaceView mGameSnakeSurfaceView;
+    private DialogFragment dlg1;
 
     /**
      * В конструктор объект уровня игры(в котором инициализированы все объекты игры)
      * В список записываем все контроллеры которые будут передвигать объекты, по ходу игры
      */
-    public ThreadMotionObjectField(Level gameSnake) {
+    public ThreadMotionObjectField(Level gameSnake, GameSnakeSurfaceView gameSnakeSurfaceView) {
         super(gameSnake);
         mList = mGameSnake.getControllers();
+        /**
+         * ПОТЫТКА НЕ ПЫТКА!
+         */
+        mGameSnakeSurfaceView = gameSnakeSurfaceView;
+        dlg1 = new DialogSaveRecord();
     }
 
     /**
@@ -52,6 +65,18 @@ public class ThreadMotionObjectField extends GameThreads {
             if (objectInTheGame(tempObjectController)) {
                 tempObjectController.nextMove();
             } else {
+                /**
+                 * ПОТЫТКА НЕ ПЫТКА!
+                 *//*
+               if(tempObjectController.getObject() instanceof Snake){
+                   mGameSnakeSurfaceView.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           dlg1.show(mGameSnakeSurfaceView.getFragmentManager(), "dlg1");
+                       }
+                   });
+               }*/
+
                 iter.remove();
             }
         }
@@ -59,10 +84,6 @@ public class ThreadMotionObjectField extends GameThreads {
 
     /**
      * Проверка, в игре ли еще объект
-     * ПЕРЕДЕЛАТЬ!!
-     * только при коллизии
-     * что бы каждую итерацию не пролистывать весь список объектов поля
-     * или создать переменную булл каждому объекту и по ней определять удалять ли viewObject
      */
     private boolean objectInTheGame(ObjectController objectController){
         if(objectController.getField().getFieldObject(objectController.getObject().getX(),

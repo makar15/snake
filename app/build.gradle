@@ -22,5 +22,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'io.realm:realm-android:0.84.1'
     compile 'com.android.support:appcompat-v7:23.0.1'
 }

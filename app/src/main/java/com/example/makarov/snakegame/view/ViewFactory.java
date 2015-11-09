@@ -34,18 +34,15 @@ public class ViewFactory {
         if (object instanceof Snake) {
             objectView = new SnakeView((Snake)object, mFieldProvider, mIconLoader);
         } else if (object instanceof Wall) {
-            objectView =
-                    new WallView(object, mFieldProvider, mIconLoader);
+            objectView = new WallView(object, mFieldProvider, mIconLoader);
         } else if (object instanceof Bomb) {
-            objectView =
-                    new BombView(object, mFieldProvider, mIconLoader);
+            objectView = new BombView(object, mFieldProvider, mIconLoader);
         } else if (object instanceof Fruite) {
-            objectView =
-                    new FruiteView(object, mFieldProvider, mIconLoader);
+            objectView = new FruiteView(object, mFieldProvider, mIconLoader);
         } else if (object instanceof Vegetable) {
             objectView = new VegetableView(object, mFieldProvider, mIconLoader);
         } else if (object instanceof TestObject) {
-
+            objectView = new TestObjectView(object, mFieldProvider, mIconLoader);
         }
         return objectView;
     }

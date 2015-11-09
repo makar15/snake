@@ -18,35 +18,67 @@ import com.example.makarov.snakegame.R;
  */
 public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
-    TextView tv;
-    Animation anim = null;
+    private TextView tv;
+    private Animation anim = null;
 
     /**
      * При запуске фрагмента:
      * говорим на каком layout находимся
      * С анимацией запускаем тексовое поле фрагмента
-     * Создаем кнопки менюшки игры
+     * До того, пока анимация не завершится, кнопки делаем прозрачными
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.menu_game_fragment, null);
 
-        tv = (TextView)v.findViewById(R.id.textView1);
-        registerForContextMenu(tv);
-        anim = AnimationUtils.loadAnimation(getActivity(), R.anim.myalpha);
-        tv.startAnimation(anim);
-
-        Button startButton = (Button)v.findViewById(R.id.button1);
+        final Button startButton = (Button)v.findViewById(R.id.button1);
         startButton.setOnClickListener(this);
 
-        Button scoreButton = (Button)v.findViewById(R.id.button2);
+        final Button scoreButton = (Button)v.findViewById(R.id.button2);
         scoreButton.setOnClickListener(this);
 
-        Button levelsButton = (Button)v.findViewById(R.id.button3);
+        final Button levelsButton = (Button)v.findViewById(R.id.button3);
         levelsButton.setOnClickListener(this);
 
-        Button exitButton = (Button)v.findViewById(R.id.button4);
+        final Button exitButton = (Button)v.findViewById(R.id.button4);
         exitButton.setOnClickListener(this);
+
+        /*
+        Все кнопки прозрачные изначально
+         */
+        startButton.setVisibility(View.INVISIBLE);
+        scoreButton.setVisibility(View.INVISIBLE);
+        levelsButton.setVisibility(View.INVISIBLE);
+        exitButton.setVisibility(View.INVISIBLE);
+
+        tv = (TextView)v.findViewById(R.id.textView1);
+        registerForContextMenu(tv);
+
+        anim = AnimationUtils.loadAnimation(getActivity(), R.anim.myalpha);
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            /*
+            Со всех кнопок снимаем прозрачность, при завершении анимации
+             */
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                startButton.setVisibility(View.VISIBLE);
+                scoreButton.setVisibility(View.VISIBLE);
+                levelsButton.setVisibility(View.VISIBLE);
+                exitButton.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        tv.startAnimation(anim);
 
         return v;
     }

@@ -14,7 +14,7 @@ public class MyTestFirst extends AndroidTestCase{
 
     public void testMedium(){
 
-        Field myF = new MyField(10, 20);
+        MyField myF = new MyField(10, 20);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new CircularMotionController(myF, myFieldObj);
         myF.addObject(myFieldObj, 7, 19);
@@ -30,7 +30,7 @@ public class MyTestFirst extends AndroidTestCase{
 
     public void testSmall() {
 
-        Field myF = new MyField(2, 3);
+        MyField myF = new MyField(2, 3);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new CircularMotionController(myF, myFieldObj);
         myF.addObject(myFieldObj, 1, 2);
@@ -47,7 +47,7 @@ public class MyTestFirst extends AndroidTestCase{
 
     public void testLarge(){
 
-        Field myF = new MyField(5000, 3000);
+        MyField myF = new MyField(5000, 3000);
         TestObject myFieldObj = new TestObject();
         ObjectController myObjController = new CircularMotionController(myF, myFieldObj);
         myF.addObject(myFieldObj, 0, 0);

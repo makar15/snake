@@ -29,18 +29,24 @@ public class ControllerField  {
      * Добавить объект на указанные координаты на поле с рассмотрением коллизии
      * В методе следующее происходит :
      * 1)проверка, нету ли этого объекта в списке объектов данной карты
-     * 2)если место куда пытаемся добавить пустое, тогда добавляем
-     * 3)если объект тестОбъект, тогда обработчик столкновений обрабатывает уже всё
-     * 4)иначе добавляем этот объект на другое свободное место
+     * 2)если ячейка поля существует , тогда :
+     *   3)если место куда пытаемся добавить пустое, тогда добавляем
+     *   4)если объект тестОбъект, тогда обработчик столкновений обрабатывает уже всё
+     *   5)иначе добавляем этот объект на другое свободное место
+     * 6)Иначе добавляем этот объект на другое свободное место
      */
     public void addObject(FieldObject objectStress, int newX, int newY) throws DuplicateObjectException {
         if(!mField.getListObject().contains(objectStress)) {
-            if (mField.isEmptyField(newX, newY)) {
-                mField.addObject(objectStress, newX, newY);
-            } else if (objectStress.getCode() == Snake.CODE_SNAKE_ON_THE_MAP) {
-                FieldObject objectCollisions = mField.getFieldObject(newX, newY);
-                mChoiceCollision.solutionCollision(objectStress, objectCollisions);
-            } else {
+            if(mField.existenceCellField(newX, newY)) {
+                if (mField.isEmptyField(newX, newY)) {
+                    mField.addObject(objectStress, newX, newY);
+                } else if (objectStress.getCode() == Snake.CODE_SNAKE_ON_THE_MAP) {
+                    FieldObject objectCollisions = mField.getFieldObject(newX, newY);
+                    mChoiceCollision.solutionCollision(objectStress, objectCollisions);
+                } else {
+                    addRandomObject(objectStress);
+                }
+            }else{
                 addRandomObject(objectStress);
             }
         }
@@ -73,7 +79,7 @@ public class ControllerField  {
      *   2)если место на которое пытаемся переместить пустое, тогда перемещаем
      *   3)если объект тестОбъект, тогда обработчик столкновений обрабатывает уже всё
      *   4)иначе перемещаем этот объект на другое свободное место
-     *  иначе коллизия границ поля решает куда переместить
+     * 5)иначе коллизия границ поля решает куда переместить
      */
     public void changeObjectLocation(FieldObject object, int newX, int newY) throws NotFoundObjectException {
         if(mField.existenceCellField(newX, newY)) {
