@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.initialized;
+package com.example.makarov.snakegame;
 
 import android.view.View;
 
@@ -11,8 +11,8 @@ public class FieldProvider {
     private int mHeight;
     private int widthScreen;
     private int heightScreen;
-    private int widthOneScreen;
-    private int heightOneScreen;
+    private float widthOneScreen;
+    private float heightOneScreen;
 
     /**
      * View узнаем высоту и ширину экрана на котором происходит отрисовка
@@ -47,11 +47,11 @@ public class FieldProvider {
         return mHeight;
     }
 
-    public int getHeightOneScreen() {
+    public float getHeightOneScreen() {
         return heightOneScreen;
     }
 
-    public int getWidthOneScreen() {
+    public float getWidthOneScreen() {
         return widthOneScreen;
     }
 
@@ -63,11 +63,11 @@ public class FieldProvider {
         return heightScreen;
     }
 
-    public int getScreenX(int fieldX){
+    public float getScreenX(int fieldX){
         return fieldX * widthOneScreen;
     }
 
-    public int getScreenY(int fieldY){
+    public float getScreenY(int fieldY){
         return fieldY * heightOneScreen;
     }
 

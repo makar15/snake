@@ -3,9 +3,9 @@ package com.example.makarov.snakegame.view;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import com.example.makarov.snakegame.initialized.IconLoader;
+import com.example.makarov.snakegame.IconLoader;
 import com.example.makarov.snakegame.objects.FieldObject;
-import com.example.makarov.snakegame.initialized.FieldProvider;
+import com.example.makarov.snakegame.FieldProvider;
 
 /**
  * Класс тестОбъекта который будем отрисовывать в игре
@@ -30,8 +30,10 @@ public class TestObjectView implements View {
         mIconLoader = iconLoader;
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        icon = mIconLoader.getIcon(IconLoader.TYPE_TEST_OBJECT,
-                mFieldProvider.getWidthOneScreen(), mFieldProvider.getHeightOneScreen());
+        int width = (int)mFieldProvider.getWidthOneScreen();
+        int height = (int)mFieldProvider.getHeightOneScreen();
+
+        icon = mIconLoader.getIcon(IconLoader.TYPE_TEST_OBJECT, width, height);
     }
 
     /**
@@ -40,8 +42,8 @@ public class TestObjectView implements View {
      */
     @Override
     public void draw(Canvas canvas) {
-        int x = mFieldProvider.getScreenX(mObject.getX());
-        int y = mFieldProvider.getScreenY(mObject.getY());
+        int x = (int)mFieldProvider.getScreenX(mObject.getX());
+        int y = (int)mFieldProvider.getScreenY(mObject.getY());
         canvas.drawBitmap(icon, x, y, mPaint);
     }
 

@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.R;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 public class DialogSaveRecord extends DialogFragment implements OnClickListener {
 
     private final int DIALOG = 1;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,4 +39,5 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
     }
+
 }

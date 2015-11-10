@@ -2,9 +2,10 @@ package com.example.makarov.snakegame.controllers;
 
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.makarov.snakegame.FieldProvider;
 import com.example.makarov.snakegame.direction.enumeration.Direction;
 import com.example.makarov.snakegame.objects.Snake;
-import com.example.makarov.snakegame.initialized.FieldProvider;
 import com.example.makarov.snakegame.field.ControllerField;
 import com.example.makarov.snakegame.field.MyField;
 
@@ -99,7 +100,7 @@ public class TouchResponseSnakeController extends Controller<Snake> {
                 break;
             case RIGHT:
                 if(event.getY() > mFieldProvider.getScreenY
-                        (mObject.getHead().getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                        (mObject.getHead().getY()) + (mFieldProvider.getHeightOneScreen()/2)){
                     mObject.getMoving().setDirection(Direction.DOWN);
                 } else{
                     mObject.getMoving().setDirection(Direction.UP);
@@ -107,7 +108,7 @@ public class TouchResponseSnakeController extends Controller<Snake> {
                 break;
             case LEFT:
                 if(event.getY() > mFieldProvider.getScreenY
-                        (mObject.getHead().getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                        (mObject.getHead().getY()) + (mFieldProvider.getHeightOneScreen()/2)){
                     mObject.getMoving().setDirection(Direction.DOWN);
                 } else{
                     mObject.getMoving().setDirection(Direction.UP);
@@ -125,7 +126,7 @@ public class TouchResponseSnakeController extends Controller<Snake> {
                 float diffX = Math.abs(event.getX() - mFieldProvider.getScreenX(mObject.getHead().getX()) +
                         (mFieldProvider.getWidthOneScreen()/2));
                 float diffY = Math.abs(event.getY() - mFieldProvider.getScreenY(mObject.getHead().getY()) +
-                        (mFieldProvider.getWidthOneScreen()/2));
+                        (mFieldProvider.getHeightOneScreen()/2));
                 /*
                 Если тап по экрану правее чем находится объект, тогда:
                  */
@@ -135,7 +136,7 @@ public class TouchResponseSnakeController extends Controller<Snake> {
                     Если тап по экрану ниже, чем находится объект, тогда:
                      */
                     if(event.getY() > mFieldProvider.getScreenY
-                            (mObject.getHead().getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                            (mObject.getHead().getY()) + (mFieldProvider.getHeightOneScreen()/2)){
                         /*
                         Сравниваем разницу ранее вычесленную , и решаем куда направить
                          */
@@ -160,7 +161,7 @@ public class TouchResponseSnakeController extends Controller<Snake> {
                      */
                 } else {
                     if(event.getY() > mFieldProvider.getScreenY
-                            (mObject.getHead().getY()) + (mFieldProvider.getWidthOneScreen()/2)){
+                            (mObject.getHead().getY()) + (mFieldProvider.getHeightOneScreen()/2)){
                         if(diffX > diffY){
                             mObject.getMoving().setDirection(Direction.LEFT);
                         } else {

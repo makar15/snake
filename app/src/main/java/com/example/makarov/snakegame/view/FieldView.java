@@ -1,7 +1,7 @@
 package com.example.makarov.snakegame.view;
 
-import com.example.makarov.snakegame.initialized.IconLoader;
-import com.example.makarov.snakegame.initialized.FieldProvider;
+import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.FieldProvider;
 import com.example.makarov.snakegame.field.MyField;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

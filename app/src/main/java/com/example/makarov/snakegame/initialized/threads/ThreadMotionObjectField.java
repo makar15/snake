@@ -1,26 +1,24 @@
 package com.example.makarov.snakegame.initialized.threads;
 
-import android.app.DialogFragment;
+import com.example.makarov.snakegame.GameOver;
+import com.example.makarov.snakegame.Observer;
+import com.example.makarov.snakegame.Subject;
 import com.example.makarov.snakegame.controllers.ObjectController;
-import com.example.makarov.snakegame.initialized.GameSnakeSurfaceView;
+import com.example.makarov.snakegame.GameSnakeSurfaceView;
 import com.example.makarov.snakegame.initialized.levels.Level;
-import com.example.makarov.snakegame.window.DialogSaveRecord;
+import com.example.makarov.snakegame.objects.Snake;
 import java.util.Collection;
 import java.util.Iterator;
 
 /**
  * Класс потока передвижения объектов игры, контроллерами
  */
-public class ThreadMotionObjectField extends GameThreads {
+public class ThreadMotionObjectField extends GameThreads implements Observer{
 
     private final int COUNT_FRAME_IN_SECOND = 10;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private Collection<ObjectController> mList;
-    /**
-     * ПОТЫТКА НЕ ПЫТКА!
-     */
-    private GameSnakeSurfaceView mGameSnakeSurfaceView;
-    private DialogFragment dlg1;
+    private Subject gameOverSnake;
 
     /**
      * В конструктор объект уровня игры(в котором инициализированы все объекты игры)
@@ -29,11 +27,10 @@ public class ThreadMotionObjectField extends GameThreads {
     public ThreadMotionObjectField(Level gameSnake, GameSnakeSurfaceView gameSnakeSurfaceView) {
         super(gameSnake);
         mList = mGameSnake.getControllers();
-        /**
-         * ПОТЫТКА НЕ ПЫТКА!
-         */
-        mGameSnakeSurfaceView = gameSnakeSurfaceView;
-        dlg1 = new DialogSaveRecord();
+
+        gameOverSnake = new GameOver();
+        gameOverSnake.registerObserver(gameSnakeSurfaceView);
+        gameOverSnake.registerObserver(this);
     }
 
     /**
@@ -65,19 +62,13 @@ public class ThreadMotionObjectField extends GameThreads {
             if (objectInTheGame(tempObjectController)) {
                 tempObjectController.nextMove();
             } else {
-                /**
-                 * ПОТЫТКА НЕ ПЫТКА!
-                 *//*
-               if(tempObjectController.getObject() instanceof Snake){
-                   mGameSnakeSurfaceView.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           dlg1.show(mGameSnakeSurfaceView.getFragmentManager(), "dlg1");
-                       }
-                   });
-               }*/
-
+                /*
+                 ПОТЫТКА НЕ ПЫТКА!
+                 */
                 iter.remove();
+               if(tempObjectController.getObject() instanceof Snake){
+                   gameOverSnake.notifyObservers();
+               }
             }
         }
     }
@@ -94,4 +85,11 @@ public class ThreadMotionObjectField extends GameThreads {
         }
     }
 
+    /**
+     *
+     */
+    @Override
+    public void update() {
+        this.setRunning(false);
+    }
 }

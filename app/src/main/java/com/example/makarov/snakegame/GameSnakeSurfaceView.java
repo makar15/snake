@@ -1,62 +1,58 @@
-package com.example.makarov.snakegame.initialized;
+package com.example.makarov.snakegame;
 
-import android.app.FragmentManager;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import com.example.makarov.snakegame.db.Record;
 import com.example.makarov.snakegame.initialized.levels.CreateLevel;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
+import com.example.makarov.snakegame.window.DialogSaveRecord;
 import java.io.IOException;
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Класс Игры змейки
  */
-public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Observer{
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
     private CreateLevel mLevelSnake;
     private IconLoader myIconLoader;
-    /**
-     * ПОТЫТКА НЕ ПЫТКА!
-     */
-    private FragmentManager mFragmentManager;
+    private CreateDialog mDialog;
+    private DialogFragment dlSaveRecord;
 
     /**
      * В конструктор контекст
      */
-    public GameSnakeSurfaceView(Context context, FragmentManager fragmentManager) {
+    public GameSnakeSurfaceView(Context context, CreateDialog dialog) {
         super(context);
         getHolder().addCallback(this);
-        /**
-         * ПОТЫТКА НЕ ПЫТКА!
-         */
-        mFragmentManager = fragmentManager;
+
+        mDialog = dialog;
+        dlSaveRecord = new DialogSaveRecord();
+
         /**
          * БД вроде записывает
          * судя по дебагу все верно!
          * но что то не нравиться компилятору(
          */
-
+/*
         Realm realm = Realm.getInstance(context);
         realm.beginTransaction();
 
         Record record = realm.createObject(Record.class);
-        record.setName("Алеша");
-        record.setScore(105);
+        record.setName("Аллешик");
+        record.setScore(185);
         Record record1 = realm.createObject(Record.class);
-        record1.setName("Вася");
-        record1.setScore(134);
+        record1.setName("Ваассян");
+        record1.setScore(174);
         Record record2 = realm.createObject(Record.class);
-        record2.setName("Юра");
-        record2.setScore(85);
+        record2.setName("Геоошан");
+        record2.setScore(52);
 
         realm.commitTransaction();
-        RealmResults<Record> result2 = realm.where(Record.class).findAll();
+        RealmResults<Record> result2 = realm.where(Record.class).findAll();*/
     }
 
     /**
@@ -109,11 +105,12 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     }
 
     /**
-     * ПОТЫТКА НЕ ПЫТКА!
+     *
      */
-    public FragmentManager getFragmentManager() {
-        return mFragmentManager;
+    @Override
+    public void update() {
+        drawThread.setRunning(false);
+        mDialog.createDialog(dlSaveRecord);
     }
-
 }
 

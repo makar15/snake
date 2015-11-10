@@ -2,6 +2,7 @@ package com.example.makarov.snakegame.initialized.threads;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
+import com.example.makarov.snakegame.Observer;
 import com.example.makarov.snakegame.initialized.levels.Level;
 import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 /**
  * Класс потока отрисовки всех viewObject игры
  */
-public class SurfaceThread extends GameThreads {
+public class SurfaceThread extends GameThreads implements Observer{
 
     private final int COUNT_FRAME_IN_SECOND = 18;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
@@ -90,5 +91,10 @@ public class SurfaceThread extends GameThreads {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void update() {
+        this.setRunning(false);
     }
 }

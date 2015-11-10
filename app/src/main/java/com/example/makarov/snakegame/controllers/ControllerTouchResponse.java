@@ -2,9 +2,10 @@ package com.example.makarov.snakegame.controllers;
 
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.makarov.snakegame.FieldProvider;
 import com.example.makarov.snakegame.direction.enumeration.Direction;
 import com.example.makarov.snakegame.objects.TestObject;
-import com.example.makarov.snakegame.initialized.FieldProvider;
 import com.example.makarov.snakegame.field.ControllerField;
 import com.example.makarov.snakegame.field.MyField;
 

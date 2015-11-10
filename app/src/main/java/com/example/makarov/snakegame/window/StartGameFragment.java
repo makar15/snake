@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.makarov.snakegame.initialized.GameSnakeSurfaceView;
+import com.example.makarov.snakegame.CreateDialog;
+import com.example.makarov.snakegame.GameSnakeSurfaceView;
 
 /**
  *
@@ -20,7 +21,8 @@ public class StartGameFragment extends Fragment {
         в котором инициализируется выбранный уровень, а далее уже объекты,
          View и др. компоненты уровня и игры
          */
-        View v = new GameSnakeSurfaceView(getActivity(), getActivity().getFragmentManager());
+        CreateDialog dialog = new CreateDialog(getActivity().getFragmentManager());
+        View v = new GameSnakeSurfaceView(getActivity(), dialog);
 
         return v;
     }
