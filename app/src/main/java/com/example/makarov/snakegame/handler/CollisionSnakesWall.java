@@ -5,7 +5,7 @@ import com.example.makarov.snakegame.objects.Wall;
 import com.example.makarov.snakegame.field.MyField;
 
 /**
- * Класс обработки столкновения объекта движущегося об стенку
+ * Класс обработки столкновения Змейки об стенку
  */
 public class CollisionSnakesWall implements HandlerCollision<Snake, Wall>{
 

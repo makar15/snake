@@ -19,17 +19,25 @@ public class ThreadMotionObjectField extends GameThreads implements Observer{
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private Collection<ObjectController> mList;
     private Subject gameOverSnake;
+    private GameSnakeSurfaceView mGameSnakeSurfaceView;
 
     /**
      * В конструктор объект уровня игры(в котором инициализированы все объекты игры)
      * В список записываем все контроллеры которые будут передвигать объекты, по ходу игры
+     * Сам объект запускающий потоки и создающий уровень игры
      */
     public ThreadMotionObjectField(Level gameSnake, GameSnakeSurfaceView gameSnakeSurfaceView) {
         super(gameSnake);
         mList = mGameSnake.getControllers();
+        mGameSnakeSurfaceView = gameSnakeSurfaceView;
 
+        /*
+        Инициализация класса, который будет следить за состоянием игры
+        и на события которого можно подписаться
+        Подписываем объекты на события конца игры ( проигрыша в игре)
+         */
         gameOverSnake = new GameOver();
-        gameOverSnake.registerObserver(gameSnakeSurfaceView);
+        gameOverSnake.registerObserver(mGameSnakeSurfaceView);
         gameOverSnake.registerObserver(this);
     }
 
@@ -63,12 +71,17 @@ public class ThreadMotionObjectField extends GameThreads implements Observer{
                 tempObjectController.nextMove();
             } else {
                 /*
-                 ПОТЫТКА НЕ ПЫТКА!
+                При удаленнии контроллера из игры, проверяем кем было его управление.
+                В случае если змейкой, то записываем в объект рекорда, набранные очки
+                 , далее оповещаем всех подписанных, на событие проигрыша в игре.
+                 Далее удаляем контроллер
                  */
-                iter.remove();
                if(tempObjectController.getObject() instanceof Snake){
+                   Snake snake = (Snake) tempObjectController.getObject();
+                   mGameSnakeSurfaceView.getRecord().setScore(snake.getScore().getScore());
                    gameOverSnake.notifyObservers();
                }
+                iter.remove();
             }
         }
     }
@@ -86,10 +99,12 @@ public class ThreadMotionObjectField extends GameThreads implements Observer{
     }
 
     /**
-     *
+     * В случае проигрыша в игре, при подписке класса вызовиться этот метод
+     * В методе измениться состояние на false, потока предевижение объектов контроллерами
      */
     @Override
     public void update() {
         this.setRunning(false);
     }
+
 }

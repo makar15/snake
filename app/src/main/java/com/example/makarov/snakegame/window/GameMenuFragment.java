@@ -31,16 +31,16 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.menu_game_fragment, null);
 
-        final Button startButton = (Button)v.findViewById(R.id.button1);
+        final Button startButton = (Button)v.findViewById(R.id.buttonStart);
         startButton.setOnClickListener(this);
 
-        final Button scoreButton = (Button)v.findViewById(R.id.button2);
+        final Button scoreButton = (Button)v.findViewById(R.id.buttonScore);
         scoreButton.setOnClickListener(this);
 
-        final Button levelsButton = (Button)v.findViewById(R.id.button3);
+        final Button levelsButton = (Button)v.findViewById(R.id.buttonLevels);
         levelsButton.setOnClickListener(this);
 
-        final Button exitButton = (Button)v.findViewById(R.id.button4);
+        final Button exitButton = (Button)v.findViewById(R.id.buttonExit);
         exitButton.setOnClickListener(this);
 
         /*
@@ -93,21 +93,21 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.button1: {
+            case R.id.buttonStart: {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;
 
-            case R.id.button2: {
+            case R.id.buttonScore: {
 
             }break;
 
-            case R.id.button3: {
+            case R.id.buttonLevels: {
 
             }break;
 
-            case R.id.button4: {
+            case R.id.buttonExit: {
                 getActivity().finish();
             }break;
 

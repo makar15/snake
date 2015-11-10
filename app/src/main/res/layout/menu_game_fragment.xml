@@ -15,7 +15,7 @@
         android:textColor="#000"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
@@ -25,7 +25,7 @@
         android:layout_marginTop="100dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score"
@@ -34,7 +34,7 @@
         android:background="#fff"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonLevels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Levels"
@@ -43,7 +43,7 @@
         android:background="#fff" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit"

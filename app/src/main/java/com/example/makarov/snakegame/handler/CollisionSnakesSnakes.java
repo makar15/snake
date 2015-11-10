@@ -5,7 +5,7 @@ import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.objects.Snake;
 
 /**
- *
+ * Класс обработки столкновения змеи об свой хвост
  */
 public class CollisionSnakesSnakes implements HandlerCollision<Snake, Snake>{
 

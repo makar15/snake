@@ -6,8 +6,6 @@ import com.example.makarov.snakegame.field.MyField;
 
 /**
  * Класс обработки столкновения змеи об овощь
- * если змейка попадет на овощь:
- * очки игры увеличаться и увеличиться скорость
  */
 public class CollisionSnakesVegetables implements HandlerCollision<Snake, Vegetable>{
 

@@ -6,8 +6,6 @@ import com.example.makarov.snakegame.field.MyField;
 
 /**
  * Класс обработки столкновения змеи об фрукт
- * змейка попадет на фрукт:
- * прибавяться очки игры и увеличиться переменная роста змеи
  */
 public class CollisionSnakeFruit implements HandlerCollision<Snake, Fruite>{
 
@@ -20,9 +18,7 @@ public class CollisionSnakeFruit implements HandlerCollision<Snake, Fruite>{
     }
 
     /**
-     *В методе изменения переменных очков набранных змейкой и переменной роста змейки,
-     * а так же, удаление с поля и добавление на другом месте поля,
-     * объекта(фрукта) стоящего на координатах и продвижение змейки по полю
+     *
      */
     @Override
     public void processingCollision(Snake objectFirst, Fruite objectSecond){

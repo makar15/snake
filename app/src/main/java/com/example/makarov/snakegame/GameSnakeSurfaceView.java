@@ -9,6 +9,7 @@ import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
 import com.example.makarov.snakegame.window.DialogSaveRecord;
 import java.io.IOException;
+import io.realm.Realm;
 
 /**
  * Класс Игры змейки
@@ -21,6 +22,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     private IconLoader myIconLoader;
     private CreateDialog mDialog;
     private DialogFragment dlSaveRecord;
+    private CreateRecord record;
 
     /**
      * В конструктор контекст
@@ -29,30 +31,21 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         super(context);
         getHolder().addCallback(this);
 
-        mDialog = dialog;
-        dlSaveRecord = new DialogSaveRecord();
-
-        /**
-         * БД вроде записывает
-         * судя по дебагу все верно!
-         * но что то не нравиться компилятору(
+        /*
+        вызываем БД в которой будем записывать результаты игры
          */
-/*
         Realm realm = Realm.getInstance(context);
-        realm.beginTransaction();
 
-        Record record = realm.createObject(Record.class);
-        record.setName("Аллешик");
-        record.setScore(185);
-        Record record1 = realm.createObject(Record.class);
-        record1.setName("Ваассян");
-        record1.setScore(174);
-        Record record2 = realm.createObject(Record.class);
-        record2.setName("Геоошан");
-        record2.setScore(52);
+        /*
+        инициализируем:
+        объект, который будет хранить рекорд игры
+        объект, умеющий запускать диалоговые окна
+        диалоговое окно, которое отобразиться при завершении игры
+         */
+        record = new CreateRecord();
+        mDialog = dialog;
+        dlSaveRecord = new DialogSaveRecord(record, realm);
 
-        realm.commitTransaction();
-        RealmResults<Record> result2 = realm.where(Record.class).findAll();*/
     }
 
     /**
@@ -105,12 +98,22 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     }
 
     /**
-     *
+     * Метод сработает в случае, когда в объекте, на который подписан этот класс изменится состояние
+     * В методеМеняем состояние потока отрисовки
+     * Запускаем диалоговое окно
      */
     @Override
     public void update() {
         drawThread.setRunning(false);
         mDialog.createDialog(dlSaveRecord);
     }
+
+    /**
+     * Вернуть объект, который хранит рекорд игры
+     */
+    public CreateRecord getRecord() {
+        return record;
+    }
+
 }
 

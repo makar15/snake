@@ -10,8 +10,6 @@ public class ScoreManager {
 
     /**
      * добавление, уменьшение, обнуление и сет методы очков набранные в игре
-     * Сохрпнение очков в список
-     * далее будет храниться это в БД
      */
     public void addScore(int addScore) {
         int newScore = this.mScore + addScore;
