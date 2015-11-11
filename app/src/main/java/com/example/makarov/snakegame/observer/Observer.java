@@ -1,7 +1,7 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.observer;
 
 /**
- * Интерфейс наблюдателей за состоянием игры(Конец, Пауза, ..)
+ * Интерфейс наблюдателей за состоянием игры(Конец, Пауза, ...)
  */
 public interface Observer {
 

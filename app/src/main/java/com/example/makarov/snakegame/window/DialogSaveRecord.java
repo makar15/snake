@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import com.example.makarov.snakegame.CreateDialog;
 import com.example.makarov.snakegame.CreateRecord;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.db.Record;
@@ -22,19 +23,21 @@ import io.realm.Realm;
 public class DialogSaveRecord extends DialogFragment implements OnClickListener {
 
     private EditText nameUser;
+    private CreateDialog mCreateDialog;
     private CreateRecord myCreateRecord;
     private Realm mRealm;
+    private DialogFragment dialogIssueRepeatGame;
 
     /**
-     * В БД результаты записываются!))
-     * RealmResults<Record> result2 = realm.where(Record.class).findAll();
+     * В конструктор: объект рекорда в игре, БД хранящая все созданные рекорды,
+     *   объект для создания диалоговых окон.
+     * Инициализируем объект диалогового окна, с вопросом: повторить игру?
      */
-    /**
-     * В конструктор: объект рекорда в игре, БД хранящая все созданные рекорды
-     */
-    public DialogSaveRecord(CreateRecord record, Realm realm){
+    public DialogSaveRecord(CreateRecord createRecord, Realm realm, CreateDialog createDialog){
+        mCreateDialog = createDialog;
         mRealm = realm;
-        myCreateRecord = record;
+        myCreateRecord = createRecord;
+        dialogIssueRepeatGame = new DialogIssueRepeatGame();
     }
 
     /**
@@ -71,19 +74,27 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
             При нажатии на сохранение :
             1)проверяем введено ли Имя пользователя
             2)Включаем БД для записи рекорда
-            3)создаем рекорд з введенным именем и набранными очками
+            3)создаем рекорд с введенным именем и набранными очками
             4)коммитим созданный рекорд
+            5)вызываем диалоговое окно, с вопросом: повторить игру?
              */
             case R.id.btnSave: {
+                /*
+                == "Enter your name"
+                вот эта проверка не пашет, вылетает приложуха
+                 */
                 if (TextUtils.isEmpty(nameUser.getText().toString()) ||
                         nameUser.getText().toString() == "Enter your name") {
-                    return;
+                    nameUser.setText("Enter your name!");
                 } else{
                     mRealm.beginTransaction();
                     Record record = mRealm.createObject(Record.class);
                     record.setName(nameUser.getText().toString());
                     record.setScore(myCreateRecord.getScore());
                     mRealm.commitTransaction();
+
+                    mCreateDialog.createDialog(dialogIssueRepeatGame);
+                    dismiss();
                 }
             }break;
             /*
@@ -99,6 +110,12 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
             Вот тут не уверен, стоит ли так делать
              */
             case R.id.btnRepeat: {
+                /*
+                очисти поле
+                задавай новый уровень
+                потоки запусти
+                 */
+                getActivity().finish();
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
@@ -107,7 +124,7 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
             default:
                 break;
         }
-        dismiss();
+        //dismiss();
     }
 
     /**

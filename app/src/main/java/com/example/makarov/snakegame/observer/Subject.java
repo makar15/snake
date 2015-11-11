@@ -1,4 +1,5 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.observer;
+
 
 /**
  * Интерфейс для объектов, за которымы можно будет следить другим подписанным классам

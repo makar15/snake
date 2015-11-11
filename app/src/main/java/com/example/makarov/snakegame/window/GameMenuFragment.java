@@ -3,6 +3,7 @@ package com.example.makarov.snakegame.window;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
+import io.realm.Realm;
 
 /**
  * Фрагмент меню игры,
@@ -20,6 +22,9 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
     private TextView tv;
     private Animation anim = null;
+    private ListRecordFragment listRecord;
+
+    Realm realmDBScore ;
 
     /**
      * При запуске фрагмента:
@@ -30,6 +35,13 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.menu_game_fragment, null);
+
+        /*
+        Вызываем базу данных со всем рекордами
+        Инициализируем фрагмент, в котором выводится весь список рекордов
+         */
+        realmDBScore = Realm.getInstance(getContext());
+        listRecord = new ListRecordFragment(realmDBScore);
 
         final Button startButton = (Button)v.findViewById(R.id.buttonStart);
         startButton.setOnClickListener(this);
@@ -86,8 +98,8 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
     /**
      * При нажатии на кнопки, запускаем различные фрагменты
      * В случае старта, запускаем второе активити с самой игрой!
-     * В случае уровней, будет запускаться фрагмент ListView с созданными уровнями
-     * В случае с рекордами, запускаем фрагмент с ListView с рекордами игры
+     * В случае уровней, будет запускаться фрагмент с созданными уровнями
+     * В случае с рекордами, запускаем фрагмент с хранящимися в базе данных рекордами игры
      */
     @Override
     public void onClick(View v) {
@@ -100,11 +112,19 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
             }break;
 
             case R.id.buttonScore: {
+                /*
+                Запускам фрагмент со списком всех рекордов находящихся в DataBaseScore
+                 */
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.add(R.id.LayoutMenuGame, listRecord).addToBackStack(null).commit();
 
             }break;
 
             case R.id.buttonLevels: {
-
+                /*
+                Фрагмент , содержащий список уровеней игры ListView
+                Название карты и попробовать скрин или по нажатию на название открывать карту и игру
+                 */
             }break;
 
             case R.id.buttonExit: {

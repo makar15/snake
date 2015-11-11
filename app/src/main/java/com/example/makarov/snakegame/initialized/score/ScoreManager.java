@@ -33,8 +33,4 @@ public class ScoreManager {
         return this.mScore;
     }
 
-    public void saveScore(int resultScore){
-
-    }
-
 }

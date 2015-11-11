@@ -1,8 +1,8 @@
 package com.example.makarov.snakegame.initialized.threads;
 
-import com.example.makarov.snakegame.GameOver;
-import com.example.makarov.snakegame.Observer;
-import com.example.makarov.snakegame.Subject;
+import com.example.makarov.snakegame.observer.GameOver;
+import com.example.makarov.snakegame.observer.Observer;
+import com.example.makarov.snakegame.observer.Subject;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
 import com.example.makarov.snakegame.initialized.levels.Level;
@@ -15,7 +15,7 @@ import java.util.Iterator;
  */
 public class ThreadMotionObjectField extends GameThreads implements Observer{
 
-    private final int COUNT_FRAME_IN_SECOND = 10;
+    private final int COUNT_FRAME_IN_SECOND = 12;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private Collection<ObjectController> mList;
     private Subject gameOverSnake;

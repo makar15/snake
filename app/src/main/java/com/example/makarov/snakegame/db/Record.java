@@ -5,7 +5,7 @@ import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * Класс связынныз с Realm хранением данных
+ * Класс связанный с Realm хранением данных
  */
 public class Record extends RealmObject {
 

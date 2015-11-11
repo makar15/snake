@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LayoutMenuGame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -31,7 +32,8 @@
         android:text="Score"
         android:textSize="30dp"
         android:textColor="#000"
-        android:background="#fff"/>
+        android:background="#fff"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/buttonLevels"
@@ -40,7 +42,8 @@
         android:text="Levels"
         android:textSize="30dp"
         android:textColor="#000"
-        android:background="#fff" />
+        android:background="#fff"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/buttonExit"
@@ -49,5 +52,6 @@
         android:text="Exit"
         android:textSize="30dp"
         android:textColor="#000"
-        android:background="#fff" />
+        android:background="#fff"
+        android:layout_marginTop="30dp"/>
 </LinearLayout>

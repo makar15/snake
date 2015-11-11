@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 import com.example.makarov.snakegame.initialized.levels.CreateLevel;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
+import com.example.makarov.snakegame.observer.Observer;
 import com.example.makarov.snakegame.window.DialogSaveRecord;
 import java.io.IOException;
 import io.realm.Realm;
@@ -14,7 +15,7 @@ import io.realm.Realm;
 /**
  * Класс Игры змейки
  */
-public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Observer{
+public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Observer {
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
@@ -25,16 +26,11 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     private CreateRecord record;
 
     /**
-     * В конструктор контекст
+     * В конструктор контекст, объект для создания диалоговых окон, DataBaseScore
      */
-    public GameSnakeSurfaceView(Context context, CreateDialog dialog) {
+    public GameSnakeSurfaceView(Context context, CreateDialog dialog, Realm realmDBScore) {
         super(context);
         getHolder().addCallback(this);
-
-        /*
-        вызываем БД в которой будем записывать результаты игры
-         */
-        Realm realm = Realm.getInstance(context);
 
         /*
         инициализируем:
@@ -44,7 +40,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
          */
         record = new CreateRecord();
         mDialog = dialog;
-        dlSaveRecord = new DialogSaveRecord(record, realm);
+        dlSaveRecord = new DialogSaveRecord(record, realmDBScore, mDialog);
 
     }
 

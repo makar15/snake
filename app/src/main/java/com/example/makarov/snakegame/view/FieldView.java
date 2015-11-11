@@ -4,7 +4,9 @@ import com.example.makarov.snakegame.IconLoader;
 import com.example.makarov.snakegame.FieldProvider;
 import com.example.makarov.snakegame.field.MyField;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 /**
@@ -38,7 +40,8 @@ public class FieldView {
      * отрисовываем картинку на полный экран
      */
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(icon, 0, 0, mPaint);
+        //canvas.drawBitmap(icon, 0, 0, mPaint);
+        canvas.drawColor(Color.WHITE);
     }
 
     /**

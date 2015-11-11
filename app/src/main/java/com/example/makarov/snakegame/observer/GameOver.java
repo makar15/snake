@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.observer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
  * Пока что он не связан с коллизиями игры, которые первый уничтожают змейку
  * Пока что узнаю об этом в классе потоке прокручиваня контроллеров игры, в дальнейшем это изменю !!
  */
-public class GameOver implements Subject{
+public class GameOver implements Subject {
 
     private List<Observer> observers;
     private boolean stateLifeSnake = true;
