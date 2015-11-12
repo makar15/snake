@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.db.Record;
+import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.window.adapters.RecordAdapter;
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Класс фрагмента со всеми рекордами из базы данных
@@ -18,15 +16,6 @@ import io.realm.RealmResults;
 public class ListRecordFragment extends Fragment {
 
     private ListView lvRecord;
-    private Realm realmDBScore;
-    private RealmResults<Record> result;
-
-    /**
-     * В конструктор DataBaseScore
-     */
-    public ListRecordFragment(Realm realm){
-        realmDBScore = realm;
-    }
 
     /**
      * При создании фрагмента, создается список из рекордов с помощью адаптера
@@ -38,9 +27,8 @@ public class ListRecordFragment extends Fragment {
 
         lvRecord = (ListView) v.findViewById(R.id.lvRecord);
 
-        result = realmDBScore.where(Record.class).findAll();
-
-        RecordAdapter recordAdapter = new RecordAdapter(getActivity(), result);
+        RecordAdapter recordAdapter = new RecordAdapter(getActivity(),
+                DataBase.getInstance().getAllRecords());
         lvRecord.setAdapter(recordAdapter);
 
         return v;

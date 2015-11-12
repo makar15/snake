@@ -26,6 +26,16 @@
         android:layout_marginTop="100dp" />
 
     <Button
+        android:id="@+id/buttonDuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snake duel"
+        android:textSize="30dp"
+        android:textColor="#000"
+        android:background="#fff"
+        android:layout_marginTop="20dp"/>
+
+    <Button
         android:id="@+id/buttonScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +43,7 @@
         android:textSize="30dp"
         android:textColor="#000"
         android:background="#fff"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/buttonLevels"
@@ -43,7 +53,7 @@
         android:textSize="30dp"
         android:textColor="#000"
         android:background="#fff"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/buttonExit"
@@ -53,5 +63,5 @@
         android:textSize="30dp"
         android:textColor="#000"
         android:background="#fff"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 </LinearLayout>

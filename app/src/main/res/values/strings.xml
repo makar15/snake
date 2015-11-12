@@ -6,6 +6,7 @@
     <string name="message_text">Enter your name</string>
     <string name="save">save</string>
     <string name="exit">exit</string>
+    <string name="create">Create levels</string>
     <string name="repeat">repeat</string>
 
 </resources>

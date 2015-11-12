@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.db.Record;
+import com.example.makarov.snakegame.db.BaseRecords;
 import io.realm.RealmResults;
 
 /**
@@ -16,12 +16,12 @@ import io.realm.RealmResults;
 public class RecordAdapter extends BaseAdapter{
 
     private LayoutInflater mLInflater;
-    private RealmResults<Record> mResult;
+    private RealmResults<BaseRecords> mResult;
 
     /**
      * В конструктор контекст, список с рекордами из базы данных Realm
      */
-    public RecordAdapter(Context cont, RealmResults<Record> result){
+    public RecordAdapter(Context cont, RealmResults<BaseRecords> result){
         mResult = result;
         mLInflater = (LayoutInflater) cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -42,7 +42,7 @@ public class RecordAdapter extends BaseAdapter{
     }
 
     /**
-     * В методе формируем каждый рекорд для отображения в  ListView
+     * В методе формируем каждый рекорд для отображения в ListView
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,7 +58,7 @@ public class RecordAdapter extends BaseAdapter{
         а именно в элементы TextView из которых и состоит каждый элемент рекорда в списке,
         получав имя пользователя и колличество набранных очков в игре
          */
-        Record tempRecord = getRecord(position);
+        BaseRecords tempRecord = getRecord(position);
         ((TextView) view.findViewById(R.id.tvNameUser)).
                 setText("Name : " + tempRecord.getName());
         ((TextView) view.findViewById(R.id.tvScoreUser)).
@@ -69,7 +69,7 @@ public class RecordAdapter extends BaseAdapter{
     /**
      * Вернуть объект рекорда по позиции
      */
-    public Record getRecord(int position) {
-        return ((Record) getItem(position));
+    public BaseRecords getRecord(int position) {
+        return ((BaseRecords) getItem(position));
     }
 }

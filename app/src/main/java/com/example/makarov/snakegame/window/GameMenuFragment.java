@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
-import io.realm.Realm;
 
 /**
  * Фрагмент меню игры,
@@ -22,9 +21,6 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
     private TextView tv;
     private Animation anim = null;
-    private ListRecordFragment listRecord;
-
-    Realm realmDBScore ;
 
     /**
      * При запуске фрагмента:
@@ -36,14 +32,11 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.menu_game_fragment, null);
 
-        /*
-        Вызываем базу данных со всем рекордами
-        Инициализируем фрагмент, в котором выводится весь список рекордов
-         */
-        realmDBScore = Realm.getInstance(getContext());
-        listRecord = new ListRecordFragment(realmDBScore);
 
         final Button startButton = (Button)v.findViewById(R.id.buttonStart);
+        startButton.setOnClickListener(this);
+
+        final Button startDuelButton = (Button)v.findViewById(R.id.buttonDuel);
         startButton.setOnClickListener(this);
 
         final Button scoreButton = (Button)v.findViewById(R.id.buttonScore);
@@ -59,6 +52,7 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
         Все кнопки прозрачные изначально
          */
         startButton.setVisibility(View.INVISIBLE);
+        startDuelButton.setVisibility(View.INVISIBLE);
         scoreButton.setVisibility(View.INVISIBLE);
         levelsButton.setVisibility(View.INVISIBLE);
         exitButton.setVisibility(View.INVISIBLE);
@@ -80,6 +74,7 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onAnimationEnd(Animation animation) {
                 startButton.setVisibility(View.VISIBLE);
+                startDuelButton.setVisibility(View.VISIBLE);
                 scoreButton.setVisibility(View.VISIBLE);
                 levelsButton.setVisibility(View.VISIBLE);
                 exitButton.setVisibility(View.VISIBLE);
@@ -98,6 +93,7 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
     /**
      * При нажатии на кнопки, запускаем различные фрагменты
      * В случае старта, запускаем второе активити с самой игрой!
+     * В случае Duel,
      * В случае уровней, будет запускаться фрагмент с созданными уровнями
      * В случае с рекордами, запускаем фрагмент с хранящимися в базе данных рекордами игры
      */
@@ -111,20 +107,18 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }break;
 
+            case R.id.buttonDuel: {
+
+            }break;
+
             case R.id.buttonScore: {
-                /*
-                Запускам фрагмент со списком всех рекордов находящихся в DataBaseScore
-                 */
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.add(R.id.LayoutMenuGame, listRecord).addToBackStack(null).commit();
+                openFragment(new ListRecordFragment());
 
             }break;
 
             case R.id.buttonLevels: {
-                /*
-                Фрагмент , содержащий список уровеней игры ListView
-                Название карты и попробовать скрин или по нажатию на название открывать карту и игру
-                 */
+                openFragment(new ListLevelsFragment());
+
             }break;
 
             case R.id.buttonExit: {
@@ -134,5 +128,10 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
             default:
                 break;
         }
+    }
+
+    public void openFragment(Fragment fragment){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.add(R.id.LayoutMenu, fragment).addToBackStack(null).commit();
     }
 }

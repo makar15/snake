@@ -2,17 +2,15 @@ package com.example.makarov.snakegame.db;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
 
 /**
- * Класс связанный с Realm хранением данных
+ * Класс связанный с Realm хранением данных(Храним рекорды игр)
  */
-public class Record extends RealmObject {
+public class BaseRecords extends RealmObject {
 
     /**
      * Храним Имя пользователя и набранные им очки
      */
-    @PrimaryKey
     private String name;
     private int score;
 

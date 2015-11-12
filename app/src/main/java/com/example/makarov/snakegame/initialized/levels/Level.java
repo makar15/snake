@@ -6,7 +6,7 @@ import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
 
 /**
- *
+ * Интерфейс Уровня игры
  */
 public interface Level {
 

@@ -15,7 +15,7 @@ import java.util.Iterator;
  */
 public class ThreadMotionObjectField extends GameThreads implements Observer{
 
-    private final int COUNT_FRAME_IN_SECOND = 12;
+    private final int COUNT_FRAME_IN_SECOND = 8;
     private final int FREQUENCY = 1000 / COUNT_FRAME_IN_SECOND;
     private Collection<ObjectController> mList;
     private Subject gameOverSnake;

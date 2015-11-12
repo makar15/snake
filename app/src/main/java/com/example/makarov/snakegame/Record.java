@@ -3,11 +3,10 @@ package com.example.makarov.snakegame;
 /**
  * Класс текущего рекорда
  * создается в каждой запущенной игре
- * Для удобства записи и взятия данных о рекорде
  * В классе потоке (где проше всего записываю очки набранные змейкой,
- * в классе диалоге из EditText беру name пользователя
+ * в классе диалоге, из EditText беру name пользователя
  */
-public class CreateRecord {
+public class Record {
 
     private String name;
     private int score;

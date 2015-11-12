@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.window;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
 import com.example.makarov.snakegame.R;
+import com.example.makarov.snakegame.initialized.levels.ManagerCreateModelLevel;
+import java.io.IOException;
 
 /**
  * Главное активити приложения
@@ -17,9 +20,12 @@ public class MainActivity extends FragmentActivity {
 
     /*
     Для открытия и сохранения последовательности открытых фрагментов
+    Preferences - для сохранения статуса приложения типом булл
      */
     private FragmentTransaction ftActivity;
     private FragmentManager fmActivity;
+    private SharedPreferences prefs = null;
+    private ManagerCreateModelLevel levels;
 
     /**
      * Запускаем класс сцены игры
@@ -28,6 +34,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        prefs = getSharedPreferences("com.example.makarov.myAppName", MODE_PRIVATE);
         /*
         приложение постоянно имеет портретную ориентацию
         приложение будет полноэкранным и без заголовка
@@ -54,5 +61,22 @@ public class MainActivity extends FragmentActivity {
         ftActivity = ftActivity.add(R.id.LayoutMenu, fragMenuGame);
         ftActivity.commit();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (prefs.getBoolean("firstRunMyApp", true)) {
+            // При первом запуске (или если юзер удалял все данные приложения)
+            try {
+                levels = new ManagerCreateModelLevel(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //и после действия записывам false в переменную firstRunMyApp
+            //Итого при следующих запусках этот код не вызывается.
+            prefs.edit().putBoolean("firstRunMyApp", false).apply();
+        }
     }
 }

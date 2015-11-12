@@ -10,7 +10,6 @@ import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField
 import com.example.makarov.snakegame.observer.Observer;
 import com.example.makarov.snakegame.window.DialogSaveRecord;
 import java.io.IOException;
-import io.realm.Realm;
 
 /**
  * Класс Игры змейки
@@ -23,12 +22,12 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     private IconLoader myIconLoader;
     private CreateDialog mDialog;
     private DialogFragment dlSaveRecord;
-    private CreateRecord record;
+    private Record record;
 
     /**
      * В конструктор контекст, объект для создания диалоговых окон, DataBaseScore
      */
-    public GameSnakeSurfaceView(Context context, CreateDialog dialog, Realm realmDBScore) {
+    public GameSnakeSurfaceView(Context context, CreateDialog dialog) {
         super(context);
         getHolder().addCallback(this);
 
@@ -38,9 +37,9 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         объект, умеющий запускать диалоговые окна
         диалоговое окно, которое отобразиться при завершении игры
          */
-        record = new CreateRecord();
+        record = new Record();
         mDialog = dialog;
-        dlSaveRecord = new DialogSaveRecord(record, realmDBScore, mDialog);
+        dlSaveRecord = new DialogSaveRecord(record, mDialog);
 
     }
 
@@ -107,7 +106,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     /**
      * Вернуть объект, который хранит рекорд игры
      */
-    public CreateRecord getRecord() {
+    public Record getRecord() {
         return record;
     }
 
