@@ -5,7 +5,7 @@ import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.FieldProvider;
 import com.example.makarov.snakegame.singleton.IconLoader;
-import com.example.makarov.snakegame.initialized.levels.Level;
+import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;
@@ -20,7 +20,7 @@ import java.util.LinkedList;
 /**
  * Класс ковертирующий строку -> String[][] -> уровень игры, со всеми объектами
  */
-public class StringToCreateLevel implements Level {
+public class StringToCreateLevelCreator implements LevelCreator {
 
     private android.view.View mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
@@ -34,7 +34,7 @@ public class StringToCreateLevel implements Level {
     /**
      * В конструкторе конвертируем
      */
-    public StringToCreateLevel(android.view.View gameSnake, IconLoader iconLoader, String lineLevel){
+    public StringToCreateLevelCreator(android.view.View gameSnake, IconLoader iconLoader, String lineLevel){
 
          /*
          * Инициализируем:

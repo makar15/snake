@@ -5,7 +5,7 @@ import com.example.makarov.snakegame.observer.Observer;
 import com.example.makarov.snakegame.observer.Subject;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
-import com.example.makarov.snakegame.initialized.levels.Level;
+import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.objects.Snake;
 import java.util.Collection;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ public class ThreadMotionObjectField extends GameThreads implements Observer{
      * В список записываем все контроллеры которые будут передвигать объекты, по ходу игры
      * Сам объект запускающий потоки и создающий уровень игры
      */
-    public ThreadMotionObjectField(Level gameSnake, GameSnakeSurfaceView gameSnakeSurfaceView) {
+    public ThreadMotionObjectField(LevelCreator gameSnake, GameSnakeSurfaceView gameSnakeSurfaceView) {
         super(gameSnake);
         mList = mGameSnake.getControllers();
         mGameSnakeSurfaceView = gameSnakeSurfaceView;

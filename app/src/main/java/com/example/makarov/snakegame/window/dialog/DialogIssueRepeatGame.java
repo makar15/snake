@@ -16,9 +16,9 @@ import com.example.makarov.snakegame.window.StartGameActivity;
  */
 public class DialogIssueRepeatGame extends DialogFragment implements View.OnClickListener {
 
-    private String lineModelLevel;
     private SharedPreferences prefs;
-    private int tempModelLevel;
+
+    public static final String NAME_ID = "name";
 
     /**
      * при запуске окна
@@ -50,16 +50,10 @@ public class DialogIssueRepeatGame extends DialogFragment implements View.OnClic
                 getActivity().finish();
 
                 prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
-                tempModelLevel = prefs.getInt("firstRuApp", 0);
-
-                lineModelLevel = DataBase.getInstance().getAllLevels().
-                        get(tempModelLevel).getModelLevel();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("press position level", lineModelLevel);
+                int levelId = prefs.getInt("firstRuApp", 0);
 
                 Intent intent = new Intent();
-                intent.putExtras(bundle);
+                intent.putExtra(NAME_ID, levelId);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;

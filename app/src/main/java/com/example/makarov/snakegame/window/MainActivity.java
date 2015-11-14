@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.initialized.levels.ManagerCreateModelLevel;
+import com.example.makarov.snakegame.initialized.levels.SnakeLevelCreator;
 import java.io.IOException;
 
 /**
@@ -25,8 +25,12 @@ public class MainActivity extends FragmentActivity {
     private FragmentTransaction ftActivity;
     private FragmentManager fmActivity;
     private SharedPreferences prefs = null;
-    private ManagerCreateModelLevel levels;
+    private SnakeLevelCreator levels;
 
+    /*
+    getLastShared
+    SnakePreferences
+     */
     /**
      * Запускаем класс сцены игры
      */
@@ -71,7 +75,7 @@ public class MainActivity extends FragmentActivity {
         if (prefs.getBoolean("firstRunMyApp", true)) {
             // При первом запуске (или если юзер удалял все данные приложения)
             try {
-                levels = new ManagerCreateModelLevel();
+                levels = new SnakeLevelCreator();
             } catch (IOException e) {
                 e.printStackTrace();
             }

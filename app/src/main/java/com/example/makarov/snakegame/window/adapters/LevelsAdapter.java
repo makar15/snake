@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.db.BaseLevels;
+import com.example.makarov.snakegame.db.Level;
+
+import java.util.List;
+
 import io.realm.RealmResults;
 
 /**
@@ -16,12 +19,12 @@ import io.realm.RealmResults;
 public class LevelsAdapter extends BaseAdapter{
 
     private LayoutInflater mLInflater;
-    private RealmResults<BaseLevels> listLevels;
+    private List<Level> listLevels;
 
     /**
      * В конструктор контекст, список с уровнями из базы данных Realm
      */
-    public LevelsAdapter(Context cont, RealmResults<BaseLevels> list){
+    public LevelsAdapter(Context cont, List<Level> list){
         listLevels = list;
         mLInflater = (LayoutInflater) cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -38,7 +41,7 @@ public class LevelsAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return listLevels.get(position).getId();
     }
 
     /**
@@ -53,7 +56,7 @@ public class LevelsAdapter extends BaseAdapter{
             //получаем LayoutInflater для работы с layout-ресурсами
             view = mLInflater.inflate(R.layout.item_level, parent, false);
         }
-        BaseLevels tempLevels =  getLevels(position);
+        Level tempLevels =  getLevels(position);
         ((TextView) view.findViewById(R.id.tvNameLevel)).
                 setText("Name : " + tempLevels.getName());
         return view;
@@ -62,7 +65,7 @@ public class LevelsAdapter extends BaseAdapter{
     /**
      * Вернуть объект уровня по позиции
      */
-    public BaseLevels getLevels(int position) {
-        return ((BaseLevels) getItem(position));
+    private Level getLevels(int position) {
+        return listLevels.get(position);
     }
 }

@@ -2,9 +2,9 @@ package com.example.makarov.snakegame.singleton;
 
 import android.content.Context;
 import com.example.makarov.snakegame.Record;
-import com.example.makarov.snakegame.db.BaseLevels;
-import com.example.makarov.snakegame.db.BaseRecords;
-import com.example.makarov.snakegame.initialized.levels.ModelLevels;
+import com.example.makarov.snakegame.db.Level;
+import com.example.makarov.snakegame.db.BaseRecord;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -39,43 +39,49 @@ public class DataBase {
     /**
      * Схоранить рекорд в БД
      */
-    public void saveRecord(Record createRecord){
+    public BaseRecord saveRecord(Record createRecord){
         Realm mRealm = Realm.getInstance(mContext);
         mRealm.beginTransaction();
-        BaseRecords record = mRealm.createObject(BaseRecords.class);
+        BaseRecord record = mRealm.createObject(BaseRecord.class);
         record.setName(createRecord.getName());
         record.setScore(createRecord.getScore());
         mRealm.commitTransaction();
+
+        return record;
     }
 
     /**
      * Получить список всех рекордов из БД
      */
-    public RealmResults<BaseRecords> getAllRecords(){
-        return Realm.getInstance(mContext).where(BaseRecords.class).findAll();
+    public RealmResults<BaseRecord> getRecords(){
+        return Realm.getInstance(mContext).where(BaseRecord.class).findAll();
     }
 
     /**
      * Сохранить уровень игры в БД
      */
-    public void saveLevels(ModelLevels modelLevels){
-        Realm mRealm = Realm.getInstance(mContext);
-        mRealm.beginTransaction();
-        BaseLevels levels = mRealm.createObject(BaseLevels.class);
-        levels.setName(modelLevels.getNameLevels());
-        levels.setModelLevel(modelLevels.getLineLevels());
-        mRealm.commitTransaction();
+    public Level saveLevel(String name, String modelLevel){
+        Realm realm = Realm.getInstance(mContext);
+        realm.beginTransaction();
+        Level level = new Level(name, modelLevel);
+        realm.copyToRealmOrUpdate(level);
+        realm.commitTransaction();
+
+        return level;
     }
 
     /**
      * Получить список всех уровней из БД
      */
-    public RealmResults<BaseLevels> getAllLevels(){
-        return Realm.getInstance(mContext).where(BaseLevels.class).findAll();
+    public RealmResults<Level> getLevels(){
+        return Realm.getInstance(mContext).where(Level.class).findAll();
     }
 
-    //public String getModelLevels(long nameLevels){
-       // String l = Realm.getInstance(mContext).getTable(BaseLevels.class)
-      //  return l;
-    //}
+    /**
+     *
+     */
+    public Level getLevel(int levelId) {
+        return Realm.getInstance(mContext).where(Level.class).equalTo("id", levelId).findFirst();
+    }
+
 }

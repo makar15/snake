@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.db.BaseRecords;
+import com.example.makarov.snakegame.db.BaseRecord;
 import io.realm.RealmResults;
 
 /**
@@ -16,12 +16,12 @@ import io.realm.RealmResults;
 public class RecordAdapter extends BaseAdapter{
 
     private LayoutInflater mLInflater;
-    private RealmResults<BaseRecords> mResult;
+    private RealmResults<BaseRecord> mResult;
 
     /**
      * В конструктор контекст, список с рекордами из базы данных Realm
      */
-    public RecordAdapter(Context cont, RealmResults<BaseRecords> result){
+    public RecordAdapter(Context cont, RealmResults<BaseRecord> result){
         mResult = result;
         mLInflater = (LayoutInflater) cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -58,7 +58,7 @@ public class RecordAdapter extends BaseAdapter{
         а именно в элементы TextView из которых и состоит каждый элемент рекорда в списке,
         получав имя пользователя и колличество набранных очков в игре
          */
-        BaseRecords tempRecord = getRecord(position);
+        BaseRecord tempRecord = getRecord(position);
         ((TextView) view.findViewById(R.id.tvNameUser)).
                 setText("Name : " + tempRecord.getName());
         ((TextView) view.findViewById(R.id.tvScoreUser)).
@@ -69,7 +69,7 @@ public class RecordAdapter extends BaseAdapter{
     /**
      * Вернуть объект рекорда по позиции
      */
-    public BaseRecords getRecord(int position) {
-        return ((BaseRecords) getItem(position));
+    public BaseRecord getRecord(int position) {
+        return ((BaseRecord) getItem(position));
     }
 }

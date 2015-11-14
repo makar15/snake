@@ -2,7 +2,7 @@ package com.example.makarov.snakegame.initialized.levels.test;
 
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
-import com.example.makarov.snakegame.initialized.levels.Level;
+import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;
@@ -25,7 +25,7 @@ import java.util.LinkedList;
  * Класс уровня тестирования игры
  * инициализация всех объектов игры, и всех объектов отрисовки в игре
  */
-public class LevelGameSnake implements Level {
+public class LevelCreatorGameSnake implements LevelCreator {
 
     private android.view.View mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
@@ -37,7 +37,7 @@ public class LevelGameSnake implements Level {
     /**
      * В конструктор View на котором отрисовываем игру, объукт со всеми Bitmap-ами для игры
      */
-    public LevelGameSnake(android.view.View gameSnake, IconLoader iconLoader){
+    public LevelCreatorGameSnake(android.view.View gameSnake, IconLoader iconLoader){
 
         /*
          * Инициализируем:

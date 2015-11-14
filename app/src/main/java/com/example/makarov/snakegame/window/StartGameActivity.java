@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.window;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
 import com.example.makarov.snakegame.R;
+import com.example.makarov.snakegame.singleton.DataBase;
+import com.example.makarov.snakegame.window.dialog.DialogIssueRepeatGame;
 
 /**
  * Активити старта игры
@@ -38,10 +41,16 @@ public class StartGameActivity extends FragmentActivity {
             return;
         }
 
+        int levelId = getIntent().getIntExtra(DialogIssueRepeatGame.NAME_ID, 0);
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(DialogIssueRepeatGame.NAME_ID, levelId);
+
         /*
         Инициализируем фрагмент старта игры
          */
         Fragment startGameFragment = new StartGameFragment();
+        startGameFragment.setArguments(bundle);
 
         /*
         Запускаем фрагмент старта игры и записываем в стек опереций с фрагментами

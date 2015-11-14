@@ -1,6 +1,6 @@
 package com.example.makarov.snakegame.initialized.threads;
 
-import com.example.makarov.snakegame.initialized.levels.Level;
+import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 
 /**
  * Абстрактный класс потоков игры
@@ -8,12 +8,12 @@ import com.example.makarov.snakegame.initialized.levels.Level;
 public abstract class GameThreads extends Thread {
 
     protected boolean myThreadRun = false;
-    protected Level mGameSnake;
+    protected LevelCreator mGameSnake;
 
     /**
      * В конструктор уровень игры
      */
-    public GameThreads(Level gameSnake){
+    public GameThreads(LevelCreator gameSnake){
         mGameSnake = gameSnake;
     }
 

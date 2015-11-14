@@ -7,23 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.CreateDialog;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
+import com.example.makarov.snakegame.window.dialog.DialogIssueRepeatGame;
 
 /**
  *
  */
 public class StartGameFragment extends Fragment {
 
-    private String lineModelLevel;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        /*
-
-         */
-        Bundle bundle = getActivity().getIntent().getExtras();
-        if(bundle != null){
-            lineModelLevel = bundle.getString("press position level");
+        int levelId = 0;
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            levelId = bundle.getInt(DialogIssueRepeatGame.NAME_ID);
         }
 
          /*
@@ -31,7 +28,7 @@ public class StartGameFragment extends Fragment {
         Запускаем класс игры
          */
         CreateDialog dialog = new CreateDialog(getActivity().getFragmentManager());
-        View v = new GameSnakeSurfaceView(getActivity(), dialog, lineModelLevel);
+        View v = new GameSnakeSurfaceView(getActivity(), dialog, levelId);
 
         return v;
     }

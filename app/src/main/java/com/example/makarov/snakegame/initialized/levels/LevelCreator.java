@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * Интерфейс Уровня игры
  */
-public interface Level {
+public interface LevelCreator {
 
     /**
      * Вернуть объект прорисовывания самого поля игры

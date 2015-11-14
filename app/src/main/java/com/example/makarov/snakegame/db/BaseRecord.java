@@ -6,7 +6,7 @@ import io.realm.annotations.Ignore;
 /**
  * Класс связанный с Realm хранением данных(Храним рекорды игр)
  */
-public class BaseRecords extends RealmObject {
+public class BaseRecord extends RealmObject {
 
     /**
      * Храним Имя пользователя и набранные им очки
@@ -16,6 +16,9 @@ public class BaseRecords extends RealmObject {
 
     @Ignore
     private int sessionId;
+
+    public BaseRecord(){
+    }
 
     /**
      * Сет и Гет методы

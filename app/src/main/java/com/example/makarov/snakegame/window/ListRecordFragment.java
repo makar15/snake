@@ -28,7 +28,7 @@ public class ListRecordFragment extends Fragment {
         lvRecord = (ListView) v.findViewById(R.id.lvRecord);
 
         RecordAdapter recordAdapter = new RecordAdapter(getActivity(),
-                DataBase.getInstance().getAllRecords());
+                DataBase.getInstance().getRecords());
         lvRecord.setAdapter(recordAdapter);
 
         return v;

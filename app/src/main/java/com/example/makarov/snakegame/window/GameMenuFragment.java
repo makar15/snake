@@ -110,8 +110,8 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
                 prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
                 tempModelLevel = prefs.getInt("firstRuApp", 0);
 
-                lineModelLevel = DataBase.getInstance().getAllLevels().
-                        get(tempModelLevel).getModelLevel();
+                lineModelLevel = DataBase.getInstance().getLevels().
+                        get(tempModelLevel).getBody();
 
                 Bundle bundle = new Bundle();
                 bundle.putString("press position level", lineModelLevel);

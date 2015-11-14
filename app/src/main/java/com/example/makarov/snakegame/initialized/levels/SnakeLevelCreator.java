@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * Класс создания модель уровня и сохранения моделей в БД Realm
  */
-public class ManagerCreateModelLevel {
+public class SnakeLevelCreator {
 
     /**
      * Массив всех существующих уровней в формате txt в папке assets
@@ -29,12 +29,12 @@ public class ManagerCreateModelLevel {
      * В конструкторе создаем и сразу же сохраняем модели уровней в Realm
      * здесь же и конвертируем txt файл в string
      */
-    public ManagerCreateModelLevel() throws IOException {
+    public SnakeLevelCreator() throws IOException {
 
         for(int i = 1; i <= folderLevels.length; i++){
             DataBase.getInstance().
-                    saveLevels(new ModelLevels(nameLevels[i - 1],
-                            TxtToString.getInstance().convertTxtString(folderLevels[i - 1])));
+                    saveLevel(nameLevels[i - 1],
+                            TxtToString.getInstance().convertTxtString(folderLevels[i - 1]));
         }
     }
 

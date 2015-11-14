@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.window.adapters.LevelsAdapter;
+import com.example.makarov.snakegame.window.dialog.DialogIssueRepeatGame;
 
 /**
  *
@@ -34,7 +35,7 @@ public class ListLevelsFragment extends Fragment {
         lvLevels = (ListView) v.findViewById(R.id.lvLevels);
 
         final LevelsAdapter levelsAdapter = new LevelsAdapter(getActivity(),
-                DataBase.getInstance().getAllLevels());
+                DataBase.getInstance().getLevels());
         lvLevels.setAdapter(levelsAdapter);
 
         prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
@@ -45,17 +46,10 @@ public class ListLevelsFragment extends Fragment {
         lvLevels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                itemPressIdLevel = (int) levelsAdapter.getItemId(position);
-                lineModelLevel = DataBase.getInstance().getAllLevels().
-                        get(itemPressIdLevel).getModelLevel();
-
-                prefs.edit().putInt("firstRuApp", itemPressIdLevel).apply();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("press position level", lineModelLevel);
+                prefs.edit().putInt("firstRuApp", (int) id).apply();
 
                 Intent intent = new Intent();
-                intent.putExtras(bundle);
+                intent.putExtra(DialogIssueRepeatGame.NAME_ID, id);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }

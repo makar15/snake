@@ -24,7 +24,7 @@ import java.util.LinkedList;
  * Класс создания своей карты для игры
  * В папке assets/levels создать txt файл !
  */
-public class CreateLevel implements Level{
+public class CreateLevelCreator implements LevelCreator {
 
     private android.view.View mGameSnake;
     private Collection<ObjectController> mListController = new LinkedList<>();
@@ -38,7 +38,7 @@ public class CreateLevel implements Level{
     /**
      * В конструктор View на котором отрисовываем игру, объукт со всеми Bitmap-ами для игры
      */
-    public CreateLevel(android.view.View gameSnake, IconLoader iconLoader) throws IOException {
+    public CreateLevelCreator(android.view.View gameSnake, IconLoader iconLoader) throws IOException {
 
         /*
          * Инициализируем:

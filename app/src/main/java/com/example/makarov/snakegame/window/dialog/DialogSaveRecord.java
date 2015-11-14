@@ -99,8 +99,8 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
                 prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
                 tempModelLevel = prefs.getInt("firstRuApp", 0);
 
-                lineModelLevel = DataBase.getInstance().getAllLevels().
-                        get(tempModelLevel).getModelLevel();
+                lineModelLevel = DataBase.getInstance().getLevels().
+                        get(tempModelLevel).getBody();
 
                 Bundle bundle = new Bundle();
                 bundle.putString("press position level", lineModelLevel);
