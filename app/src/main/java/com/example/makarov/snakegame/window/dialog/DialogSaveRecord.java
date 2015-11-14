@@ -3,6 +3,7 @@ package com.example.makarov.snakegame.window.dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -26,6 +27,9 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
     private CreateDialog mCreateDialog;
     private Record myCreateRecord;
     private DialogFragment dialogIssueRepeatGame;
+    private String lineModelLevel;
+    private SharedPreferences prefs;
+    private int tempModelLevel;
 
     /**
      * В конструктор: объект рекорда в игре, объект для создания диалоговых окон.
@@ -91,7 +95,18 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
                 потоки запусти
                  */
                 getActivity().finish();
+
+                prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
+                tempModelLevel = prefs.getInt("firstRuApp", 0);
+
+                lineModelLevel = DataBase.getInstance().getAllLevels().
+                        get(tempModelLevel).getModelLevel();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("press position level", lineModelLevel);
+
                 Intent intent = new Intent();
+                intent.putExtras(bundle);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;

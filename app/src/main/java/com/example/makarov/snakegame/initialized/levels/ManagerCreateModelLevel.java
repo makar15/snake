@@ -1,6 +1,6 @@
 package com.example.makarov.snakegame.initialized.levels;
 
-import com.example.makarov.snakegame.convert.TxtToString;
+import com.example.makarov.snakegame.singleton.TxtToString;
 import com.example.makarov.snakegame.singleton.DataBase;
 import java.io.IOException;
 

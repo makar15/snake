@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import com.example.makarov.snakegame.convert.StringToCreateLevel;
-import com.example.makarov.snakegame.initialized.levels.CreateLevel;
 import com.example.makarov.snakegame.initialized.levels.Level;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
@@ -20,7 +19,6 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
-    private CreateLevel mLevelSnake;
     private CreateDialog mDialog;
     private DialogFragment dlSaveRecord;
     private Record record;

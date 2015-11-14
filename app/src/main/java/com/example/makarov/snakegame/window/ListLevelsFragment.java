@@ -1,6 +1,7 @@
 package com.example.makarov.snakegame.window;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ public class ListLevelsFragment extends Fragment {
     private ListView lvLevels;
     private int itemPressIdLevel;
     private String lineModelLevel;
+    private SharedPreferences prefs;
 
     /**
      * При создании фрагмента, создается список из рекордов с помощью адаптера
@@ -35,6 +37,8 @@ public class ListLevelsFragment extends Fragment {
                 DataBase.getInstance().getAllLevels());
         lvLevels.setAdapter(levelsAdapter);
 
+        prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
+
         /**
          *
          */
@@ -44,6 +48,8 @@ public class ListLevelsFragment extends Fragment {
                 itemPressIdLevel = (int) levelsAdapter.getItemId(position);
                 lineModelLevel = DataBase.getInstance().getAllLevels().
                         get(itemPressIdLevel).getModelLevel();
+
+                prefs.edit().putInt("firstRuApp", itemPressIdLevel).apply();
 
                 Bundle bundle = new Bundle();
                 bundle.putString("press position level", lineModelLevel);

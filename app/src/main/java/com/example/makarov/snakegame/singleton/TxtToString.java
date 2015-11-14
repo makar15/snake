@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.convert;
+package com.example.makarov.snakegame.singleton;
 
 import android.content.Context;
 import android.content.res.AssetManager;

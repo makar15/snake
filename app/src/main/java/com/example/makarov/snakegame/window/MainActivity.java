@@ -35,6 +35,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         prefs = getSharedPreferences("com.example.makarov.myAppName", MODE_PRIVATE);
+
         /*
         приложение постоянно имеет портретную ориентацию
         приложение будет полноэкранным и без заголовка
@@ -77,6 +78,7 @@ public class MainActivity extends FragmentActivity {
             //и после действия записывам false в переменную firstRunMyApp
             //Итого при следующих запусках этот код не вызывается.
             prefs.edit().putBoolean("firstRunMyApp", false).apply();
+            prefs.edit().putInt("firstRuApp", 0).apply();
         }
     }
 }

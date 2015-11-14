@@ -1,7 +1,7 @@
 package com.example.makarov.snakegame;
 
 import android.app.Application;
-import com.example.makarov.snakegame.convert.TxtToString;
+import com.example.makarov.snakegame.singleton.TxtToString;
 import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.singleton.IconLoader;
 
