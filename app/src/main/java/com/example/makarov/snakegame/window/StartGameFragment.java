@@ -13,15 +13,25 @@ import com.example.makarov.snakegame.GameSnakeSurfaceView;
  */
 public class StartGameFragment extends Fragment {
 
+    private String lineModelLevel;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        /*
+
+         */
+        Bundle bundle = getActivity().getIntent().getExtras();
+        if(bundle != null){
+            lineModelLevel = bundle.getString("press position level");
+        }
 
          /*
          Создаем объект, умеющий запускать диалоговые окна
         Запускаем класс игры
          */
         CreateDialog dialog = new CreateDialog(getActivity().getFragmentManager());
-        View v = new GameSnakeSurfaceView(getActivity(), dialog);
+        View v = new GameSnakeSurfaceView(getActivity(), dialog, lineModelLevel);
 
         return v;
     }

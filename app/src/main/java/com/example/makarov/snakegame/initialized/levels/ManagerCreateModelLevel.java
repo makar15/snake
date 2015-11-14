@@ -1,6 +1,5 @@
 package com.example.makarov.snakegame.initialized.levels;
 
-import android.content.Context;
 import com.example.makarov.snakegame.convert.TxtToString;
 import com.example.makarov.snakegame.singleton.DataBase;
 import java.io.IOException;
@@ -30,14 +29,12 @@ public class ManagerCreateModelLevel {
      * В конструкторе создаем и сразу же сохраняем модели уровней в Realm
      * здесь же и конвертируем txt файл в string
      */
-    public ManagerCreateModelLevel(Context context) throws IOException {
-
-        TxtToString convert = new TxtToString(context);
+    public ManagerCreateModelLevel() throws IOException {
 
         for(int i = 1; i <= folderLevels.length; i++){
             DataBase.getInstance().
                     saveLevels(new ModelLevels(nameLevels[i - 1],
-                            convert.convertTxtString(folderLevels[i - 1])));
+                            TxtToString.getInstance().convertTxtString(folderLevels[i - 1])));
         }
     }
 

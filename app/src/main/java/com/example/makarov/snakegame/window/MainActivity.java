@@ -70,7 +70,7 @@ public class MainActivity extends FragmentActivity {
         if (prefs.getBoolean("firstRunMyApp", true)) {
             // При первом запуске (или если юзер удалял все данные приложения)
             try {
-                levels = new ManagerCreateModelLevel(this);
+                levels = new ManagerCreateModelLevel();
             } catch (IOException e) {
                 e.printStackTrace();
             }

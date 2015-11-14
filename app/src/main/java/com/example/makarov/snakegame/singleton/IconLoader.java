@@ -1,8 +1,9 @@
-package com.example.makarov.snakegame;
+package com.example.makarov.snakegame.singleton;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import com.example.makarov.snakegame.R;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,21 +29,32 @@ public class IconLoader {
     public final static int TYPE_VEGETABLE = 3;
     public final static int TYPE_WALL = 4;
     public final static int TYPE_BOMB = 5;
-    public final static int TYPE_SNAKE_TRUNK_VERTICAL = 6;
-    public final static int TYPE_SNAKE_TRUNK_HORIZONTAL = 7;
-    public final static int TYPE_SNAKE_HEAD = 8;
-    public final static int TYPE_SNAKE_TAIL = 9;
-    public final static int TYPE_SNAKE_TURN_DOWN_RIGHT = 10;
-    public final static int TYPE_SNAKE_TURN_DOWN_LEFT = 11;
-    public final static int TYPE_SNAKE_TURN_UP_RIGHT = 12;
-    public final static int TYPE_SNAKE_TURN_UP_LEFT = 13;
+    public final static int TYPE_SNAKE = 6;
+
+    private static IconLoader mInstance;
 
     /**
      * В конструктор Context на котором отрисовываем картинки
      */
-    public IconLoader(Context context){
+    private IconLoader(Context context){
         mContext = context;
         initConfig();
+    }
+
+    /**
+     * Класс инициализации объекта (объект синглетон)
+     */
+    public static void initInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new IconLoader(context);
+        }
+    }
+
+    /**
+     * получить объект
+     */
+    public static IconLoader getInstance() {
+        return mInstance;
     }
 
     /**
@@ -56,14 +68,8 @@ public class IconLoader {
         iconConfig.put(TYPE_VEGETABLE, R.drawable.vegetable);
         iconConfig.put(TYPE_WALL, R.drawable.wall);
         iconConfig.put(TYPE_BOMB, R.drawable.bomb);
-        iconConfig.put(TYPE_SNAKE_HEAD, R.drawable.snake_head);
-        iconConfig.put(TYPE_SNAKE_TAIL, R.drawable.snake_tail);
-        iconConfig.put(TYPE_SNAKE_TRUNK_VERTICAL, R.drawable.snake_trunk_vertical);
-        iconConfig.put(TYPE_SNAKE_TRUNK_HORIZONTAL, R.drawable.snake_trunk_horizontal);
-        iconConfig.put(TYPE_SNAKE_TURN_DOWN_RIGHT, R.drawable.snake_turn_dr);
-        iconConfig.put(TYPE_SNAKE_TURN_DOWN_LEFT, R.drawable.snake_turn_dl);
-        iconConfig.put(TYPE_SNAKE_TURN_UP_RIGHT, R.drawable.snake_turn_ur);
-        iconConfig.put(TYPE_SNAKE_TURN_UP_LEFT, R.drawable.snake_turn_ul);
+        iconConfig.put(TYPE_SNAKE, R.drawable.snake);
+
     }
 
     /**

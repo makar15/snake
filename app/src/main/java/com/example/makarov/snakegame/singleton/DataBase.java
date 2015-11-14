@@ -73,4 +73,9 @@ public class DataBase {
     public RealmResults<BaseLevels> getAllLevels(){
         return Realm.getInstance(mContext).where(BaseLevels.class).findAll();
     }
+
+    //public String getModelLevels(long nameLevels){
+       // String l = Realm.getInstance(mContext).getTable(BaseLevels.class)
+      //  return l;
+    //}
 }

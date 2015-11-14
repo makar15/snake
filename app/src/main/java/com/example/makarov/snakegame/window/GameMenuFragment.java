@@ -32,7 +32,6 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.menu_game_fragment, null);
 
-
         final Button startButton = (Button)v.findViewById(R.id.buttonStart);
         startButton.setOnClickListener(this);
 

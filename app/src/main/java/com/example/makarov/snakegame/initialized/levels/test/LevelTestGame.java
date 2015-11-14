@@ -6,7 +6,7 @@ import com.example.makarov.snakegame.initialized.levels.Level;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.TestObject;
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.view.FieldView;
 import com.example.makarov.snakegame.view.FruiteView;

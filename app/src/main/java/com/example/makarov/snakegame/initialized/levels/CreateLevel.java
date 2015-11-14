@@ -5,7 +5,7 @@ import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;

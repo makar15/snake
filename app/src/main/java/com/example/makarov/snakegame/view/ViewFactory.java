@@ -1,7 +1,7 @@
 package com.example.makarov.snakegame.view;
 
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.FieldObject;
 import com.example.makarov.snakegame.objects.Fruite;

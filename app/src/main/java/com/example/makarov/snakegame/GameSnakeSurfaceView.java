@@ -4,12 +4,14 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import com.example.makarov.snakegame.convert.StringToCreateLevel;
 import com.example.makarov.snakegame.initialized.levels.CreateLevel;
+import com.example.makarov.snakegame.initialized.levels.Level;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
 import com.example.makarov.snakegame.observer.Observer;
-import com.example.makarov.snakegame.window.DialogSaveRecord;
-import java.io.IOException;
+import com.example.makarov.snakegame.singleton.IconLoader;
+import com.example.makarov.snakegame.window.dialog.DialogSaveRecord;
 
 /**
  * Класс Игры змейки
@@ -19,15 +21,16 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
     private CreateLevel mLevelSnake;
-    private IconLoader myIconLoader;
     private CreateDialog mDialog;
     private DialogFragment dlSaveRecord;
     private Record record;
+    private String lineModelLevel;
+    private Level gameLevel;
 
     /**
      * В конструктор контекст, объект для создания диалоговых окон, DataBaseScore
      */
-    public GameSnakeSurfaceView(Context context, CreateDialog dialog) {
+    public GameSnakeSurfaceView(Context context, CreateDialog dialog, String lineLevel) {
         super(context);
         getHolder().addCallback(this);
 
@@ -39,6 +42,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
          */
         record = new Record();
         mDialog = dialog;
+        lineModelLevel = lineLevel;
         dlSaveRecord = new DialogSaveRecord(record, mDialog);
 
     }
@@ -59,15 +63,11 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
      */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        myIconLoader = new IconLoader(this.getContext());
-        try {
-            mLevelSnake = new CreateLevel(this, myIconLoader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        threadMotionObject = new ThreadMotionObjectField(mLevelSnake, this);
-        drawThread = new SurfaceThread(getHolder(), mLevelSnake);
+        gameLevel = new StringToCreateLevel(this, IconLoader.getInstance(), lineModelLevel);
+
+        threadMotionObject = new ThreadMotionObjectField(gameLevel, this);
+        drawThread = new SurfaceThread(getHolder(), gameLevel);
         threadMotionObject.setRunning(true);
         drawThread.setRunning(true);
         threadMotionObject.start();

@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.window;
+package com.example.makarov.snakegame.window.dialog;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -14,6 +14,7 @@ import com.example.makarov.snakegame.CreateDialog;
 import com.example.makarov.snakegame.Record;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.singleton.DataBase;
+import com.example.makarov.snakegame.window.StartGameActivity;
 
 /**
  * Класс Диалога

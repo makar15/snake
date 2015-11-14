@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.objects.FieldObject;
 
 /**

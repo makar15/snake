@@ -7,7 +7,7 @@ import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.IconLoader;
+import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.objects.Vegetable;
 import com.example.makarov.snakegame.objects.Wall;

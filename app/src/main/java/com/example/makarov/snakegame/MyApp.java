@@ -1,7 +1,9 @@
 package com.example.makarov.snakegame;
 
 import android.app.Application;
+import com.example.makarov.snakegame.convert.TxtToString;
 import com.example.makarov.snakegame.singleton.DataBase;
+import com.example.makarov.snakegame.singleton.IconLoader;
 
 /**
  * Класс приложения
@@ -16,6 +18,7 @@ public class MyApp extends Application{
         super.onCreate();
 
         DataBase.initInstance(this);
-
+        IconLoader.initInstance(this);
+        TxtToString.initInstance(this);
     }
 }

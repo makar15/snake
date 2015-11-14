@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.window;
+package com.example.makarov.snakegame.window.dialog;
 
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.R;
+import com.example.makarov.snakegame.window.StartGameActivity;
 
 /**
  * Класс диалогового окна, сробатывающий после сохранения игры
