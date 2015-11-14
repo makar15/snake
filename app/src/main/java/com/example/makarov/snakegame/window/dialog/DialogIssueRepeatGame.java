@@ -50,7 +50,7 @@ public class DialogIssueRepeatGame extends DialogFragment implements View.OnClic
                 getActivity().finish();
 
                 prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
-                tempModelLevel = prefs.getInt("firstRunMyApp", 0);
+                tempModelLevel = prefs.getInt("firstRuApp", 0);
 
                 lineModelLevel = DataBase.getInstance().getAllLevels().
                         get(tempModelLevel).getModelLevel();
