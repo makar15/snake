@@ -4,7 +4,6 @@ import android.content.Context;
 import com.example.makarov.snakegame.Record;
 import com.example.makarov.snakegame.db.Level;
 import com.example.makarov.snakegame.db.BaseRecord;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -82,6 +81,13 @@ public class DataBase {
      */
     public Level getLevel(int levelId) {
         return Realm.getInstance(mContext).where(Level.class).equalTo("id", levelId).findFirst();
+    }
+
+    /**
+     *
+     */
+    public Level getLevel(String nameLevel) {
+        return Realm.getInstance(mContext).where(Level.class).equalTo("name", nameLevel).findFirst();
     }
 
 }

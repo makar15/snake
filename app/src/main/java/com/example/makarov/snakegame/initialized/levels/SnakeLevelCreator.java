@@ -14,7 +14,7 @@ public class SnakeLevelCreator {
      */
     private String[] folderLevels ={
             "levels/level1.txt", "levels/level2.txt", "levels/level3.txt", "levels/level4.txt",
-            "levels/level5.txt"
+            "levels/level5.txt", "levels/levelTest.txt"
     };
 
     /**
@@ -22,7 +22,7 @@ public class SnakeLevelCreator {
      */
     private String[] nameLevels = {
             "surprise", "many walls", "box", "in a locked",
-            "ridge"
+            "ridge", "first"
     };
 
     /**

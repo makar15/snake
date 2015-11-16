@@ -1,6 +1,5 @@
 package com.example.makarov.snakegame.window;
 
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
 import com.example.makarov.snakegame.R;
+import com.example.makarov.snakegame.SnakePreferences;
+import com.example.makarov.snakegame.db.Level;
 import com.example.makarov.snakegame.initialized.levels.SnakeLevelCreator;
+import com.example.makarov.snakegame.singleton.DataBase;
 import java.io.IOException;
 
 /**
@@ -20,25 +22,17 @@ public class MainActivity extends FragmentActivity {
 
     /*
     Для открытия и сохранения последовательности открытых фрагментов
-    Preferences - для сохранения статуса приложения типом булл
      */
     private FragmentTransaction ftActivity;
     private FragmentManager fmActivity;
-    private SharedPreferences prefs = null;
     private SnakeLevelCreator levels;
 
-    /*
-    getLastShared
-    SnakePreferences
-     */
     /**
      * Запускаем класс сцены игры
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        prefs = getSharedPreferences("com.example.makarov.myAppName", MODE_PRIVATE);
 
         /*
         приложение постоянно имеет портретную ориентацию
@@ -65,14 +59,13 @@ public class MainActivity extends FragmentActivity {
         ftActivity = fmActivity.beginTransaction();
         ftActivity = ftActivity.add(R.id.LayoutMenu, fragMenuGame);
         ftActivity.commit();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (prefs.getBoolean("firstRunMyApp", true)) {
+        if (SnakePreferences.getInstance().getFirstStartApp()) {
             // При первом запуске (или если юзер удалял все данные приложения)
             try {
                 levels = new SnakeLevelCreator();
@@ -81,8 +74,10 @@ public class MainActivity extends FragmentActivity {
             }
             //и после действия записывам false в переменную firstRunMyApp
             //Итого при следующих запусках этот код не вызывается.
-            prefs.edit().putBoolean("firstRunMyApp", false).apply();
-            prefs.edit().putInt("firstRuApp", 0).apply();
+            SnakePreferences.getInstance().changedStartApp(false);
+
+            int idLevel = DataBase.getInstance().getLevel(Level.NAME_FIRST_LEVEL).getId();
+            SnakePreferences.getInstance().changedLastLevel(idLevel);
         }
     }
 }

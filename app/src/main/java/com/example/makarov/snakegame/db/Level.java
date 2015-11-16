@@ -1,5 +1,6 @@
 package com.example.makarov.snakegame.db;
 
+import com.example.makarov.snakegame.singleton.DataBase;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,18 +13,24 @@ public class Level extends RealmObject {
      * Храним Имя уровня и строку уровня(в дальнейшем переработанную в объекты уровня и поле)
      */
 
+    public static final String NAME_ID = "name";
+    public static final String NAME_FIRST_LEVEL = "first";
+
     private String name;
     private String body;
 
-    @PrimaryKey private int id;
+    @PrimaryKey
+    private int id;
+
+    public Level(){
+
+    }
 
     public Level(String name, String modelLevel) {
         setName(name);
         setId(name.hashCode());
         setBody(modelLevel);
     }
-
-    public Level(){}
 
     /**
      * Сет и Гет методы

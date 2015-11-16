@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.CreateDialog;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
-import com.example.makarov.snakegame.window.dialog.DialogIssueRepeatGame;
+import com.example.makarov.snakegame.db.Level;
+import com.example.makarov.snakegame.singleton.DataBase;
 
 /**
  *
@@ -16,11 +17,14 @@ public class StartGameFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        /*
 
-        int levelId = 0;
+         */
+        int idLevel = DataBase.getInstance().getLevel(Level.NAME_FIRST_LEVEL).getId();
+
         Bundle bundle = getArguments();
         if(bundle != null) {
-            levelId = bundle.getInt(DialogIssueRepeatGame.NAME_ID);
+            idLevel = bundle.getInt(Level.NAME_ID);
         }
 
          /*
@@ -28,7 +32,7 @@ public class StartGameFragment extends Fragment {
         Запускаем класс игры
          */
         CreateDialog dialog = new CreateDialog(getActivity().getFragmentManager());
-        View v = new GameSnakeSurfaceView(getActivity(), dialog, levelId);
+        View v = new GameSnakeSurfaceView(getActivity(), dialog, idLevel);
 
         return v;
     }

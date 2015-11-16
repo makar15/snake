@@ -8,10 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.db.Level;
-
 import java.util.List;
-
-import io.realm.RealmResults;
 
 /**
  * Класс адаптера списка рекордов

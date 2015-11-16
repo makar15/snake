@@ -1,7 +1,6 @@
 package com.example.makarov.snakegame.db;
 
 import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
 
 /**
  * Класс связанный с Realm хранением данных(Храним рекорды игр)
@@ -14,12 +13,9 @@ public class BaseRecord extends RealmObject {
     private String name;
     private int score;
 
-    @Ignore
-    private int sessionId;
-
     public BaseRecord(){
-    }
 
+    }
     /**
      * Сет и Гет методы
      */
@@ -31,16 +27,8 @@ public class BaseRecord extends RealmObject {
         this.score = score;
     }
 
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public int getSessionId() {
-        return sessionId;
     }
 
     public int getScore() {

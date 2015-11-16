@@ -2,23 +2,19 @@ package com.example.makarov.snakegame.window.dialog;
 
 import android.app.DialogFragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.singleton.DataBase;
+import com.example.makarov.snakegame.SnakePreferences;
+import com.example.makarov.snakegame.db.Level;
 import com.example.makarov.snakegame.window.StartGameActivity;
 
 /**
  * Класс диалогового окна, сробатывающий после сохранения игры
  */
 public class DialogIssueRepeatGame extends DialogFragment implements View.OnClickListener {
-
-    private SharedPreferences prefs;
-
-    public static final String NAME_ID = "name";
 
     /**
      * при запуске окна
@@ -49,11 +45,10 @@ public class DialogIssueRepeatGame extends DialogFragment implements View.OnClic
                  */
                 getActivity().finish();
 
-                prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
-                int levelId = prefs.getInt("firstRuApp", 0);
+                int levelId = SnakePreferences.getInstance().getLastLevel();
 
                 Intent intent = new Intent();
-                intent.putExtra(NAME_ID, levelId);
+                intent.putExtra(Level.NAME_ID, levelId);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;

@@ -29,7 +29,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     /**
      * В конструктор контекст, объект для создания диалоговых окон, DataBaseScore
      */
-    public GameSnakeSurfaceView(Context context, CreateDialog dialog, int levelId) {
+    public GameSnakeSurfaceView(Context context, CreateDialog dialog, int idLevel) {
         super(context);
         getHolder().addCallback(this);
 
@@ -42,7 +42,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         record = new Record();
         mDialog = dialog;
 
-        lineModelLevel = DataBase.getInstance().getLevel(levelId).getBody();
+        lineModelLevel = DataBase.getInstance().getLevel(idLevel).getBody();
         dlSaveRecord = new DialogSaveRecord(record, mDialog);
     }
 
@@ -63,7 +63,8 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
-        gameLevelCreator = new StringToCreateLevelCreator(this, IconLoader.getInstance(), lineModelLevel);
+        gameLevelCreator = new StringToCreateLevelCreator
+                (this, IconLoader.getInstance(), lineModelLevel);
 
         threadMotionObject = new ThreadMotionObjectField(gameLevelCreator, this);
         drawThread = new SurfaceThread(getHolder(), gameLevelCreator);

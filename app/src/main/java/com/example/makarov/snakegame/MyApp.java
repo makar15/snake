@@ -20,5 +20,6 @@ public class MyApp extends Application{
         DataBase.initInstance(this);
         IconLoader.initInstance(this);
         TxtToString.initInstance(this);
+        SnakePreferences.initInstance(this);
     }
 }

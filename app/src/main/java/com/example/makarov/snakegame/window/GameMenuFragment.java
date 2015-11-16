@@ -1,7 +1,6 @@
 package com.example.makarov.snakegame.window;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.makarov.snakegame.R;
+import com.example.makarov.snakegame.SnakePreferences;
+import com.example.makarov.snakegame.db.Level;
 import com.example.makarov.snakegame.singleton.DataBase;
 
 /**
@@ -23,9 +24,6 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
     private TextView tv;
     private Animation anim = null;
-    private String lineModelLevel;
-    private SharedPreferences prefs;
-    private int tempModelLevel;
 
     /**
      * При запуске фрагмента:
@@ -107,17 +105,10 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.buttonStart: {
 
-                prefs = getActivity().getSharedPreferences("com.example.makarov.myAppName", 0);
-                tempModelLevel = prefs.getInt("firstRuApp", 0);
-
-                lineModelLevel = DataBase.getInstance().getLevels().
-                        get(tempModelLevel).getBody();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("press position level", lineModelLevel);
+                int levelId = SnakePreferences.getInstance().getLastLevel();
 
                 Intent intent = new Intent();
-                intent.putExtras(bundle);
+                intent.putExtra(Level.NAME_ID, levelId);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;
