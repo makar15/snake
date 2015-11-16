@@ -8,11 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.view.WindowManager;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.SnakePreferences;
 import com.example.makarov.snakegame.db.Level;
 import com.example.makarov.snakegame.initialized.levels.SnakeLevelCreator;
-import com.example.makarov.snakegame.singleton.DataBase;
 import java.io.IOException;
 
 /**
@@ -25,7 +24,6 @@ public class MainActivity extends FragmentActivity {
      */
     private FragmentTransaction ftActivity;
     private FragmentManager fmActivity;
-    private SnakeLevelCreator levels;
 
     /**
      * Запускаем класс сцены игры
@@ -65,19 +63,19 @@ public class MainActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
 
-        if (SnakePreferences.getInstance().getFirstStartApp()) {
+        if (MyApp.getApp().getSnakePreferences().getFirstStartApp()) {
             // При первом запуске (или если юзер удалял все данные приложения)
             try {
-                levels = new SnakeLevelCreator();
+                SnakeLevelCreator levels = new SnakeLevelCreator();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //и после действия записывам false в переменную firstRunMyApp
             //Итого при следующих запусках этот код не вызывается.
-            SnakePreferences.getInstance().changedStartApp(false);
+            MyApp.getApp().getSnakePreferences().changedStartApp(false);
 
-            int idLevel = DataBase.getInstance().getLevel(Level.NAME_FIRST_LEVEL).getId();
-            SnakePreferences.getInstance().changedLastLevel(idLevel);
+            int idLevel = MyApp.getApp().getDataBase().getLevel(Level.NAME_FIRST_LEVEL).getId();
+            MyApp.getApp().getSnakePreferences().changedLastLevel(idLevel);
         }
     }
 }

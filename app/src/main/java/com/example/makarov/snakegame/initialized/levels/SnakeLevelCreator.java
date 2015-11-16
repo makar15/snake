@@ -1,7 +1,6 @@
 package com.example.makarov.snakegame.initialized.levels;
 
-import com.example.makarov.snakegame.singleton.TxtToString;
-import com.example.makarov.snakegame.singleton.DataBase;
+import com.example.makarov.snakegame.MyApp;
 import java.io.IOException;
 
 /**
@@ -13,16 +12,16 @@ public class SnakeLevelCreator {
      * Массив всех существующих уровней в формате txt в папке assets
      */
     private String[] folderLevels ={
-            "levels/level1.txt", "levels/level2.txt", "levels/level3.txt", "levels/level4.txt",
-            "levels/level5.txt", "levels/levelTest.txt"
+            "levels/levelTest.txt", "levels/level1.txt", "levels/level2.txt", "levels/level3.txt",
+            "levels/level4.txt", "levels/level5.txt"
     };
 
     /**
      * Массив названий существующих уровней игры
      */
     private String[] nameLevels = {
-            "surprise", "many walls", "box", "in a locked",
-            "ridge", "first"
+            "first", "surprise", "many walls", "box",
+            "in a locked", "ridge"
     };
 
     /**
@@ -32,9 +31,9 @@ public class SnakeLevelCreator {
     public SnakeLevelCreator() throws IOException {
 
         for(int i = 1; i <= folderLevels.length; i++){
-            DataBase.getInstance().
+            MyApp.getApp().getDataBase().
                     saveLevel(nameLevels[i - 1],
-                            TxtToString.getInstance().convertTxtString(folderLevels[i - 1]));
+                            MyApp.getApp().getTxtToString().convertTxtString(folderLevels[i - 1]));
         }
     }
 

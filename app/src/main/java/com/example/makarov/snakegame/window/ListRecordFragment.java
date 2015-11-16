@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.window.adapters.RecordAdapter;
 
 /**
@@ -28,7 +28,7 @@ public class ListRecordFragment extends Fragment {
         lvRecord = (ListView) v.findViewById(R.id.lvRecord);
 
         RecordAdapter recordAdapter = new RecordAdapter(getActivity(),
-                DataBase.getInstance().getRecords());
+                MyApp.getApp().getDataBase().getRecords());
         lvRecord.setAdapter(recordAdapter);
 
         return v;

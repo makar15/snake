@@ -11,10 +11,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.SnakePreferences;
 import com.example.makarov.snakegame.db.Level;
-import com.example.makarov.snakegame.singleton.DataBase;
 
 /**
  * Фрагмент меню игры,
@@ -105,10 +104,10 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.buttonStart: {
 
-                int levelId = SnakePreferences.getInstance().getLastLevel();
+                int levelId = MyApp.getApp().getSnakePreferences().getLastLevel();
 
                 Intent intent = new Intent();
-                intent.putExtra(Level.NAME_ID, levelId);
+                intent.putExtra(Level.ID_LEVEL, levelId);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;

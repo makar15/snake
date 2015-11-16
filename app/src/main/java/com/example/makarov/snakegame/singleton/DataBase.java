@@ -13,26 +13,9 @@ import io.realm.RealmResults;
 public class DataBase {
 
     private Context mContext;
-    private static DataBase mInstance;
 
-    private DataBase(Context context){
+    public DataBase(Context context){
         mContext = context;
-    }
-
-    /**
-     * Класс инициализации объекта (объект синглетон)
-     */
-    public static void initInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new DataBase(context);
-        }
-    }
-
-    /**
-     * получить объект
-     */
-    public static DataBase getInstance() {
-        return mInstance;
     }
 
     /**

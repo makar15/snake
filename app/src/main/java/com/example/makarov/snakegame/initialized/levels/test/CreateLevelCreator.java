@@ -1,10 +1,11 @@
-package com.example.makarov.snakegame.initialized.levels;
+package com.example.makarov.snakegame.initialized.levels.test;
 
 import android.content.res.AssetManager;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.FieldProvider;
+import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
@@ -30,7 +31,6 @@ public class CreateLevelCreator implements LevelCreator {
     private Collection<ObjectController> mListController = new LinkedList<>();
     private Collection<com.example.makarov.snakegame.view.View> mListView = new LinkedList<>();
     private FieldView myFieldView;
-    private IconLoader mIconLoader;
     private FieldProvider mFieldProvider;
     private MyField myField;
     private ViewFactory myViewFactory;
@@ -46,7 +46,6 @@ public class CreateLevelCreator implements LevelCreator {
          * объект со всеми содержащими bitmap-ами
          */
         mGameSnake = gameSnake;
-        mIconLoader = iconLoader;
         /*
          * АссетсМенеджером получаем доступ к файлам папка Assets
          * в строку переносим все данные в файле уровня
@@ -85,8 +84,8 @@ public class CreateLevelCreator implements LevelCreator {
          */
         myField = new MyField(x, y);
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
-        myFieldView = new FieldView(myField, mFieldProvider, mIconLoader);
-        myViewFactory = new ViewFactory(mIconLoader, mFieldProvider);
+        myFieldView = new FieldView(myField, mFieldProvider, iconLoader);
+        myViewFactory = new ViewFactory(iconLoader, mFieldProvider);
 
         initMapGame(massCodes);
     }

@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.makarov.snakegame.CreateDialog;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.db.Level;
-import com.example.makarov.snakegame.singleton.DataBase;
 
 /**
  *
@@ -20,11 +20,11 @@ public class StartGameFragment extends Fragment {
         /*
 
          */
-        int idLevel = DataBase.getInstance().getLevel(Level.NAME_FIRST_LEVEL).getId();
+        int idLevel = MyApp.getApp().getDataBase().getLevel(Level.NAME_FIRST_LEVEL).getId();
 
         Bundle bundle = getArguments();
         if(bundle != null) {
-            idLevel = bundle.getInt(Level.NAME_ID);
+            idLevel = bundle.getInt(Level.ID_LEVEL);
         }
 
          /*

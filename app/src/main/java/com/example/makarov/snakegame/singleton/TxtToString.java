@@ -12,26 +12,9 @@ import java.io.InputStream;
 public class TxtToString {
 
     private Context mContext;
-    private static TxtToString mInstance;
 
-    private TxtToString(Context context){
+    public TxtToString(Context context){
         mContext = context;
-    }
-
-    /**
-     * Класс инициализации объекта (объект синглетон)
-     */
-    public static void initInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new TxtToString(context);
-        }
-    }
-
-    /**
-     * получить объект
-     */
-    public static TxtToString getInstance() {
-        return mInstance;
     }
 
     /**

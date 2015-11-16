@@ -9,8 +9,6 @@ import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
 import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
 import com.example.makarov.snakegame.observer.Observer;
-import com.example.makarov.snakegame.singleton.DataBase;
-import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.window.dialog.DialogSaveRecord;
 
 /**
@@ -42,7 +40,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
         record = new Record();
         mDialog = dialog;
 
-        lineModelLevel = DataBase.getInstance().getLevel(idLevel).getBody();
+        lineModelLevel = MyApp.getApp().getDataBase().getLevel(idLevel).getBody();
         dlSaveRecord = new DialogSaveRecord(record, mDialog);
     }
 
@@ -64,7 +62,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
     public void surfaceCreated(SurfaceHolder holder) {
 
         gameLevelCreator = new StringToCreateLevelCreator
-                (this, IconLoader.getInstance(), lineModelLevel);
+                (this, MyApp.getApp().getIconLoader(), lineModelLevel);
 
         threadMotionObject = new ThreadMotionObjectField(gameLevelCreator, this);
         drawThread = new SurfaceThread(getHolder(), gameLevelCreator);

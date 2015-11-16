@@ -31,30 +31,12 @@ public class IconLoader {
     public final static int TYPE_BOMB = 5;
     public final static int TYPE_SNAKE = 6;
 
-    private static IconLoader mInstance;
-
     /**
      * В конструктор Context на котором отрисовываем картинки
      */
-    private IconLoader(Context context){
+    public IconLoader(Context context){
         mContext = context;
         initConfig();
-    }
-
-    /**
-     * Класс инициализации объекта (объект синглетон)
-     */
-    public static void initInstance(Context context) {
-        if (mInstance == null) {
-            mInstance = new IconLoader(context);
-        }
-    }
-
-    /**
-     * получить объект
-     */
-    public static IconLoader getInstance() {
-        return mInstance;
     }
 
     /**

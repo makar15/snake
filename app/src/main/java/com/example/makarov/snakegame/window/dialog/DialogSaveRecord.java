@@ -11,11 +11,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import com.example.makarov.snakegame.CreateDialog;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.Record;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.SnakePreferences;
 import com.example.makarov.snakegame.db.Level;
-import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.window.StartGameActivity;
 
 /**
@@ -72,10 +71,10 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
             case R.id.btnSave: {
                 if (!TextUtils.isEmpty(nameUser.getText().toString())) {
                     /*
-                    После того как DataBase впуститься в дело:
+
                     */
                     myCreateRecord.setName(nameUser.getText().toString());
-                    DataBase.getInstance().saveRecord(myCreateRecord);
+                    MyApp.getApp().getDataBase().saveRecord(myCreateRecord);
 
                     mCreateDialog.createDialog(dialogIssueRepeatGame);
                     dismiss();
@@ -94,10 +93,10 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
                  */
                 getActivity().finish();
 
-                int levelId = SnakePreferences.getInstance().getLastLevel();
+                int levelId = MyApp.getApp().getSnakePreferences().getLastLevel();
 
                 Intent intent = new Intent();
-                intent.putExtra(Level.NAME_ID, levelId);
+                intent.putExtra(Level.ID_LEVEL, levelId);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }break;

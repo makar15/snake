@@ -13,7 +13,6 @@ import com.example.makarov.snakegame.field.MyField;
  */
 public class TouchResponseSnakeController extends Controller<Snake> {
 
-    private final View mGameSnake;
     private final FieldProvider mFieldProvider;
     private final MyField mField;
     private final ControllerField mControllerField;
@@ -27,13 +26,12 @@ public class TouchResponseSnakeController extends Controller<Snake> {
         super(mFieldObject);
         mField = field;
         mControllerField = new ControllerField(mField);
-        mGameSnake = gameSnake;
         mFieldProvider = fieldProvider;
 
         /**
          * При тапах по экрану
          */
-        mGameSnake.setOnTouchListener(new View.OnTouchListener() {
+        gameSnake.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 turnOnTheTouch(event);

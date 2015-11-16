@@ -26,7 +26,6 @@ public class StringToCreateLevelCreator implements LevelCreator {
     private Collection<ObjectController> mListController = new LinkedList<>();
     private Collection<com.example.makarov.snakegame.view.View> mListView = new LinkedList<>();
     private FieldView myFieldView;
-    private IconLoader mIconLoader;
     private FieldProvider mFieldProvider;
     private MyField myField;
     private ViewFactory myViewFactory;
@@ -39,10 +38,8 @@ public class StringToCreateLevelCreator implements LevelCreator {
          /*
          * Инициализируем:
          * view экран, на котором все отрисовываем
-         * объект со всеми содержащими bitmap-ами
          */
         mGameSnake = gameSnake;
-        mIconLoader = iconLoader;
 
         //String[] massLines = text.split("\\s+");  Заменит следующие операции,
         // но не позволяет узнать ширину поля заранее(
@@ -72,8 +69,8 @@ public class StringToCreateLevelCreator implements LevelCreator {
          */
         myField = new MyField(x, y);
         mFieldProvider = new FieldProvider(mGameSnake, myField.getWidth() ,myField.getHeight());
-        myFieldView = new FieldView(myField, mFieldProvider, mIconLoader);
-        myViewFactory = new ViewFactory(mIconLoader, mFieldProvider);
+        myFieldView = new FieldView(myField, mFieldProvider, iconLoader);
+        myViewFactory = new ViewFactory(iconLoader, mFieldProvider);
 
         initMapGame(massCodes);
     }

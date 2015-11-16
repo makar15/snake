@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.R;
-import com.example.makarov.snakegame.SnakePreferences;
 import com.example.makarov.snakegame.db.Level;
-import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.window.adapters.LevelsAdapter;
 
 /**
@@ -32,7 +31,7 @@ public class ListLevelsFragment extends Fragment {
         lvLevels = (ListView) v.findViewById(R.id.lvLevels);
 
         final LevelsAdapter levelsAdapter = new LevelsAdapter(getActivity(),
-                DataBase.getInstance().getLevels());
+                MyApp.getApp().getDataBase().getLevels());
         lvLevels.setAdapter(levelsAdapter);
 
         /**
@@ -41,10 +40,10 @@ public class ListLevelsFragment extends Fragment {
         lvLevels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                SnakePreferences.getInstance().changedLastLevel((int) id);
+                MyApp.getApp().getSnakePreferences().changedLastLevel((int) id);
 
                 Intent intent = new Intent();
-                intent.putExtra(Level.NAME_ID, (int) id);
+                intent.putExtra(Level.ID_LEVEL, (int) id);
                 intent.setClass(getActivity(), StartGameActivity.class);
                 startActivity(intent);
             }
