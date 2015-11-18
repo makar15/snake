@@ -18,7 +18,7 @@ public class IconLoader {
      */
     private Map<Integer, Bitmap> cache = new HashMap<>();
     private Map<Integer, Integer> iconConfig = new HashMap<>();
-    private Context mContext;
+    private final Context mContext;
 
     /*
      * type картинкок игры

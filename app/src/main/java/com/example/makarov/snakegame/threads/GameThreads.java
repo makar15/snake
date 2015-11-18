@@ -1,6 +1,6 @@
-package com.example.makarov.snakegame.initialized.threads;
+package com.example.makarov.snakegame.threads;
 
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
+import com.example.makarov.snakegame.level.LevelCreator;
 
 /**
  * Абстрактный класс потоков игры

@@ -18,7 +18,7 @@ public class StartGameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         /*
-
+        переменная с id модели уровня, который будет запускаться
          */
         int idLevel = MyApp.getApp().getDataBase().getLevel(Level.NAME_FIRST_LEVEL).getId();
 

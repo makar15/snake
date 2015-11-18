@@ -12,7 +12,7 @@ import io.realm.RealmResults;
  */
 public class DataBase {
 
-    private Context mContext;
+    private final Context mContext;
 
     public DataBase(Context context){
         mContext = context;
@@ -60,14 +60,14 @@ public class DataBase {
     }
 
     /**
-     *
+     * Получить уровень по id модели уровня
      */
     public Level getLevel(int levelId) {
         return Realm.getInstance(mContext).where(Level.class).equalTo("id", levelId).findFirst();
     }
 
     /**
-     *
+     * Получить уровень по названию модели уровня
      */
     public Level getLevel(String nameLevel) {
         return Realm.getInstance(mContext).where(Level.class).equalTo("name", nameLevel).findFirst();

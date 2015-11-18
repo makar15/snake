@@ -9,14 +9,14 @@ public class FieldProvider {
 
     private int mWidth;
     private int mHeight;
-    private int widthScreen;
-    private int heightScreen;
+    private final int widthScreen;
+    private final int heightScreen;
     private float widthOneScreen;
     private float heightOneScreen;
 
     /**
-     * View узнаем высоту и ширину экрана на котором происходит отрисовка
-     * Узнаём общий размер экрна и размер одной клетки игры в пикселях
+     * Узнаем высоту и ширину экрана в пикселях
+     * Узнаём общий размер экрана и размер одной клетки игры в пикселях
      */
     public FieldProvider(View surfaceView, int width, int height){
 

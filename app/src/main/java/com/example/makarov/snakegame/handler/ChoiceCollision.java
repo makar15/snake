@@ -46,6 +46,10 @@ public class ChoiceCollision {
      * и запускает нужный хэндлер (из мапы по ключу) для решения столкновения
      */
     public void solutionCollision(FieldObject objectStress, FieldObject objectCollisions){
+        /*
+        Не решена проблема CollisionSnakesSnakes т.к componentsSnake=null,
+         по причине отсутсвия их в списке поля
+         */
         int code = objectStress.getCode() * objectCollisions.getCode();
 
         HandlerCollision handlerCollision = map.get(code);

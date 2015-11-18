@@ -1,8 +1,8 @@
-package com.example.makarov.snakegame.initialized.threads;
+package com.example.makarov.snakegame.threads;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
+import com.example.makarov.snakegame.level.LevelCreator;
 import com.example.makarov.snakegame.view.View;
 import java.util.Collection;
 import java.util.Iterator;
@@ -58,10 +58,6 @@ public class SurfaceThread extends GameThreads {
                 mGameSnake.getFieldView().draw(canvas);
                 Iterator<View> iter = mList.iterator();
                 while (iter.hasNext()) {
-                    /*
-                    Когда у объекта состояние на false,
-                    тогда удаляем вьюху этого объекта
-                     */
                     View tempView = iter.next();
                     if (objectInTheGame(tempView)) {
                         tempView.draw(canvas);
@@ -79,13 +75,10 @@ public class SurfaceThread extends GameThreads {
 
     /**
      * Проверка, в игре ли еще объект
-     * ПЕРЕДЕЛАТЬ!!
-     * только при коллизии
-     * что бы каждую итерацию не пролистывать весь список объектов поля
-     * или создать переменную булл каждому объекту и по ней определять удалять ли viewObject
      */
     private boolean objectInTheGame(View view) {
-        if (mGameSnake.getFieldView().getField().getFieldObject(view.getObject().getX(), view.getObject().getY()) != null) {
+        if (mGameSnake.getFieldView().getField().
+                getFieldObject(view.getObject().getX(), view.getObject().getY()) != null) {
             return true;
         } else {
             return false;

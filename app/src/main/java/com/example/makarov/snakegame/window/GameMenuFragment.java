@@ -26,7 +26,6 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
 
     /**
      * При запуске фрагмента:
-     * говорим на каком layout находимся
      * С анимацией запускаем тексовое поле фрагмента
      * До того, пока анимация не завершится, кнопки делаем прозрачными
      */
@@ -95,8 +94,8 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
      * При нажатии на кнопки, запускаем различные фрагменты
      * В случае старта, запускаем второе активити с самой игрой!
      * В случае Duel,
-     * В случае уровней, будет запускаться фрагмент с созданными уровнями
-     * В случае с рекордами, запускаем фрагмент с хранящимися в базе данных рекордами игры
+     * В случае уровней, будет запускаться фрагмент с списком созданных уровней
+     * В случае с рекордами, запускаем фрагмент с сохраненными в базу данных рекордами
      */
     @Override
     public void onClick(View v) {
@@ -135,7 +134,10 @@ public class GameMenuFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void openFragment(Fragment fragment){
+    /**
+     * Метод открывает фрагмент
+     */
+    private void openFragment(Fragment fragment){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.LayoutMenu, fragment).addToBackStack(null).commit();
     }

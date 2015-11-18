@@ -1,8 +1,8 @@
-package com.example.makarov.snakegame.initialized.levels.test;
+package com.example.makarov.snakegame.level.test;
 
 import com.example.makarov.snakegame.controllers.ControllerTouchResponse;
 import com.example.makarov.snakegame.controllers.ObjectController;
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
+import com.example.makarov.snakegame.level.LevelCreator;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.TestObject;
 import com.example.makarov.snakegame.FieldProvider;

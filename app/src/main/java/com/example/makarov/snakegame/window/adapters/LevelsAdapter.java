@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LevelsAdapter extends BaseAdapter{
 
-    private LayoutInflater mLInflater;
+    private final LayoutInflater mLInflater;
     private List<Level> listLevels;
 
     /**

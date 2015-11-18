@@ -3,7 +3,7 @@ package com.example.makarov.snakegame.objects;
 import com.example.makarov.snakegame.direction.Moving;
 import com.example.makarov.snakegame.direction.MovingObjectField;
 import com.example.makarov.snakegame.direction.enumeration.Direction;
-import com.example.makarov.snakegame.initialized.score.ScoreManager;
+import com.example.makarov.snakegame.score.ScoreManager;
 
 import java.util.LinkedList;
 import java.util.List;

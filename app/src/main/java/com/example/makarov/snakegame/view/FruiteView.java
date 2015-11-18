@@ -8,21 +8,21 @@ import com.example.makarov.snakegame.objects.FieldObject;
 import com.example.makarov.snakegame.FieldProvider;
 
 /**
- * Класс fruite который будем отрисовывать в игре
+ * Класс Fruite который будем отрисовывать в игре
  */
 public class FruiteView implements View {
 
-    private FieldObject mObject;
-    private Bitmap icon;
-    private Paint mPaint;
-    private FieldProvider mFieldProvider;
+    private final FieldObject mObject;
+    private final Paint mPaint;
+    private final FieldProvider mFieldProvider;
     private IconLoader mIconLoader;
+    private Bitmap icon;
 
     /**
-     * В констркторе сам объект поля
-     * провайдер поля
-     * создаем кисточку
-     * получаем картинку из класса со всеми bitmap-ами
+     * В конструкторе: сам объект поля;
+     * провайдер поля;
+     * создаем кисточку;
+     * получаем картинку из класса со всеми bitmap-ами.
      */
     public FruiteView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;

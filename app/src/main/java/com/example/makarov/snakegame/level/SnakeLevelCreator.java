@@ -1,10 +1,10 @@
-package com.example.makarov.snakegame.initialized.levels;
+package com.example.makarov.snakegame.level;
 
 import com.example.makarov.snakegame.MyApp;
 import java.io.IOException;
 
 /**
- * Класс создания модель уровня и сохранения моделей в БД Realm
+ * Класс создания модели уровней и сохранения моделей в БД Realm
  */
 public class SnakeLevelCreator {
 
@@ -25,7 +25,7 @@ public class SnakeLevelCreator {
     };
 
     /**
-     * В конструкторе создаем и сразу же сохраняем модели уровней в Realm
+     * В конструкторе передаем данные модели уровней в Realm
      * здесь же и конвертируем txt файл в string
      */
     public SnakeLevelCreator() throws IOException {

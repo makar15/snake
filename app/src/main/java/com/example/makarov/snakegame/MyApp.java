@@ -7,7 +7,7 @@ import com.example.makarov.snakegame.singleton.DataBase;
 import com.example.makarov.snakegame.singleton.IconLoader;
 
 /**
- * Класс приложения
+ * Класс Application приложения
  */
 public class MyApp extends Application{
 
@@ -18,7 +18,7 @@ public class MyApp extends Application{
     private SnakePreferences snakePreferences;
 
     /**
-     * При запуске приложения инитим синглетоны
+     * При запуске приложения инициализируем синглетоны
      */
     @Override
     public void onCreate() {
@@ -31,6 +31,9 @@ public class MyApp extends Application{
         snakePreferences = new SnakePreferences(this);
     }
 
+    /**
+     *Гет методы: получить статический объект Application, и гет методы получения синглетонов
+     */
     public static MyApp getApp() {
         return app;
     }

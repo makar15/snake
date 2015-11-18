@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.initialized.levels;
+package com.example.makarov.snakegame.level;
 
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.view.FieldView;

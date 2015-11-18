@@ -1,11 +1,11 @@
-package com.example.makarov.snakegame.initialized.threads;
+package com.example.makarov.snakegame.threads;
 
 import com.example.makarov.snakegame.observer.GameOver;
 import com.example.makarov.snakegame.observer.Observer;
 import com.example.makarov.snakegame.observer.Subject;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.GameSnakeSurfaceView;
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
+import com.example.makarov.snakegame.level.LevelCreator;
 import com.example.makarov.snakegame.objects.Snake;
 import java.util.Collection;
 import java.util.Iterator;
@@ -62,10 +62,6 @@ public class ThreadMotionObjectField extends GameThreads implements Observer{
     private void iteration(){
         Iterator<ObjectController> iter = mList.iterator();
         while (iter.hasNext()) {
-            /*
-            Когда у объекта состояние на false,
-            тогда удаляем вьюху этого объекта
-            */
             ObjectController tempObjectController = iter.next();
             if (objectInTheGame(tempObjectController)) {
                 tempObjectController.nextMove();

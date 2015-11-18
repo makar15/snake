@@ -13,17 +13,17 @@ import android.graphics.Paint;
  */
 public class FieldView {
 
-    private MyField mField;
-    private Bitmap icon;
-    private Paint mPaint;
-    private FieldProvider mFieldProvider;
+    private final MyField mField;
+    private final Paint mPaint;
+    private final FieldProvider mFieldProvider;
     private IconLoader mIconLoader;
+    private Bitmap icon;
 
     /**
-     * В конструктор контекст на котором будем отрисовывать
-     * провайдер поля
-     * создаем кисточку
-     * получаем картинку из класса со всеми bitmap-ами
+     * В конструктор: контекст на котором будем отрисовывать;
+     * провайдер поля;
+     * создаем кисточку;
+     * получаем картинку из класса со всеми bitmap-ами.
      */
     public FieldView(MyField field, FieldProvider fieldProvider, IconLoader iconLoader){
         mField = field;

@@ -1,12 +1,11 @@
-package com.example.makarov.snakegame.initialized.levels.test;
+package com.example.makarov.snakegame.level.convert;
 
-import android.content.res.AssetManager;
 import com.example.makarov.snakegame.controllers.ObjectController;
 import com.example.makarov.snakegame.controllers.TouchResponseSnakeController;
 import com.example.makarov.snakegame.field.MyField;
 import com.example.makarov.snakegame.FieldProvider;
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
 import com.example.makarov.snakegame.singleton.IconLoader;
+import com.example.makarov.snakegame.level.LevelCreator;
 import com.example.makarov.snakegame.objects.Bomb;
 import com.example.makarov.snakegame.objects.Fruite;
 import com.example.makarov.snakegame.objects.Snake;
@@ -15,54 +14,41 @@ import com.example.makarov.snakegame.objects.Wall;
 import com.example.makarov.snakegame.view.FieldView;
 import com.example.makarov.snakegame.view.View;
 import com.example.makarov.snakegame.view.ViewFactory;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedList;
 
 /**
- * Класс создания своей карты для игры
- * В папке assets/levels создать txt файл !
+ * Класс ковертирующий строку -> String[][] -> уровень игры, со всеми объектами
  */
-public class CreateLevelCreator implements LevelCreator {
+public class StringToCreateLevelCreator implements LevelCreator {
 
-    private android.view.View mGameSnake;
+    private final android.view.View mGameSnake;
+    private final FieldView myFieldView;
+    private final FieldProvider mFieldProvider;
+    private final MyField myField;
+    private final ViewFactory myViewFactory;
     private Collection<ObjectController> mListController = new LinkedList<>();
     private Collection<com.example.makarov.snakegame.view.View> mListView = new LinkedList<>();
-    private FieldView myFieldView;
-    private FieldProvider mFieldProvider;
-    private MyField myField;
-    private ViewFactory myViewFactory;
 
     /**
-     * В конструктор View на котором отрисовываем игру, объукт со всеми Bitmap-ами для игры
+     * В конструкторе конвертируем
      */
-    public CreateLevelCreator(android.view.View gameSnake, IconLoader iconLoader) throws IOException {
+    public StringToCreateLevelCreator(android.view.View gameSnake, IconLoader iconLoader, String lineLevel){
 
-        /*
+         /*
          * Инициализируем:
          * view экран, на котором все отрисовываем
-         * объект со всеми содержащими bitmap-ами
          */
         mGameSnake = gameSnake;
-        /*
-         * АссетсМенеджером получаем доступ к файлам папка Assets
-         * в строку переносим все данные в файле уровня
-         * и с разделением пробелов и переносов строки записывает в массив
-         */
-        AssetManager assetManager = mGameSnake.getContext().getAssets();
-        InputStream inputStream = null;
-        inputStream = assetManager.open("levels/level3.txt");
-        String text = loadTextFile(inputStream);
+
         //String[] massLines = text.split("\\s+");  Заменит следующие операции,
         // но не позволяет узнать ширину поля заранее(
 
         /*
-         * строку символов файла разбивая на подстроки записываем водномерный массив,
+         * строку символов файла разбивая на подстроки записываем в одномерный массив,
          * далее в двумерный массив разбивая уже по пробелам между символами
          */
-        String[] massLines = text.split("\\n");
+        String[] massLines = lineLevel.split("\\n");
         String[][] massCodes = new String[massLines.length][];
 
         for(int k = 0; k < massLines.length; k++){
@@ -74,7 +60,6 @@ public class CreateLevelCreator implements LevelCreator {
          */
         int x = massCodes[0].length;
         int y = massCodes.length ;
-
         /*
          * Создаем:
          * поле
@@ -88,18 +73,6 @@ public class CreateLevelCreator implements LevelCreator {
         myViewFactory = new ViewFactory(iconLoader, mFieldProvider);
 
         initMapGame(massCodes);
-    }
-
-    /**
-     * В методе файл переводим в массив байт и получаем из массива байт строку символов
-     */
-    public String loadTextFile(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-        byte[] bytes = new byte[2048];
-        int len = 0;
-        while ((len = inputStream.read(bytes)) > 0)
-            byteStream.write(bytes, 0, len);
-        return new String(byteStream.toByteArray(), "UTF8");
     }
 
     /**

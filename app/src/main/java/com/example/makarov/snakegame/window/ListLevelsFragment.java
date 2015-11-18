@@ -34,12 +34,13 @@ public class ListLevelsFragment extends Fragment {
                 MyApp.getApp().getDataBase().getLevels());
         lvLevels.setAdapter(levelsAdapter);
 
-        /**
-         *
-         */
         lvLevels.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                /*
+                При клике на элемент уровня в списке ,
+                записываем в preferences id модели уровни на который кликнули
+                 */
                 MyApp.getApp().getSnakePreferences().changedLastLevel((int) id);
 
                 Intent intent = new Intent();

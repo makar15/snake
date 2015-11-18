@@ -11,7 +11,7 @@ import java.io.InputStream;
  */
 public class TxtToString {
 
-    private Context mContext;
+    private final Context mContext;
 
     public TxtToString(Context context){
         mContext = context;
@@ -22,9 +22,8 @@ public class TxtToString {
      */
     public String convertTxtString(String folder) throws IOException {
         /*
-         * АссетсМенеджером получаем доступ к файлам папка Assets
+         * АссетсМенеджером получаем доступ к файлам папки Assets
          * в строку переносим все данные в файле уровня
-         * и с разделением пробелов и переносов строки записывает в массив
          */
         AssetManager assetManager = mContext.getAssets();
         InputStream inputStream = null;
@@ -35,7 +34,7 @@ public class TxtToString {
     }
 
     /**
-     * В методе, файл переводим в массив байт и получаем из массива байт строку символов
+     * В методе, файл переводим в массив байт и получаем из массива байт, строку символов
      */
     public String loadTextFile(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();

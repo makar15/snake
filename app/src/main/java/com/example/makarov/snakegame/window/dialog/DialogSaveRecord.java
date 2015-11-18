@@ -23,10 +23,10 @@ import com.example.makarov.snakegame.window.StartGameActivity;
  */
 public class DialogSaveRecord extends DialogFragment implements OnClickListener {
 
+    private final DialogFragment dialogIssueRepeatGame;
+    private final CreateDialog mCreateDialog;
     private EditText nameUser;
-    private CreateDialog mCreateDialog;
     private Record myCreateRecord;
-    private DialogFragment dialogIssueRepeatGame;
 
     /**
      * В конструктор: объект рекорда в игре, объект для создания диалоговых окон.
@@ -70,9 +70,6 @@ public class DialogSaveRecord extends DialogFragment implements OnClickListener 
              */
             case R.id.btnSave: {
                 if (!TextUtils.isEmpty(nameUser.getText().toString())) {
-                    /*
-
-                    */
                     myCreateRecord.setName(nameUser.getText().toString());
                     MyApp.getApp().getDataBase().saveRecord(myCreateRecord);
 

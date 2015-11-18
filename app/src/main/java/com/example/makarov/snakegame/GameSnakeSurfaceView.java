@@ -4,10 +4,10 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import com.example.makarov.snakegame.convert.StringToCreateLevelCreator;
-import com.example.makarov.snakegame.initialized.levels.LevelCreator;
-import com.example.makarov.snakegame.initialized.threads.SurfaceThread;
-import com.example.makarov.snakegame.initialized.threads.ThreadMotionObjectField;
+import com.example.makarov.snakegame.level.convert.StringToCreateLevelCreator;
+import com.example.makarov.snakegame.level.LevelCreator;
+import com.example.makarov.snakegame.threads.SurfaceThread;
+import com.example.makarov.snakegame.threads.ThreadMotionObjectField;
 import com.example.makarov.snakegame.observer.Observer;
 import com.example.makarov.snakegame.window.dialog.DialogSaveRecord;
 
@@ -18,24 +18,24 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
 
     private SurfaceThread drawThread;
     private ThreadMotionObjectField threadMotionObject;
-    private CreateDialog mDialog;
-    private DialogFragment dlSaveRecord;
+    private final CreateDialog mDialog;
+    private final DialogFragment dlSaveRecord;
     private Record record;
     private String lineModelLevel;
     private LevelCreator gameLevelCreator;
 
     /**
-     * В конструктор контекст, объект для создания диалоговых окон, DataBaseScore
+     * В конструктор контекст, объект для создания диалоговых окон, id уровня для запуска
      */
     public GameSnakeSurfaceView(Context context, CreateDialog dialog, int idLevel) {
         super(context);
         getHolder().addCallback(this);
 
         /*
-        инициализируем:
-        объект, который будет хранить рекорд игры
-        объект, умеющий запускать диалоговые окна
-        диалоговое окно, которое отобразиться при завершении игры
+        инициализируем: объект, который будет хранить рекорд игры;
+        объект, умеющий запускать диалоговые окна;
+        строку модели уровня( по id уровня из DataBase);
+        диалоговое окно, которое отобразиться при завершении игры.
          */
         record = new Record();
         mDialog = dialog;
@@ -92,8 +92,7 @@ public class GameSnakeSurfaceView extends SurfaceView implements SurfaceHolder.C
 
     /**
      * Метод сработает в случае, когда в объекте, на который подписан этот класс изменится состояние
-     * В методеМеняем состояние потока отрисовки
-     * Запускаем диалоговое окно
+     * В методе меняем состояние потока отрисовки и запускаем диалоговое окно
      */
     @Override
     public void update() {

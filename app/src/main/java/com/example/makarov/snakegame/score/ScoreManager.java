@@ -1,4 +1,4 @@
-package com.example.makarov.snakegame.initialized.score;
+package com.example.makarov.snakegame.score;
 
 
 /**

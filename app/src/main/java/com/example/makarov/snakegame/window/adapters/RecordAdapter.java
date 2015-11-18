@@ -15,7 +15,7 @@ import io.realm.RealmResults;
  */
 public class RecordAdapter extends BaseAdapter{
 
-    private LayoutInflater mLInflater;
+    private final LayoutInflater mLInflater;
     private RealmResults<BaseRecord> mResult;
 
     /**

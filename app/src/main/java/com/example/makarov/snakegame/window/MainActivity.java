@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.example.makarov.snakegame.MyApp;
 import com.example.makarov.snakegame.R;
 import com.example.makarov.snakegame.db.Level;
-import com.example.makarov.snakegame.initialized.levels.SnakeLevelCreator;
+import com.example.makarov.snakegame.level.SnakeLevelCreator;
 import java.io.IOException;
 
 /**
@@ -66,14 +66,14 @@ public class MainActivity extends FragmentActivity {
         if (MyApp.getApp().getSnakePreferences().getFirstStartApp()) {
             // При первом запуске (или если юзер удалял все данные приложения)
             try {
+                //Инициализируем все модели уровней с записью их в Realm DataBase
                 SnakeLevelCreator levels = new SnakeLevelCreator();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //и после действия записывам false в переменную firstRunMyApp
-            //Итого при следующих запусках этот код не вызывается.
+             //и после действия записывам false в preferences
             MyApp.getApp().getSnakePreferences().changedStartApp(false);
-
+            //из DataBase получаем id модели уровня первого уровня и записываем id в preferences
             int idLevel = MyApp.getApp().getDataBase().getLevel(Level.NAME_FIRST_LEVEL).getId();
             MyApp.getApp().getSnakePreferences().changedLastLevel(idLevel);
         }

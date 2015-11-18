@@ -41,7 +41,7 @@ public class StartGameActivity extends FragmentActivity {
         }
 
         /*
-
+        переменные с id модели уровня, который будет запускаться
          */
         int idDefaultLevel = MyApp.getApp().getDataBase().getLevel(Level.NAME_FIRST_LEVEL).getId();
         int idLevel = getIntent().getIntExtra(Level.ID_LEVEL, idDefaultLevel);

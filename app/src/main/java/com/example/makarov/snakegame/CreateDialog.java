@@ -8,6 +8,7 @@ import android.app.FragmentManager;
  */
 public class CreateDialog {
 
+    private final String TAG_DIALOG = "dlg";
     private FragmentManager fm;
 
     /**
@@ -21,6 +22,6 @@ public class CreateDialog {
      * Метод запускает нужное окно
      */
     public void createDialog(DialogFragment dialog){
-        dialog.show(fm, "dlg1");
+        dialog.show(fm, TAG_DIALOG);
     }
 }

@@ -12,23 +12,20 @@ import java.util.List;
 
 /**
  * Класс snake который будем отрисовывать в игре
- *
- * С прорисовкой красивой змейки в игре пока не все хорошо, над этим работаю
- * Трабла с прорисовкой всех компонент после поворотов змейки
  */
 public class SnakeView implements View {
 
-    private Snake mObject;
-    private Bitmap iconSnake;
-    private Paint mPaint;
-    private FieldProvider mFieldProvider;
+    private final Snake mObject;
+    private final Paint mPaint;
+    private final FieldProvider mFieldProvider;
     private IconLoader mIconLoader;
+    private Bitmap iconSnake;
 
     /**
-     * В конструкторе сам объект поля
-     * провайдер поля
-     * создаем кисточку
-     * получаем картинку из класса со всеми bitmap-ами
+     * В конструкторе: сам объект поля;
+     * провайдер поля;
+     * создаем кисточку;
+     * получаем картинку из класса со всеми bitmap-ами.
      */
     public SnakeView(Snake object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;

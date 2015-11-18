@@ -8,21 +8,21 @@ import com.example.makarov.snakegame.singleton.IconLoader;
 import com.example.makarov.snakegame.objects.FieldObject;
 
 /**
- *
+ * Класс Bomb которую будем отрисовывать в игре
  */
 public class BombView implements View {
 
-    private FieldObject mObject;
-    private Bitmap icon;
-    private Paint mPaint;
-    private FieldProvider mFieldProvider;
+    private final FieldObject mObject;
+    private final Paint mPaint;
+    private final FieldProvider mFieldProvider;
     private IconLoader mIconLoader;
+    private Bitmap icon;
 
     /**
-     * В констркторе сам объект поля
-     * провайдер поля
-     * создаем кисточку
-     * получаем картинку из класса со всеми bitmap-ами
+     * В конструкторе: сам объект поля;
+     * провайдер поля;
+     * создаем кисточку;
+     * получаем картинку из класса со всеми bitmap-ами.
      */
     public BombView(FieldObject object, FieldProvider fieldProvider, IconLoader iconLoader){
         mObject = object;
